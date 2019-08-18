@@ -1,9 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div id="login">
+    <div id="login-content">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <img id="logo" src="./../../assets/logo.svg">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <img class="inputIconLeft" src="./../../assets/icon_email.svg">
+            <input type="text" placeholder="Seu e-mail"/>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <img class="inputIconLeft" src="./../../assets/icon_senha.svg">
+            <img class="inputIconRight" src="./../../assets/icon_hide_senha.svg">
+            <input type="password" placeholder="Senha">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-end">
+              <p>Esqueceu a senha?</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <button id="login-btn">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </div>
+    <div id="info">
+        <p>Novo no <u>Barber Home?</u></p>
+      </div>
+  </div>
+  <img id="detalhe-rodape" src="./../../assets/detalhe_rodaPe_login.svg"/>
 </ion-content>
