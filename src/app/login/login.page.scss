@@ -5,6 +5,7 @@ ion-content {
         position: absolute;
         bottom: 0;
         width: 100%;
+        z-index: 0;
     }
 }
 
@@ -14,6 +15,7 @@ ion-content {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: 50;
     p {
         color: #696969;
     }
