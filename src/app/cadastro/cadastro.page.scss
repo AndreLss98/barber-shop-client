@@ -1,0 +1,55 @@
+ion-content {
+    --background: #313131;
+}
+
+#cadastro-btn {
+    float: right;
+    margin-top: 40px;
+    padding: 4px 0 0 2px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    color: white;
+    font-size: 30px;
+    background-image: linear-gradient(to right, #fbd072, #d8a964);
+}
+
+p {
+    color: white;
+}
+
+#p1 {
+    color: #fbd072;
+}
+
+#paddingDiv {
+    padding: 0 25px;
+}
+
+#logo {
+    display: flex;
+    justify-content: center;
+}
+
+ion-icon {
+    color: #fbd072;
+}
+
+button ion-icon {
+    color: white;
+}
+
+ion-item {
+    --background: #313131;
+    --border-color: white !important;
+}
+
+ion-label {
+    --color: white !important;
+}
+
+ion-input {
+    --placeholder-color: white;
+    --color: white;
+    caret-color: #d8a964;
+}

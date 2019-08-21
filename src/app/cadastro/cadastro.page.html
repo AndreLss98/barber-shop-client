@@ -1,9 +1,60 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>cadastro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col id="logo">
+        <img src="./../../assets/logo.svg">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p id="p1">Informe seus dados para cadastro.</p>
+        <p>* Dados obrigatórios</p>
+      </ion-col>
+    </ion-row>
+    <div id="paddingDiv">
+      <ion-row>
+        <ion-col size="1" align-self-center>
+          <ion-icon name="person"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nome *</ion-label>
+            <ion-input clearInput></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col size="1" align-self-center>
+          <ion-icon name="mail"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Email *</ion-label>
+            <ion-input clearInput></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="1" align-self-center>
+          <ion-icon name="key"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Senha *</ion-label>
+            <ion-input clearInput></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col align-self-end>
+          <button id="cadastro-btn">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
 
+  </ion-grid>
 </ion-content>
