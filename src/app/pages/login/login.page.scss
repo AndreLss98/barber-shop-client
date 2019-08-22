@@ -1,5 +1,5 @@
 ion-content {
-    --background: url(./../../assets/tela_de_fundo.svg);
+    --background: url(./../../../assets/tela_de_fundo.svg);
     position: relative;
     #detalhe-rodape {
         position: absolute;
@@ -24,7 +24,7 @@ ion-content {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-image: url(./../../assets/background_login.svg);
+        background-image: url(./../../../assets/background_login.svg);
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
