@@ -1,0 +1,10 @@
+ion-content {
+    --background: url(./../../../../assets/tela_de_fundo.svg);
+    position: relative;
+    #detalhe-rodape {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        z-index: 0;
+    }
+}

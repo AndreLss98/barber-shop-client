@@ -1,73 +1,54 @@
 ion-content {
-    --background: url(./../../../assets/tela_de_fundo.svg);
-    position: relative;
+    --ion-background-color: #313131;
     #detalhe-rodape {
         position: absolute;
         bottom: 0;
         width: 100%;
         z-index: 0;
     }
-}
 
-#login {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 50;
-    p {
-        color: #696969;
-    }
-    #login-content {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-image: url(./../../../assets/background_login.svg);
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center;
-        height: 55%;
+    ion-grid {
         width: 80%;
-        padding: 0 25px 65px 25px;
-        ion-grid {
-            margin: 0 !important;
-            padding-bottom: 25px;
-        }
-        ion-grid ion-row ion-col div p {
-            margin: 0;
-            font-size: 14px;
-        }
+        max-width: 500px;
+        padding: 0 15px;
+    }
+
+    .login-content {
+        background-color: white;
+        border-radius: 25px 25px 0 0;
+        display: flex;
+        flex-direction: column;
+        padding: 0 25px;
         input {
-            border: 1px solid #696969;
-            border-radius: 23px;
-            height: 45px;
             width: 100%;
-            padding-left: 50px;
-            padding-right: 50px;
         }
-        #login-btn {
-            padding: 4px 0 0 2px;
-            position: absolute;
-            bottom: 25px;
-            right: 35px;
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            color: white;
-            font-size: 30px;
-            background-image: linear-gradient(to right,#FBD072, #D8A964);
+    }
+
+    #logo {
+        margin: 0 auto;
+        align-self: center;
+        img {
+            width: 100%;
+            max-width: 300px;
+            min-height: 100px;
+            height: auto;
         }
-        img.inputIconLeft {
-            position: absolute;
-            left: 25px;
-            bottom: 20px;
-        }
-        img.inputIconRight {
-            position: absolute;
-            right: 25px;
-            bottom: 20px;
+    }
+
+    .signin-col {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: -5px;
+
+        background: url(./../../../assets/box_footer.svg) top center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        max-width: 500px;
+        height: 185px;
+        @media (max-width: 760px) {
+            height: 27vw;
         }
     }
 }
