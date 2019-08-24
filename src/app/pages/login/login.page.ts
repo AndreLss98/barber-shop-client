@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
   }
 
   public login() {
-    this.route.navigateByUrl('/home');
+    this.route.navigateByUrl('login/home');
   }
 
 }

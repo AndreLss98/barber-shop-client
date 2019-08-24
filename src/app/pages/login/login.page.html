@@ -1,21 +1,37 @@
 <ion-content>
+  <img id="detalhe-rodape" src="./../../../assets/detalhe_rodaPe_login_2.svg" />
   <form>
     <ion-grid>
       <ion-row class="login-content">
-        <div id="logo">
+        <div id="logo" class="item">
           <img src="./../../../assets/logo.svg">
         </div>
-        <div>
-          <input placeholder="nome"/>
+        <div class="item">
+          <img class="iconLeft" src="./../../../assets/perfil.svg">
+          <input placeholder="nome" type="text" />
         </div>
-        <div>
-          <input placeholder="senha"/>
+        <div class="item">
+          <img class="iconLeft II" src="./../../../assets/icon_senha.svg">
+          <input class="inputSenha" placeholder="senha" type="password" />
+          <img class="iconRight" src="./../../../assets/icon_hide_senha.svg">
         </div>
+        <ion-note>Esqueceu a senha?</ion-note>
       </ion-row>
       <ion-row class="signin-col">
+        <ion-button (click)="login()">
+          <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-grid>
+    <ion-grid id="cadastro" routerLink="cadastro">
+      <ion-row>
+        <ion-col>
+          <ion-note>Novo no <u>Barber Home?</u></ion-note>
+        </ion-col>
+      </ion-row>
+      <ion-row>
         
       </ion-row>
     </ion-grid>
   </form>
-  <img id="detalhe-rodape" src="./../../../assets/detalhe_rodaPe_login_2.svg" />
 </ion-content>
