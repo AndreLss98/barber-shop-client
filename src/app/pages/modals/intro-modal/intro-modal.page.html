@@ -1,4 +1,26 @@
 <ion-content>
-
+  <img id="backgroundImg" src="./../../../../assets/imgs/barber-shop.jpg">
   <img id="detalhe-rodape" src="./../../../../assets/detalhe_rodaPe_login_2.svg"/>
+  <ion-grid>
+    <ion-row align-self-center>
+      <ion-col>
+        <img src="./../../../../assets/logo.svg" />
+      </ion-col>
+    </ion-row>
+    <ion-row align-self-center>
+      <ion-col>
+        <ion-note>Um bom corte inspira uma sensação de vitória</ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row align-self-center>
+      <ion-col>
+        <div>
+          <ion-note class="bemVindo">Bem vindo de volta!</ion-note>
+        </div>
+        <div align="center">
+          <ion-button shape="round" (click)="closeModal()">Vamos lá</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

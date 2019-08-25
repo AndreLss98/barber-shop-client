@@ -1,6 +1,28 @@
 ion-content {
-    --background: url(./../../../../assets/tela_de_fundo.svg);
     position: relative;
+    #backgroundImg {
+        position: absolute;
+        height: 100%;
+        filter: grayscale(50%) brightness(25%);
+    }
+    ion-grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 100%;
+        padding-bottom: 9vh;
+        ion-note {
+            --color: white;
+            font-size: 1em;
+        }
+        ion-note.bemVindo {
+            font-size: 1.3em;
+        }
+        ion-button {
+            --background: linear-gradient(152deg, rgba(246,202,112,1) 0%, rgba(218,172,100,1) 75%);
+            margin-top: 15px;
+        }
+    }
     #detalhe-rodape {
         position: absolute;
         bottom: 0;

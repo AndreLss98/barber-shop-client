@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ModalController } from '@ionic/angular';
+
 @Component({
   selector: 'app-intro-modal',
   templateUrl: './intro-modal.page.html',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroModalPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalCtrl: ModalController
+  ) { 
+
+  }
 
   ngOnInit() {
+    
+  }
+
+  public closeModal(): void {
+    this.modalCtrl.dismiss();
   }
 
 }

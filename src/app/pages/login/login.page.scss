@@ -48,7 +48,7 @@ ion-content {
                 z-index: 10;
                 bottom: 13px;
                 left: 10px;
-                width: 8%;
+                width: 15px;
             }
             img.iconLeft.II {
                 bottom: 11px;
@@ -58,7 +58,7 @@ ion-content {
                 z-index: 10;
                 bottom: 12px;
                 right: 10px;
-                width: 8%;
+                width: 15px;
             }
         }
 
@@ -67,12 +67,13 @@ ion-content {
             height: 40px;
             border: 1px solid grey;
             border-radius: 25px;
-            padding-left: 16%;
+            padding-left: 30px;
             position: relative;
+            padding-right: 10px;
         }
 
         input.inputSenha {
-            padding-right: 16%;
+            padding-right: 30px;
         }
 
         .item:nth-child(3) {
