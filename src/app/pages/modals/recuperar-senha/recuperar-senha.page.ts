@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AlertController, ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,7 +13,9 @@ export class RecuperarSenhaPage implements OnInit {
   public formGroup: any;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController
   ) {
     this.formGroup = this.formBuilder.group({
       email: [null, [Validators.email, Validators.required]]
@@ -23,6 +26,22 @@ export class RecuperarSenhaPage implements OnInit {
 
   }
 
+  public async openAlert() {
+    const alert = await this.alertCtrl.create({
+      header: "Atenção",
+      message: "E-mail enviado com sucesso para recuperar a senha.",
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: "Ok",
+          handler: () => {
+            this.modalCtrl.dismiss();
+          }
+        }
+      ]
+    });
 
+    alert.present();
+  }
 
 }

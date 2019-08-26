@@ -9,18 +9,18 @@
             <p id="info">Esqueceu a senha?</p>
             <p>Digite seu endereço de e-mail para obter o código de redefinição de senha.</p>
         </ion-row>
-        <ion-row id="rowInput">
-            <form [formGroup]="formGroup">
+        <form [formGroup]="formGroup" (ngSubmit)="openAlert()" novalidate>
+            <ion-row id="rowInput">
                 <ion-icon class="inputIcon" name="close-circle" (click)="inputEmail.value = ''"></ion-icon>
-                <input #inputEmail formControlName="email" type="email"/>
-            </form>
-        </ion-row>
-        <ion-row>
-            <ion-col align-self-end>
-                <ion-button [disabled]="formGroup.invalid || !inputEmail.value">
-                    <ion-icon name="arrow-forward"></ion-icon>
-                </ion-button>
-            </ion-col>
-        </ion-row>
+                <input #inputEmail formControlName="email" type="email" />
+            </ion-row>
+            <ion-row>
+                <ion-col align-self-end>
+                    <ion-button type="submit" [disabled]="formGroup.invalid || !inputEmail.value">
+                        <ion-icon name="arrow-forward"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
     </ion-grid>
 </ion-content>
