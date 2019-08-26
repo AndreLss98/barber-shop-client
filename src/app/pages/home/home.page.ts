@@ -19,7 +19,7 @@ export class HomePage {
 
 
   ionViewWillEnter() {
-  //  this.openModalPage();
+   this.openModalPage();
   }
 
   private async openModalPage() {
