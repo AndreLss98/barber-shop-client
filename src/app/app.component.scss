@@ -1,0 +1,15 @@
+ion-menu {
+    background-color: rgba(128, 128, 128, .5);
+    --min-width: 100% !important;
+    --max-height: 300px;
+}
+
+ion-content {
+    --ion-background-color: #313131;
+    ion-icon {
+        color: white;
+    }
+    ion-note {
+        color: white;
+    }
+}
