@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.module';
+import { RecuperarSenhaPageModule } from './pages/modals/recuperar-senha/recuperar-senha.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,8 @@ import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.mod
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    IntroModalPageModule
+    IntroModalPageModule,
+    RecuperarSenhaPageModule
   ],
   providers: [
     StatusBar,

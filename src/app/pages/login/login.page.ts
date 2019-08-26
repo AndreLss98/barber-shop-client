@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+
+import { RecuperarSenhaPage } from '../modals/recuperar-senha/recuperar-senha.page';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,8 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
   constructor(
-    private route: Router
+    private route: Router,
+    private modalCtrl: ModalController
   ) {
 
   }
@@ -21,6 +25,14 @@ export class LoginPage implements OnInit {
 
   public login() {
     this.route.navigateByUrl('login/home');
+  }
+
+  public async recuperarSenha() {
+    const modal = await this.modalCtrl.create({
+      component: RecuperarSenhaPage
+    });
+
+    modal.present();
   }
 
 }

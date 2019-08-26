@@ -1,0 +1,26 @@
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col align="center">
+                <img src="./../../../../assets/logo.svg" />
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <p id="info">Esqueceu a senha?</p>
+            <p>Digite seu endereço de e-mail para obter o código de redefinição de senha.</p>
+        </ion-row>
+        <ion-row id="rowInput">
+            <form [formGroup]="formGroup">
+                <ion-icon class="inputIcon" name="close-circle" (click)="inputEmail.value = ''"></ion-icon>
+                <input #inputEmail formControlName="email" type="email"/>
+            </form>
+        </ion-row>
+        <ion-row>
+            <ion-col align-self-end>
+                <ion-button [disabled]="formGroup.invalid || !inputEmail.value">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

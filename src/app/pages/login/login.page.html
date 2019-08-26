@@ -15,7 +15,7 @@
           <input class="inputSenha" placeholder="senha" type="password" />
           <img class="iconRight" src="./../../../assets/icon_hide_senha.svg">
         </div>
-        <ion-note>Esqueceu a senha?</ion-note>
+        <ion-note (click)="recuperarSenha()">Esqueceu a senha?</ion-note>
       </ion-row>
       <ion-row class="signin-col">
         <ion-button (click)="login()">

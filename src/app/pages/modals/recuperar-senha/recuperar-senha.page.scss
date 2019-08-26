@@ -1,0 +1,56 @@
+ion-content {
+    --ion-background-color: #313131;
+}
+
+ion-grid {
+    box-shadow: 0px 4px 9px -3px black;
+    border-radius: 0 0 25px 25px;
+}
+
+p {
+    color: #6c6d74;
+    margin: 0;
+}
+
+#info {
+    color: #D6A763;
+}
+
+#rowInput {
+    position: relative;
+    ion-icon.inputIcon {
+        position: absolute;
+        right: 10px;
+        bottom: 6px;
+        color: #6c6d74;
+        font-size: 25px;
+    }
+}
+
+form {
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    background-color: transparent;
+    border: 1.5px solid #6c6d74;
+    border-radius: 4px;
+    height: 40px;
+    padding-left: 15px;
+    color: #888888;
+}
+
+ion-button {
+    width: 50px;
+    height: 50px;
+    --background: linear-gradient(152deg, rgba(246,202,112,1) 0%, rgba(218,172,100,1) 75%);
+    --border-radius: 25px;
+    --padding-end: 0.4em;
+    --padding-start: 0.4em;
+    float: right;
+}
+
+ion-button[disabled] {
+    --background: linear-gradient(to right, #d8d7d5, #9b9b9b);
+}
