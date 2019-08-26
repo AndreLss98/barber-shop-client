@@ -1,4 +1,29 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+ion-content {
+  --ion-background-color: #313131;
+  position: relative;
 }
+
+ion-toolbar {
+  position: absolute;
+  --background: transparent;
+  color: #D6A763;
+}
+
+ion-footer {
+  position: absolute;
+  bottom: 0;
+  padding: 0 15px 15px 15px;
+}
+
+#searchBar {
+  background-color: white;
+  ion-icon {
+     color: red;
+  }
+  input {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+  }
+}
+
