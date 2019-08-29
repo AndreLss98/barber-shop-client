@@ -1,5 +1,7 @@
 {
   "name": "BarberHome",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
