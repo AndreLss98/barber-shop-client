@@ -21,20 +21,73 @@ ion-toolbar {
   color: #D6A763;
 }
 
+#myPos {
+  ion-icon {
+    font-size: 25px;
+  }
+  ion-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ion-col:nth-child(1) {
+    ion-icon {
+      color: #D6A763;
+    }
+  }
+}
+
 ion-footer {
   position: absolute;
   bottom: 0;
   padding: 0 15px 15px 15px;
+  ion-grid {
+    background-color: white;
+    border-radius: 4px;
+    ion-row {
+      ion-col:nth-child(1) {
+        padding-right: 0;
+      }
+      ion-col:nth-child(2) {
+        padding-left: 0;
+      }
+    }
+  }
+  ion-button {
+    --background: linear-gradient(152deg, rgba(246,202,112,1) 0%, rgba(218,172,100,1) 75%);
+    margin-top: 15px;
+    width: 60%;
+  }
+}
+
+ion-footer::before {
+  display: none;
+}
+
+#centerPosition {
+  text-align: end;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  div {
+    display: inline-flex;
+    background-color: white;
+    border-radius: 18px;
+    padding: 5px;
+  }
+  ion-icon {
+    color: black !important;
+    font-size: 20px;
+  }
 }
 
 #searchBar {
-  background-color: white;
   ion-icon {
-     color: red;
+    color: red;
   }
   input {
     border: none;
     background-color: transparent;
     width: 100%;
+    padding-left: 5px;
   }
 }

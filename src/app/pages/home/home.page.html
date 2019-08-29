@@ -12,7 +12,21 @@
 
 <ion-footer>
   <div id="searchBar">
+    <div id="centerPosition">
+      <div id="background">
+        <ion-icon name="locate"></ion-icon>
+      </div>
+    </div>
     <ion-grid>
+      <ion-row id="myPos">
+        <ion-col size="2" align="center">
+          <ion-icon name="pin"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <input type="text" placeholder="Sua localidade..." readonly />
+        </ion-col>
+      </ion-row>
+
       <ion-row>
         <ion-col size="2" align="center">
           <ion-icon name="pin"></ion-icon>
@@ -22,5 +36,8 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+  </div>
+  <div align="center">
+    <ion-button shape="round">Localizar</ion-button>
   </div>
 </ion-footer>
