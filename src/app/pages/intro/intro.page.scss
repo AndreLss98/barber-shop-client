@@ -1,0 +1,32 @@
+ion-content {
+    --ion-background-color: #313131;
+}
+
+ion-content ion-slides {
+    height: 100%;
+}
+
+ion-content ion-slides ion-slide {
+    color: white;
+    p {
+        color: gray;
+    }
+}
+
+#tabs img {
+    margin: 0 5px;
+    width: 10px;
+}
+
+ion-footer {
+    --ion-background-color: #313131;
+}
+
+ion-footer ion-toolbar {
+    padding: 20px 0;
+}
+
+ion-footer ion-toolbar ion-button {
+    --color: white;
+    --border-radius: 25px !important;
+}
