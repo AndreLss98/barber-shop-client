@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-intro-modal',
@@ -10,7 +11,8 @@ import { ModalController } from '@ionic/angular';
 export class IntroModalPage implements OnInit {
 
   constructor(
-    private modalCtrl: ModalController
+    private router: Router,
+    private navCtrl: NavController
   ) { 
 
   }
@@ -20,7 +22,7 @@ export class IntroModalPage implements OnInit {
   }
 
   public closeModal(): void {
-    this.modalCtrl.dismiss();
+    this.navCtrl.navigateBack('login/home');
   }
 
 }

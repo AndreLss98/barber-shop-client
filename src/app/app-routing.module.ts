@@ -17,7 +17,8 @@ const routes: Routes = [
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'login/cadastro', loadChildren: './pages/cadastro/cadastro.module#CadastroPageModule' },
-  { path: 'intro', loadChildren: './pages/intro/intro.module#IntroPageModule' }
+  { path: 'intro', loadChildren: './pages/intro/intro.module#IntroPageModule' },
+  { path: 'login/intro', loadChildren: './pages/modals/intro-modal/intro-modal.module#IntroModalPageModule' },
 
 ];
 

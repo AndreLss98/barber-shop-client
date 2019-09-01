@@ -2,8 +2,8 @@ ion-content {
   --ion-background-color: #313131;
   position: relative;
   #map {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     .marker {
       background-image: url('./../../../assets/imgs/mark80.png');
       background-size: cover;
@@ -22,14 +22,6 @@ ion-toolbar {
 }
 
 #myPos {
-  ion-icon {
-    font-size: 25px;
-  }
-  ion-col {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   ion-col:nth-child(1) {
     ion-icon {
       color: #D6A763;

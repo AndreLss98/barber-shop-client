@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
   }
 
   public login() {
-    this.route.navigateByUrl('login/home');
+    this.route.navigate(['login/intro']);
   }
 
   public async recuperarSenha() {
