@@ -11,8 +11,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.module';
 import { RecuperarSenhaPageModule } from './pages/modals/recuperar-senha/recuperar-senha.module';
+import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +22,8 @@ import { RecuperarSenhaPageModule } from './pages/modals/recuperar-senha/recuper
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    IntroModalPageModule,
-    RecuperarSenhaPageModule
+    RecuperarSenhaPageModule,
+    IntroModalPageModule
   ],
   providers: [
     StatusBar,
