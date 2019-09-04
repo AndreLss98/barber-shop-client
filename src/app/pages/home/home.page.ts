@@ -29,20 +29,25 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.loadMap();
+
   }
 
   ionViewDidEnter() {
-
+    this.loadMap();
   }
 
-  private loadMap() {
+  private async loadMap() {
+    const gpsOptions = {
+      maximumAge: 2000,
+      timeout: 1000,
+      enableHighAccuracy: true
+    }
     this.openLoading().then(() => {
-      this.getAtualPosition().then(data => {
-        this.initializeMap(data.longitude, data.latitude);
-      }).catch(() => {
+      this.geolocation.getCurrentPosition(gpsOptions).then((resp) => {
+        this.initializeMap(resp.coords.longitude, resp.coords.latitude);
+      }).catch((error) => {
         this.closeLoading().then(() => {
-          this.showAlert('Desculpe', 'Falha no gps', 'Não foi possível localiza-lo');
+          this.showAlert('Desculpe', 'Falha de conexão do gps', 'Não foi possível localiza-lo');
         });
       });
     });
@@ -63,8 +68,7 @@ export class HomePage {
         this.closeLoading();
       })
     });
-    this.map.on('error', () =>
-     {
+    this.map.on('error', () => {
       console.log("falhou");
       this.closeLoading().then(() => {
         this.showAlert('Desculpe', 'Falha de conexão', 'Não foi possível se conectar');

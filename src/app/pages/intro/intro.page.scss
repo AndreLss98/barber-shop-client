@@ -23,7 +23,7 @@ ion-footer {
 }
 
 ion-footer::before {
-    display: none;
+    display: none !important;
 }
 
 ion-footer ion-toolbar {
