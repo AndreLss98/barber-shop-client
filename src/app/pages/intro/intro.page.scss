@@ -22,6 +22,10 @@ ion-footer {
     --ion-background-color: #313131;
 }
 
+ion-footer::before {
+    display: none;
+}
+
 ion-footer ion-toolbar {
     padding: 20px 0;
 }
