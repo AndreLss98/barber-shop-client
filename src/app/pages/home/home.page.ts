@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
-
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LoadingController, AlertController } from '@ionic/angular';
 
 import mapboxgl from 'mapbox-gl';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+import { MapService } from 'src/app/services/map.service';
+import { MAPBOX_TOKEN } from './../../../environments/environment';
+
+const gpsOptions = {
+  maximumAge: 2000,
+  timeout: 1000,
+  enableHighAccuracy: true
+}
 
 @Component({
   selector: 'app-home',
@@ -12,14 +20,16 @@ import { LoadingController, AlertController } from '@ionic/angular';
 })
 export class HomePage {
   private map: any;
+  private mapObj: any = {};
   private isLoaded: boolean = false;
   private loading: HTMLIonLoadingElement;
-  private mapBoxToken = 'pk.eyJ1IjoiZGlvbmltIiwiYSI6ImNqejA0Mm54OTA0MHkzb3Fpemo5cnhmYWcifQ.gbYcjV1OcISZp1Ym1xw8pw';
+  private content: HTMLElement;
 
   constructor(
     private geolocation: Geolocation,
     private loadinController: LoadingController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private mapService: MapService
   ) {
 
   }
@@ -29,19 +39,20 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-
   }
 
   ionViewDidEnter() {
-    this.loadMap();
+    this.mapObj = this.mapService.getMap();
+    this.content = document.querySelector('#content');
+    this.content.appendChild(this.mapObj.mapElement);
+    this.mapObj.map.resize();
+  }
+
+  ionViewDidLoad() {
+
   }
 
   private async loadMap() {
-    const gpsOptions = {
-      maximumAge: 2000,
-      timeout: 1000,
-      enableHighAccuracy: true
-    }
     this.openLoading().then(() => {
       this.geolocation.getCurrentPosition(gpsOptions).then((resp) => {
         this.initializeMap(resp.coords.longitude, resp.coords.latitude);
@@ -54,7 +65,7 @@ export class HomePage {
   }
 
   async initializeMap(longitude: any, latitude: any) {
-    mapboxgl.accessToken = this.mapBoxToken;
+    mapboxgl.accessToken = MAPBOX_TOKEN;
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/dionim/cjzwtgft014k41csdy9xmjcyq',

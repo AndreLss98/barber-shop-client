@@ -3,6 +3,16 @@ import { Resolve } from '@angular/router';
 
 import mapboxgl from 'mapbox-gl';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { MAPBOX_TOKEN } from '../../environments/environment'
+
+import { MapService } from '../services/map.service';
+import { Platform } from '@ionic/angular';
+
+const gpsOptions = {
+  maximumAge: 2000,
+  timeout: 1000,
+  enableHighAccuracy: true
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,33 +20,35 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 export class MapResolveService implements Resolve<any> {
 
   constructor(
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private mapService: MapService,
+    private platform: Platform
   ) {
 
   }
 
   resolve() {
-    let mapElement = document.createElement('div');
-    mapElement.id = `map`;
-    mapElement.style.height = '100%';
-    this.getAtualPosition().then(data => {
-      mapboxgl.accessToken = 'pk.eyJ1IjoiZGlvbmltIiwiYSI6ImNqejA0Mm54OTA0MHkzb3Fpemo5cnhmYWcifQ.gbYcjV1OcISZp1Ym1xw8pw';
-       new mapboxgl.Map({
+    return this.geolocation.getCurrentPosition(gpsOptions).then((resp) => {
+      let mapElement = this.createElement();
+      mapboxgl.accessToken = MAPBOX_TOKEN;
+      let map = new mapboxgl.Map({
         container: mapElement,
-        style: 'mapbox://styles/dionim/cjzwtgft014k41csdy9xmjcyq',
-        center: [data.longitude, data.latitude],
-        zoom: 12
-      })
-    }).finally(() => {
-      
+        style: 'mapbox://styles/mapbox/dark-v9',
+        center: [resp.coords.longitude, resp.coords.latitude],
+        zoom: 13
+      });
+      this.mapService.setMap({ mapElement: mapElement, map: map });
+      return { mapElement: mapElement, map: map };
+    }).catch((error) => {
+      return error;
     });
-    return mapElement;
   }
 
-  private async getAtualPosition() {
-    return await this.geolocation.getCurrentPosition().then((resp) => {
-      return resp.coords;
-    })
+  private createElement(): HTMLElement {
+    let element = document.createElement('div');
+    element.id = 'map';
+    element.style.height = "100%";
+    element.style.width = this.platform.width().toString();
+    return element;
   }
-
 }

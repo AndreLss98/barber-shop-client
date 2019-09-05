@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ModalController, NavController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { MapService } from 'src/app/services/map.service';
 
 @Component({
   selector: 'app-intro-modal',
@@ -10,11 +10,28 @@ import { Router } from '@angular/router';
 })
 export class IntroModalPage implements OnInit {
 
-  constructor(
-    private router: Router,
-    private navCtrl: NavController
-  ) { 
+  public btnDesactive: boolean;
+  private mapObj: any;
 
+  constructor(
+    private navCtrl: NavController,
+    private mapService: MapService
+  ) { 
+    this.btnDesactive = true;
+  }
+
+  ionViewWillEnter() {
+    this.mapObj = this.mapService.getMap();
+  }
+  
+  ionViewDidEnter() {
+    if (this.mapObj.map.loaded()) {
+      this.btnDesactive = false;
+    } else {
+      this.mapObj.map.on('load', () => {
+        this.navCtrl.navigateBack('login/home');
+      });
+    }
   }
 
   ngOnInit() {
@@ -22,7 +39,17 @@ export class IntroModalPage implements OnInit {
   }
 
   public closeModal(): void {
-    this.navCtrl.navigateBack('login/home');
+    if (this.mapObj.map && this.mapObj.map.loaded()) {
+      
+      console.log("Carregou");
+    } else {
+      console.log("Nao Carregou");
+    }
+  }
+
+  private toggleBtn() {
+    this.btnDesactive = !this.btnDesactive;
+    console.log("Valor atual: ", this.btnDesactive);
   }
 
 }
