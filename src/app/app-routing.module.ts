@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { MapResolveService } from './resolver/map-resolve.service';
 
 const routes: Routes = [
   {
@@ -21,9 +20,6 @@ const routes: Routes = [
   { path: 'intro', loadChildren: './pages/intro/intro.module#IntroPageModule' },
   { 
     path: 'login/intro',
-    resolve: {
-      map: MapResolveService
-    },
     loadChildren: './pages/modals/intro-modal/intro-modal.module#IntroModalPageModule'
   }
 ];

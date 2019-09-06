@@ -25,12 +25,17 @@ export class IntroModalPage implements OnInit {
   }
   
   ionViewDidEnter() {
-    if (this.mapObj.map.loaded()) {
-      this.btnDesactive = false;
-    } else {
+    if (this.mapObj.map && this.mapObj.map.loaded()) {
+      this.navCtrl.navigateBack('login/home');
+    } else if (this.mapObj.map) {
       this.mapObj.map.on('load', () => {
         this.navCtrl.navigateBack('login/home');
       });
+      this.mapObj.map.on('error', () => {
+        console.log("Error");
+      });
+    } else {
+      console.log(this.mapObj.error);
     }
   }
 
