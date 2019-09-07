@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { MapService } from './services/map.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private menuCtrl: MenuController,
-    private mapService: MapService
+    private mapService: MapService,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -45,5 +47,13 @@ export class AppComponent {
 
   public toggleMenu() {
     this.menuCtrl.toggle();
+  }
+
+  public navigatePage(page: string) {
+    if (page === "perfil") {
+      this.router.navigateByUrl("home/perfil");
+    }
+
+    this.toggleMenu();
   }
 }

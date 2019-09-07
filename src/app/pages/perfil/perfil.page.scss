@@ -1,0 +1,44 @@
+ion-header {
+    --ion-background-color: #313131;
+    color: white;
+    border: none;
+    box-shadow: none;
+    ion-toolbar {
+        --border-width: 0;
+        --color: white;
+        display: flex;
+        justify-content: center;
+        ion-back-button {
+            --icon-font-size: 24px;
+        }
+        ion-title {
+            font-size: 14px;
+        }
+    }
+}
+
+ion-content {
+    --ion-background-color: #313131;
+    --color: white;
+    ion-grid {
+        ion-row {
+            ion-col {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+        ion-row.endLine {
+            border-bottom: 1px solid white;
+            padding-bottom: 15px;
+        }
+        ion-row ion-col ion-label.subHeader {
+            color: #D6A763;
+        }
+        #exitLabel {
+            color: #f24822;
+            font-weight: bolder;
+        }
+    }
+}

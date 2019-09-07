@@ -1,0 +1,78 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-butttons slot="start">
+      <ion-back-button defaultHref="login/home"></ion-back-button>
+    </ion-butttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label class="header">DETALHES DO PERFIL</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label class="subHeader">Nome</ion-label>
+        <ion-label>Andre Luis</ion-label>
+      </ion-col>
+      <ion-col size="1" align-self-end>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label class="subHeader">Email</ion-label>
+        <ion-label>andreluiss@gmail.com</ion-label>
+      </ion-col>
+      <ion-col size="1" align-self-end>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="endLine">
+      <ion-col>
+        <ion-label class="subHeader">Telefone</ion-label>
+        <ion-label>+55 62 98124 2373</ion-label>
+      </ion-col>
+      <ion-col size="1" align-self-end>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label class="header">DETALHES DE SEGURANÇA</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="endLine">
+      <ion-col>
+        <ion-label class="subHeader">Senha</ion-label>
+        <ion-label>Mudar senha</ion-label>
+      </ion-col>
+      <ion-col size="1" align-self-end>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label class="header">IDIOMA</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label class="subHeader">Selecione o idioma</ion-label>
+        <ion-label>Portugês</ion-label>
+      </ion-col>
+      <ion-col size="1" align-self-end>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="logout()">
+      <ion-col>
+        <ion-label id="exitLabel">Sair</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
