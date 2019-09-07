@@ -1,0 +1,56 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Seus cartões</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row id="header">
+      <ion-col id="label">
+        Cartões Salvos
+      </ion-col>
+      <ion-col text-end align-self-end>
+        <ion-icon name="add-circle-outline" slort="start"></ion-icon> Add Cartão
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="cartoes.length > 0" no-padding>
+      <ion-col>
+        <ion-slides [options]="sliderConfigs" pager>
+          <ion-slide *ngFor="let card of cartoes">
+            <ion-card [class]="card.category">
+              <ion-card-content>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col text-start align-self-start>
+                      <img [src]="getCartao(card)" />
+                      <ion-label>{{ card.category }}</ion-label>
+                    </ion-col>
+                    <ion-col size="1">
+                      <ion-icon name="md-more"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col align-self-start>
+                      <p>Data Exp</p>
+                      <p>{{ card.expDate }}</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer *ngIf="cartoes.length > 0">
+  <ion-toolbar align="center">
+    <ion-button (click)="showAlert('Deseja excluir o cartão selecionado?')">Excluir</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,92 @@
+ion-header {
+    --ion-background-color: #313131;
+    color: white;
+    border: none;
+    box-shadow: none;
+    ion-toolbar {
+        --border-width: 0;
+        --color: white;
+        display: flex;
+        justify-content: center;
+        ion-back-button {
+            --icon-font-size: 24px;
+        }
+        ion-title {
+            font-size: 14px;
+        }
+    }
+}
+
+ion-content {
+    --ion-background-color: #313131;
+    --color: white;
+    ion-grid, ion-col {
+        margin: 0;
+        padding: 0;
+    }
+    ion-slides {
+        padding-bottom: 50px;
+    }
+    #header {
+        padding: 0 15px;
+    }
+    #label {
+        color: #D6A763;
+    }
+}
+
+ion-card {
+    color: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vw;
+    width: 80vw;
+}
+
+ion-card.MasterCard {
+    background-image: url(./../../../assets/cardBackground.svg);
+}
+
+ion-card.Visa {
+    background-image: url(./../../../assets/cardBackground2.svg);
+}
+
+ion-card ion-card-content {
+    height: 100%;
+    img {
+        width: 35px;
+    }
+
+    ion-grid {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        ion-row ion-col p {
+            text-align: start;
+            margin: 0;
+        }
+        ion-icon {
+            font-size: 24px;
+        }
+    }
+}
+
+ion-footer {
+    --ion-background-color: #313131;
+}
+
+ion-footer::before {
+    display: none !important;
+}
+
+ion-footer ion-toolbar {
+    padding: 20px 0;
+}
+
+ion-footer ion-toolbar ion-button {
+    --color: white;
+    --border-radius: 25px !important;
+    --background: linear-gradient(152deg, rgba(246,202,112,1) 0%, rgba(218,172,100,1) 75%);
+}

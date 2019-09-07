@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NavController } from '@ionic/angular';
-import { MapService } from 'src/app/services/map.service';
+import { MapService } from 'src/app/services/map/map.service';
 
 @Component({
   selector: 'app-intro-modal',

@@ -4,7 +4,7 @@ import { LoadingController, AlertController } from '@ionic/angular';
 import mapboxgl from 'mapbox-gl';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import { MapService } from 'src/app/services/map.service';
+import { MapService } from 'src/app/services/map/map.service';
 import { MAPBOX_TOKEN } from './../../../environments/environment';
 
 const gpsOptions = {

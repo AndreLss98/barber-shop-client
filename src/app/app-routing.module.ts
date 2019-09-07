@@ -22,7 +22,8 @@ const routes: Routes = [
     path: 'login/intro',
     loadChildren: './pages/modals/intro-modal/intro-modal.module#IntroModalPageModule'
   },
-  { path: 'home/perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },  { path: 'cartoes', loadChildren: './pages/cartoes/cartoes.module#CartoesPageModule' }
+  { path: 'home/perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
+  { path: 'home/cartoes', loadChildren: './pages/cartoes/cartoes.module#CartoesPageModule' }
 
 
 ];

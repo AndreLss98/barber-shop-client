@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import { MAPBOX_TOKEN } from './../../environments/environment';
+import { MAPBOX_TOKEN } from '../../../environments/environment';
 
 import mapboxgl from 'mapbox-gl';
 

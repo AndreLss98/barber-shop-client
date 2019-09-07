@@ -4,7 +4,7 @@ import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { MapService } from './services/map.service';
+import { MapService } from './services/map/map.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -52,6 +52,8 @@ export class AppComponent {
   public navigatePage(page: string) {
     if (page === "perfil") {
       this.router.navigateByUrl("home/perfil");
+    } else if (page === "cartao") {
+      this.router.navigateByUrl("home/cartoes");
     }
 
     this.toggleMenu();
