@@ -1,0 +1,40 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Histórico</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="cabecalho">
+    <div class="aba" (click)="abaSelecionada = 'realizado'">
+      <ion-label [class.selecionado]="abaSelecionada === 'realizado'">Realizados</ion-label>
+    </div>
+    <div class="aba"></div>
+    <div class="aba" (click)="abaSelecionada = 'cancelado'">
+      <ion-label [class.selecionado]="abaSelecionada === 'cancelado'">Cancelados</ion-label>
+    </div>
+  </div>
+  <div id="historicoRealizado" *ngIf="abaSelecionada === 'realizado'">
+    <div class="itemList" *ngFor="let hist of historicoRealizados">
+      <div>
+        <p>{{ hist.dia }}</p>
+        <div *ngFor="let item of hist.data">
+          <historicoComponent [nome]="item.barberName" [local]="item.local" [valor]="item.valor" [horario]="item.horas"></historicoComponent>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="historicoCancelado" *ngIf="abaSelecionada === 'cancelado'">
+    <div class="itemList" *ngFor="let hist of historicoCancelados">
+      <div>
+        <p>{{ hist.dia }}</p>
+        <div *ngFor="let item of hist.data">
+          <historicoComponent [nome]="item.barberName" [local]="item.local" [valor]="item.valor" [horario]="item.horas"></historicoComponent>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

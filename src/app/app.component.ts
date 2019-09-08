@@ -54,6 +54,8 @@ export class AppComponent {
       this.router.navigateByUrl("home/perfil");
     } else if (page === "cartao") {
       this.router.navigateByUrl("home/cartoes");
+    } else if (page === "historico") {
+      this.router.navigateByUrl("home/historico");
     }
 
     this.toggleMenu();
