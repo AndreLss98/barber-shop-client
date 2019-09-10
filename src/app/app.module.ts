@@ -13,17 +13,22 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { RecuperarSenhaPageModule } from './pages/modals/recuperar-senha/recuperar-senha.module';
 import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.module';
+import { CadastroCartaoPage } from './pages/modals/cadastro-cartao/cadastro-cartao.page';
+import { CadastroCartaoPageModule } from './pages/modals/cadastro-cartao/cadastro-cartao.module';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [
+    CadastroCartaoPage
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
     RecuperarSenhaPageModule,
-    IntroModalPageModule
+    IntroModalPageModule,
+    CadastroCartaoPageModule
   ],
   providers: [
     StatusBar,

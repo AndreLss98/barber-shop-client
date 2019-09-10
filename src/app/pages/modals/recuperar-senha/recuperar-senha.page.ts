@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AlertController, ModalController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import creditCardType from 'credit-card-type';
 
 @Component({
   selector: 'app-recuperar-senha',

@@ -22,7 +22,7 @@ export class IntroPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log(this.slides);
+    
   }
 
   public nextSlide() {

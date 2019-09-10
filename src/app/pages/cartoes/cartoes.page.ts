@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CartaoService } from 'src/app/services/cartao/cartao.service';
-import { IonSlides, AlertController } from '@ionic/angular';
+import { IonSlides, AlertController, ModalController } from '@ionic/angular';
+import { CadastroCartaoPage } from '../modals/cadastro-cartao/cadastro-cartao.page';
 
 @Component({
   selector: 'app-cartoes',
@@ -20,13 +21,22 @@ export class CartoesPage implements OnInit {
 
   constructor(
     private cardService: CartaoService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController
   ) {
 
   }
 
   ngOnInit() {
     this.cartoes = this.cardService.getCards();
+  }
+
+  public async addCartao() {
+    this.modalCtrl.create({
+      component: CadastroCartaoPage
+    }).then((modal) => {
+      modal.present();
+    });
   }
 
   public getCartao(cartao) {

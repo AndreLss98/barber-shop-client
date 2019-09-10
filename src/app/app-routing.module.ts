@@ -26,6 +26,7 @@ const routes: Routes = [
   { path: 'home/cartoes', loadChildren: './pages/cartoes/cartoes.module#CartoesPageModule' },
   { path: 'home/historico', loadChildren: './pages/historico/historico.module#HistoricoPageModule' }
 
+
 ];
 
 @NgModule({

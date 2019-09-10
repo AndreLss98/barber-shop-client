@@ -7,7 +7,7 @@ import mapboxgl from 'mapbox-gl';
 
 const gpsOptions = {
   maximumAge: 15000,
-  timeout: 10000,
+  timeout: 10000
 }
 
 @Injectable({

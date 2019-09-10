@@ -19,8 +19,8 @@ const gpsOptions = {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  private map: any;
   private mapObj: any = {};
+  private position;
   private isLoaded: boolean = false;
   private loading: HTMLIonLoadingElement;
   private content: HTMLElement;
@@ -46,72 +46,34 @@ export class HomePage {
     this.content = document.querySelector('#content');
     this.content.appendChild(this.mapObj.mapElement);
     this.mapObj.map.resize();
+    this.centerMap();
   }
 
   ionViewDidLoad() {
 
   }
 
-  private async loadMap() {
-    this.openLoading().then(() => {
-      this.geolocation.getCurrentPosition(gpsOptions).then((resp) => {
-        this.initializeMap(resp.coords.longitude, resp.coords.latitude);
-      }).catch((error) => {
-        this.closeLoading().then(() => {
-          this.showAlert('Desculpe', 'Falha de conexão do gps', 'Não foi possível localiza-lo');
-        });
-      });
-    });
-  }
-
-  async initializeMap(longitude: any, latitude: any) {
-    mapboxgl.accessToken = MAPBOX_TOKEN;
-    this.map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/dionim/cjzwtgft014k41csdy9xmjcyq',
-      center: [longitude, latitude],
-      zoom: 13
-    });
-    this.map.on('load', () => {
-      console.log("carregou");
-      this.isLoaded = true;
-      this.setPosition(longitude, latitude).then(() => {
-        this.closeLoading();
-      })
-    });
-    this.map.on('error', () => {
-      console.log("falhou");
-      this.closeLoading().then(() => {
-        this.showAlert('Desculpe', 'Falha de conexão', 'Não foi possível se conectar');
-      })
-    });
-  }
-
   public async getAtualPosition() {
     return await this.geolocation.getCurrentPosition().then((resp) => {
       return resp.coords;
-    })
+    });
   }
 
   private async setPosition(longitude: any, latitude: any) {
-    this.map.setCenter([longitude, latitude]);
+    this.mapObj.map.setCenter([longitude, latitude]);
     await this.markerCurrentPosition(longitude, latitude);
   }
 
   public centerMap() {
-    if (this.isLoaded) {
-      this.getAtualPosition().then(data => {
-        this.setPosition(data.longitude, data.latitude);
-      }).catch(() => {
-        this.showAlert('Desculpe', 'Falha no gps', 'Não foi possível localiza-lo');
-      });
-    } else {
-      this.loadMap();
-    }
+    this.getAtualPosition().then(data => {
+      this.setPosition(data.longitude, data.latitude);
+    }).catch(() => {
+      this.showAlert('Desculpe', 'Falha no gps', 'Não foi possível localiza-lo');
+    });
   }
 
   private async markerCurrentPosition(longitude: any, latitude: any) {
-    await new mapboxgl.Marker({ color: '#D6A763' }).setLngLat([longitude, latitude]).addTo(this.map);
+    await new mapboxgl.Marker({ color: '#D6A763' }).setLngLat([longitude, latitude]).addTo(this.mapObj.map);
   }
 
   private async openLoading() {
