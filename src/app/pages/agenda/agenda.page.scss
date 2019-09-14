@@ -1,0 +1,54 @@
+ion-header {
+    --ion-background-color: #313131;
+    color: white;
+    border: none;
+    box-shadow: none;
+    ion-toolbar {
+        --border-width: 0;
+        --color: white;
+        display: flex;
+        justify-content: center;
+        ion-back-button {
+            --icon-font-size: 24px;
+        }
+        ion-title {
+            font-size: 14px;
+        }
+    }
+}
+
+ion-content {
+    --ion-background-color: #313131;
+    --color: gray;
+}
+
+#calendario {
+    box-shadow: 0 7px 4px -2px #2c2c2c;
+}
+
+#mes {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #facf72;
+    ion-icon {
+        color: gray;
+        position: absolute;
+        bottom: 5px;
+        padding-left: 5px;
+    }
+}
+
+ion-col.diaSemana {
+    font-size: 10px;
+}
+
+#whiteLine {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    div {
+        width: 20%;
+        height: 1px;
+        background-color: white;
+    }
+}

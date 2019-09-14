@@ -24,7 +24,9 @@ const routes: Routes = [
   },
   { path: 'home/perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'home/cartoes', loadChildren: './pages/cartoes/cartoes.module#CartoesPageModule' },
-  { path: 'home/historico', loadChildren: './pages/historico/historico.module#HistoricoPageModule' }
+  { path: 'home/historico', loadChildren: './pages/historico/historico.module#HistoricoPageModule' },
+  { path: 'home/agenda', loadChildren: './pages/agenda/agenda.module#AgendaPageModule' }
+
 
 
 ];
