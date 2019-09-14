@@ -1,0 +1,21 @@
+ion-grid {
+    border-left: 3px solid #facf72;
+}
+
+#colImg {
+    margin-right: 15px;
+}
+
+div.circularImg {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}

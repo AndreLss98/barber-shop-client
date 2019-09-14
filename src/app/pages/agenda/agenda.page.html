@@ -35,9 +35,9 @@
         <div></div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngFor="let item of agenda">
       <ion-col>
-
+        <item-agenda [local]="item.local" [horario]="item.horario" [servico]="item.servico" [valor]="item.valor" [nome]="item.nome"></item-agenda>
       </ion-col>
     </ion-row>
   </ion-grid>

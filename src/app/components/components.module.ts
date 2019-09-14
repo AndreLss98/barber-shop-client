@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
 import { HistoricoComponent } from './historico/historico.component';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { ItemAgendaComponent } from './item-agenda/item-agenda.component';
 
 @NgModule({
   declarations: [
-    HistoricoComponent
+    HistoricoComponent,
+    ItemAgendaComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import { IonicModule } from '@ionic/angular';
     IonicModule,
   ],
   exports: [
-    HistoricoComponent
+    HistoricoComponent,
+    ItemAgendaComponent
   ]
 })
 export class ComponentsModule { }
