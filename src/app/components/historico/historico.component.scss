@@ -14,3 +14,24 @@
 img {
     width: 40px;
 }
+
+#avaliacao {
+    display: flex;
+    flex-direction: row;
+    div {
+        width: 17%;
+        img {
+            width: 100%;
+        }
+    }
+}
+
+ion-button {
+    --color: white;
+    --border-radius: 25px !important;
+    --background: linear-gradient(152deg, rgba(245,201,112,1) 0%, rgba(215,168,100,1) 75%);
+}
+
+ion-button[disabled] {
+    --background: linear-gradient(to right, #d8d7d5, #9b9b9b);
+}

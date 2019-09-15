@@ -8,7 +8,7 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              {{ nome }}
+              <div>{{ nome }}</div>
             </ion-col>
             <ion-col size="4" text-center align-self-end>
               Valor
@@ -16,15 +16,25 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              {{ local }}
+              <div>{{ local }}</div>
             </ion-col>
             <ion-col size="4" text-center align-self-end>
-              {{ valor? 'R$'+valor: 'cancelado' }}
+              <div>{{ valor? 'R$'+valor: 'cancelado' }}</div>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              {{ horario }}
+              <div>{{ horario }}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row id="linhaAvaliacao" *ngIf="valor">
+            <ion-col id="avaliacao">
+              <div *ngFor="let star of stars; let i = index" (click)="toggleStars(i+1); qtdStar = i+1">
+                <img src="{{ star.src }}">
+              </div>
+            </ion-col>
+            <ion-col size="4">
+              <ion-button size="small" expand="block" [disabled]="qtdStar === 0">Avaliar</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
