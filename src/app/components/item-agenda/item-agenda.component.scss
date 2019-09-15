@@ -1,4 +1,4 @@
-ion-grid {
+ion-grid.selected {
     border-left: 3px solid #facf72;
 }
 
@@ -15,7 +15,30 @@ div.circularImg {
     border-radius: 50%;
 }
 
+#gridDetails {
+    padding-top: 0;
+    ion-grid {
+        padding-top: 0;
+        color: white;
+        ion-row ion-col ion-icon {
+            font-size: 1.7em;
+            color: #ff5050;
+        }
+    }
+}
+
+div.header {
+    color: #facf72;
+    font-size: 1.3em;
+}
+
 img {
     width: 100%;
     height: auto;
+}
+
+ion-button {
+    --color: white;
+    --border-radius: 25px !important;
+    --background: linear-gradient(152deg, rgba(245,201,112,1) 0%, rgba(215,168,100,1) 75%);
 }

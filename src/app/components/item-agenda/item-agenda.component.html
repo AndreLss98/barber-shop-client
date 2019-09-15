@@ -1,15 +1,70 @@
-<ion-grid>
+<ion-grid [class.selected]="!isInverted">
   <ion-row>
-    <ion-col size="2" id="colImg">
+    <ion-col size="2" id="colImg" *ngIf="!isInverted">
       <div class="circularImg">
         <img src="./../../../assets/imgs/facePlaceholder.jpg">
       </div>
     </ion-col>
-    <ion-col>
+    <ion-col size="1" *ngIf="isInverted === true" (click)="isInverted = !isInverted">
+      <ion-icon name="ios-arrow-back"></ion-icon>
+    </ion-col>
+    <ion-col *ngIf="!isInverted">
       <div>{{ nome }}</div>
       <div>{{ horario }}</div>
     </ion-col>
-    <ion-col size="2">
+    <ion-col id="gridDetails" *ngIf="isInverted">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div class="header">Local</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="2" align-self-center>
+            <ion-icon name="pin"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <div>{{ local }}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="header">Horário</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div>{{ horario }}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="header">Serviço</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div>{{ servico }}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="header">Valor</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div>R$ {{ valor }}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col text-center align-self-center>
+            <ion-button>Cancelar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+    <ion-col size="2" *ngIf="!isInverted" (click)="isInverted = !isInverted">
       <ion-icon name="ios-arrow-forward"></ion-icon>
     </ion-col>
   </ion-row>

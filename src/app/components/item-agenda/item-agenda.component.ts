@@ -7,15 +7,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ItemAgendaComponent implements OnInit {
 
-
   @Input() local: string;
   @Input() horario: string;
   @Input() servico: string;
   @Input() valor: string;
   @Input() nome: string;
 
+  public isInverted: boolean = false;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { 
+    this.valor = Number(this.valor).toFixed(2).replace('.', ',');
+  }
+
+
 
 }
