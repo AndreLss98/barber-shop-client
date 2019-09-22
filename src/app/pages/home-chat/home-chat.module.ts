@@ -5,15 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AgendaPage } from './agenda.page';
+import { HomeChatPage } from './home-chat.page';
 import { ComponentsModule } from 'src/app/components/components.module';
-
-import { MesAgendaComponent } from 'src/app/components/popovers/mes-agenda/mes-agenda.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AgendaPage
+    component: HomeChatPage
   }
 ];
 
@@ -25,7 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule
   ],
-  declarations: [AgendaPage],
-  entryComponents: [ MesAgendaComponent ]
+  declarations: [HomeChatPage]
 })
-export class AgendaPageModule {}
+export class HomeChatPageModule {}

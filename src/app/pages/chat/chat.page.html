@@ -1,0 +1,31 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home/home-chat"></ion-back-button>
+    </ion-buttons>
+    <ion-title>chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let conversa of conversas.conversas.barbeiroMensagens">
+      <ion-col>
+        <div class="barbeiro">{{ conversa.mensagen }}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let conversa of conversas.conversas.minhasMensagens">
+      <ion-col>
+        <div class="cliente">{{ conversa.mensagen }}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-item>
+    <ion-textarea rows="1" placeholder="Digite uma mensagem">
+      <ion-icon slot="end" name="send"></ion-icon>
+    </ion-textarea>
+  </ion-item>
+</ion-footer>

@@ -11,22 +11,23 @@
   <ion-grid id="calendario">
     <ion-row>
       <ion-col>
-        <div id="mes">Julho <ion-icon name="ios-arrow-down"></ion-icon></div>
+        <div id="mes">{{ nameCurrentMoth }} <ion-icon (click)="presentPopOver($event)" name="ios-arrow-down"></ion-icon></div>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <div>2019</div>
+        <div>{{ currentYear }}</div>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col class="diaSemana">DOM</ion-col>
-      <ion-col class="diaSemana">SEG</ion-col>
-      <ion-col class="diaSemana">TER</ion-col>
-      <ion-col class="diaSemana">QUA</ion-col>
-      <ion-col class="diaSemana">QUI</ion-col>
-      <ion-col class="diaSemana">SEX</ion-col>
-      <ion-col class="diaSemana">SAB</ion-col>
+      <ion-slides [options]="slidesConfig">
+        <ion-slide *ngFor="let day of month">
+          <div style="display: flex; flex-direction: column">
+            <div>{{ day.nameDay }}</div>
+            <div>{{ day.day }}</div>
+          </div>
+        </ion-slide>
+      </ion-slides>
     </ion-row>
   </ion-grid>
   <ion-grid>

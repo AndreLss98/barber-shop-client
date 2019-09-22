@@ -5,11 +5,15 @@ import { CommonModule } from '@angular/common';
 
 import { HistoricoComponent } from './historico/historico.component';
 import { ItemAgendaComponent } from './item-agenda/item-agenda.component';
+import { ChatComponent } from './chat/chat.component';
+import { MesAgendaComponent } from './popovers/mes-agenda/mes-agenda.component';
 
 @NgModule({
   declarations: [
     HistoricoComponent,
-    ItemAgendaComponent
+    ItemAgendaComponent,
+    ChatComponent,
+    MesAgendaComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +22,9 @@ import { ItemAgendaComponent } from './item-agenda/item-agenda.component';
   ],
   exports: [
     HistoricoComponent,
-    ItemAgendaComponent
+    ItemAgendaComponent,
+    ChatComponent,
+    MesAgendaComponent
   ]
 })
 export class ComponentsModule { }

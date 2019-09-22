@@ -58,6 +58,8 @@ export class AppComponent {
       this.router.navigateByUrl("home/historico");
     } else if (page === 'agenda') {
       this.router.navigateByUrl("home/agenda");
+    }else if (page === "chat") {
+      this.router.navigateByUrl("home/home-chat")
     }
 
     this.toggleMenu();

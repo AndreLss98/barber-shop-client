@@ -1,0 +1,12 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <chat-item *ngFor="let conversa of conversas; let i = index" [nome]="conversa.nome" [ulitmaMensagem]="conversa.conversas.minhasMensagens[0].mensagen" [hora]="conversa.conversas.minhasMensagens[0].hora" (click)="viewChat(i)"></chat-item>
+</ion-content>

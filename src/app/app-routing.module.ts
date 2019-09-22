@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ChatResolveService } from './resolver/chat-resolve.service';
 
 const routes: Routes = [
   {
@@ -25,10 +26,15 @@ const routes: Routes = [
   { path: 'home/perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'home/cartoes', loadChildren: './pages/cartoes/cartoes.module#CartoesPageModule' },
   { path: 'home/historico', loadChildren: './pages/historico/historico.module#HistoricoPageModule' },
-  { path: 'home/agenda', loadChildren: './pages/agenda/agenda.module#AgendaPageModule' }
-
-
-
+  { path: 'home/agenda', loadChildren: './pages/agenda/agenda.module#AgendaPageModule' },
+  { path: 'home/home-chat', loadChildren: './pages/home-chat/home-chat.module#HomeChatPageModule' },
+  {
+    path: 'home/home-chat/:id',
+    resolve: {
+      conversas: ChatResolveService
+    },
+    loadChildren: './pages/chat/chat.module#ChatPageModule'
+  }
 ];
 
 @NgModule({
