@@ -39,7 +39,7 @@ export class IntroModalPage implements OnInit {
       } else {
         console.log(this.mapObj.error);
       }
-    }, 2500);
+    }, 1500);
 
   }
 
