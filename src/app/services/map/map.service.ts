@@ -6,6 +6,7 @@ import { MAPBOX_TOKEN } from '../../../environments/environment';
 import mapboxgl from 'mapbox-gl';
 import { GeoJson, FeatureCollection } from 'src/app/classes/map';
 import { MARKERS } from 'src/app/constants/mock-markers';
+import { MapItemComponent } from 'src/app/components/map-item/map-item.component';
 
 const gpsOptions = {
   maximumAge: 15000,
@@ -33,7 +34,7 @@ export class MapService {
     this.mapElement.id = 'map';
     this.mapElement.style.height = '100%';
 
-    this.markers = JSON.parse(MARKERS);
+    // this.markers = JSON.parse(MARKERS);
   }
 
   public getMap() {
@@ -71,11 +72,22 @@ export class MapService {
     map.on('click', (position) => {
       const result = map.queryRenderedFeatures(position.point, { layers: ['Points'] });
       if (result.length) {
+        const content = result[0].properties;
         const popup = new mapboxgl.Popup({ closeButton: false });
-        popup.setLngLat(position.lngLat).setHTML(`<h1>MapPoint</h1>`).addTo(map);
+        const coordinates = result[0].geometry.coordinates.slice();
+        while (Math.abs(position.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += position.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+        popup.setLngLat(coordinates).setHTML(this.generateHTMLItemToMap(content['nome'])).addTo(map);
+      } else {
+        /* const coordinates = [position.lngLat.lng, position.lngLat.lat];
+        const newMarker = new GeoJson(coordinates, { nome: "Claude Castro" });
+        this.pushNewMarker(newMarker);
+        const data = new FeatureCollection(this.getMarkers());
+        console.log(JSON.stringify(this.getMarkers()));
+        map.getSource(SOURCE_MARKERS_NAME).setData(data); */
       }
     });
-
     return map;
   }
 
@@ -87,7 +99,7 @@ export class MapService {
         'features': []
       }
     });
-    const data = new FeatureCollection(this.getMarkers());
+    const data = new FeatureCollection(JSON.parse(this.getMarkers()));
     map.getSource(SOURCE_MARKERS_NAME).setData(data);
   }
 
@@ -103,11 +115,20 @@ export class MapService {
   }
 
   private getMarkers() {
-    return this.markers;
+    // return this.markers;
+    return MARKERS;
   }
 
   private pushNewMarker(newMarker: GeoJson) {
     this.markers.push(newMarker);
-    console.log(JSON.stringify(this.markers));
+    // console.log(JSON.stringify(this.markers));
+  }
+
+  private generateHTMLItemToMap(name: string): string {
+    return `<ion-grid><ion-row><ion-col class="ion-align-self-center"><img src="/assets/imgs/man_model.jpg"></ion-col><ion-col><ion-row><ion-col text-center><div>${name}</div></ion-col></ion-row><ion-row><ion-col><ion-button class="map-item">Agendar</ion-button></ion-col></ion-row></ion-col></ion-row></ion-grid>`;
+  }
+
+  public myConsole() {
+    console.log("Foi chamada a funcao");
   }
 }

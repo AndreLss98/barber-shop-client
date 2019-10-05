@@ -106,6 +106,12 @@ export class HomePage {
       backdropDismiss: false
     }).then((res) => {
       res.present();
-    })
+    });
+  }
+
+  private clickEvent(event) {
+    if (event.target.attributes.length !== 0 && event.target.attributes[0].value === 'map-item md button button-solid ion-activatable ion-focusable hydrated activated') {
+      console.log('PerformeAction');
+    }
   }
 }
