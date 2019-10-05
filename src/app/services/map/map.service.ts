@@ -69,11 +69,11 @@ export class MapService {
     });
 
     map.on('click', (position) => {
-      const coordinates = [position.lngLat.lng, position.lngLat.lat];
-      const newMarker = new GeoJson(coordinates);
-      this.pushNewMarker(newMarker);
-      const data = new FeatureCollection(this.getMarkers());
-      map.getSource(SOURCE_MARKERS_NAME).setData(data);
+      const result = map.queryRenderedFeatures(position.point, { layers: ['Points'] });
+      if (result.length) {
+        const popup = new mapboxgl.Popup({ closeButton: false });
+        popup.setLngLat(position.lngLat).setHTML(`<h1>MapPoint</h1>`).addTo(map);
+      }
     });
 
     return map;
