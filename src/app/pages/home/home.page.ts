@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, ModalController } from '@ionic/angular';
 
 import mapboxgl from 'mapbox-gl';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { MapService } from 'src/app/services/map/map.service';
 import { MAPBOX_TOKEN } from './../../../environments/environment';
+import { SelecaoServicoPage } from '../modals/selecao-servico/selecao-servico.page';
 
 const gpsOptions = {
   maximumAge: 2000,
@@ -29,7 +30,8 @@ export class HomePage {
     private geolocation: Geolocation,
     private loadinController: LoadingController,
     private alertCtrl: AlertController,
-    private mapService: MapService
+    private mapService: MapService,
+    private modalCtrl: ModalController
   ) {
 
   }
@@ -109,9 +111,13 @@ export class HomePage {
     });
   }
 
-  private clickEvent(event) {
+  public clickEvent(event) {
     if (event.target.attributes.length !== 0 && event.target.attributes[0].value === 'map-item md button button-solid ion-activatable ion-focusable hydrated activated') {
-      console.log('PerformeAction');
+      this.modalCtrl.create({
+        component: SelecaoServicoPage
+      }).then((modal) => {
+        modal.present();
+      });
     }
   }
 }

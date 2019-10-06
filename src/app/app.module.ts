@@ -15,11 +15,13 @@ import { RecuperarSenhaPageModule } from './pages/modals/recuperar-senha/recuper
 import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.module';
 import { CadastroCartaoPage } from './pages/modals/cadastro-cartao/cadastro-cartao.page';
 import { CadastroCartaoPageModule } from './pages/modals/cadastro-cartao/cadastro-cartao.module';
+import { SelecaoServicoPage } from './pages/modals/selecao-servico/selecao-servico.page';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SelecaoServicoPage],
   entryComponents: [
-    CadastroCartaoPage
+    CadastroCartaoPage,
+    SelecaoServicoPage
   ],
   imports: [
     BrowserModule,
