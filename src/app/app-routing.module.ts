@@ -31,7 +31,9 @@ const routes: Routes = [
       conversas: ChatResolveService
     },
     loadChildren: './pages/chat/chat.module#ChatPageModule'
-  }
+  },  { path: 'load-atendimento', loadChildren: './pages/load-atendimento/load-atendimento.module#LoadAtendimentoPageModule' },
+  { path: 'confirmacao-agenda', loadChildren: './pages/confirmacao-agenda/confirmacao-agenda.module#ConfirmacaoAgendaPageModule' }
+
 
 ];
 
