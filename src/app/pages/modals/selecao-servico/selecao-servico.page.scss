@@ -59,12 +59,17 @@ div.itemDay {
   flex-direction: column;
   text-align: start !important;
   .dia-mes {
-    font-size: 0.9em;
+    font-size: 0.7em;
   }
   #currentDay {
     font-size: 0.7em;
     margin-bottom: 5px;
   }
+}
+
+ion-slide {
+  display: flex;
+  align-items: flex-end;
 }
 
 div.selecionado {
@@ -98,15 +103,19 @@ div.selecionado {
   #servicosBottom {
     span {
       color: rgb(54, 55, 66);
-      font-size: 0.7em;
+      font-size: 0.6em;
     }
 
     .start {
       align-items: flex-start;
+      ion-icon {
+        margin: 0 !important;
+      }
     }
 
     .end {
       align-items: flex-end;
+      justify-content: space-between;
     }
   }
 }
