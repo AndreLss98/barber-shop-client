@@ -125,7 +125,7 @@ export class MapService {
   }
 
   private generateHTMLItemToMap(name: string): string {
-    return `<ion-grid><ion-row><ion-col class="ion-align-self-center"><img src="/assets/imgs/man_model.jpg"></ion-col><ion-col><ion-row><ion-col text-center><div>${name}</div></ion-col></ion-row><ion-row><ion-col><ion-button class="map-item">Agendar</ion-button></ion-col></ion-row></ion-col></ion-row></ion-grid>`;
+    return `<ion-grid><ion-row><ion-col class="ion-align-self-center" style="display: flex"><img src="/assets/imgs/man_model.jpg"></ion-col><ion-col class="ion-align-self-center"><ion-row><ion-col text-center><div>${name}</div></ion-col></ion-row><ion-row><ion-col><ion-button class="map-item">Agendar</ion-button></ion-col></ion-row></ion-col></ion-row></ion-grid>`;
   }
 
   public myConsole() {
