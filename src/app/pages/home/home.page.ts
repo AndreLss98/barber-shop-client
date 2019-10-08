@@ -112,7 +112,7 @@ export class HomePage {
   }
 
   public clickEvent(event) {
-    if (event.target.attributes.length !== 0 && event.target.attributes[0].value === 'map-item md button button-solid ion-activatable ion-focusable hydrated activated') {
+    if ((event.target.attributes.length !== 0) && (event.target.attributes[0].value === 'map-item md button button-solid ion-activatable ion-focusable hydrated activated' || event.target.attributes[0].value === 'map-item ios button button-solid ion-activatable ion-focusable hydrated activated')) {
       this.modalCtrl.create({
         component: SelecaoServicoPage
       }).then((modal) => {
