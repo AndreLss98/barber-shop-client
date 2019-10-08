@@ -12,6 +12,16 @@ export class SelecaoServicoPage implements OnInit {
   public slidesConfig = {
     slidesPerView: 4
   }
+  public diaSelecionado: number = null;
+  public horarioSelecionado: number = null;
+  private total: number = 0;
+  public totalFormatado: string;
+  public isBeardSelecionada: boolean = false;
+  public isHairSelecionado: boolean = false;
+  public isMustacheSelecionado: boolean = false;
+  public pathBeardSvg: string = './../../../../assets/beard.svg';
+  public pathHairSvg: string = './../../../../assets/hair.svg';
+  public pathMustacheSvg: string = './../../../../assets/mustache.svg';
   public currentMoth;
   public moth = [];
 
@@ -23,11 +33,52 @@ export class SelecaoServicoPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.formataValorTotal();
   }
 
   public closeModal() {
     this.modaCtrl.dismiss();
+  }
+
+  public selectBeardService() {
+    this.isBeardSelecionada = !this.isBeardSelecionada;
+    if (this.isBeardSelecionada) {
+      this.pathBeardSvg = './../../../../assets/beard_black.svg';
+      this.total += 20;
+    } else {
+      this.pathBeardSvg = './../../../../assets/beard.svg';
+      this.total -= 20;
+    }
+    this.formataValorTotal();
+  }
+
+  public selectHairService() {
+    this.isHairSelecionado = !this.isHairSelecionado;
+    if (this.isHairSelecionado) {
+      this.pathHairSvg = './../../../../assets/hair_black.svg';
+      this.total += 30;
+    } else {
+      this.pathHairSvg = './../../../../assets/hair.svg';
+      this.total -= 30;
+    }
+    this.formataValorTotal();
+  }
+
+  public selectMustacheService() {
+    this.isMustacheSelecionado = !this.isMustacheSelecionado;
+    if (this.isMustacheSelecionado) {
+      this.pathMustacheSvg = './../../../../assets/mustache_black.svg';
+      this.total += 15;
+    } else {
+      this.pathMustacheSvg = './../../../../assets/mustache.svg';
+      this.total -= 15;
+    }
+    this.formataValorTotal();
+  }
+
+  public formataValorTotal() {
+    this.totalFormatado = Number(this.total).toFixed(2);
+    this.totalFormatado = this.totalFormatado.replace('.', ',');
   }
 
 }

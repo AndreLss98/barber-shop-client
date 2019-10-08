@@ -20,8 +20,8 @@
       </ion-row>
       <ion-row id="slidesDay">
         <ion-slides [options]="slidesConfig">
-          <ion-slide *ngFor="let day of moth; let i = index">
-            <div class="itemDay">
+          <ion-slide *ngFor="let day of moth; let i = index" (click)="diaSelecionado = i">
+            <div class="itemDay" [class.selecionado]="diaSelecionado === i">
               <div *ngIf="i === 0" id="currentDay">Hoje</div>
               <div class="dia-mes">{{ day.day }} {{ currentMoth }}</div>
               <div>{{ day.nameDay }}</div>
@@ -39,8 +39,8 @@
       </ion-row>
       <ion-row id="slideHorarios">
         <ion-slides [options]="slidesConfig">
-          <ion-slide *ngFor="let hora of horarios">
-            <div>{{ hora }}</div>
+          <ion-slide *ngFor="let hora of horarios; let i = index" (click)="horarioSelecionado = i">
+            <div [class.selecionado]="horarioSelecionado === i">{{ hora }}</div>
           </ion-slide>
         </ion-slides>
       </ion-row>
@@ -53,20 +53,20 @@
         <ion-col id="colServicos" size="10">
           <ion-grid id="servicos">
             <ion-row class="ion-justify-content-center">
-              <ion-col size="4" text-center>
-                <span>Barba</span>
-                <ion-icon src="./../../../../assets/beard.svg"></ion-icon>
-                <span>R$ 20</span>
+              <ion-col size="4" text-center (click)="selectBeardService()">
+                <span [class.selecionado]="isBeardSelecionada">Barba</span>
+                <ion-icon [src]="pathBeardSvg"></ion-icon>
+                <span [class.selecionado]="isBeardSelecionada">R$ 20</span>
               </ion-col>
-              <ion-col size="4" text-center>
-                <span>Cabelo</span>
-                <ion-icon src="./../../../../assets/hair.svg"></ion-icon>
-                <span>R$ 30</span>
+              <ion-col size="4" text-center (click)="selectHairService()">
+                <span [class.selecionado]="isHairSelecionado">Cabelo</span>
+                <ion-icon [src]="pathHairSvg"></ion-icon>
+                <span [class.selecionado]="isHairSelecionado">R$ 30</span>
               </ion-col>
-              <ion-col size="4" text-center>
-                <span>Bigode</span>
-                <ion-icon src="./../../../../assets/mustache.svg"></ion-icon>
-                <span>R$ 15</span>
+              <ion-col size="4" text-center (click)="selectMustacheService()">
+                <span [class.selecionado]="isMustacheSelecionado">Bigode</span>
+                <ion-icon [src]="pathMustacheSvg"></ion-icon>
+                <span [class.selecionado]="isMustacheSelecionado">R$ 15</span>
               </ion-col>
             </ion-row>
             <ion-row class="ion-justify-content-center">
@@ -79,7 +79,7 @@
               </ion-col>
               <ion-col size="4" class="end">
                 <span>Total</span>
-                <span>R$ 30,00</span>
+                <span>R$ {{ totalFormatado }}</span>
               </ion-col>
             </ion-row>
           </ion-grid>

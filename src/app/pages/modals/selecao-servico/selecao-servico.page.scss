@@ -68,6 +68,10 @@ div.itemDay {
   }
 }
 
+div.selecionado {
+  color: var(--ion-color-primary);
+}
+
 #colServicos {
   background-color: white;
   border-radius: 4px;
@@ -80,9 +84,12 @@ div.itemDay {
     flex-direction: column;
     align-items: center;
     span {
-      color: black;
+      color: #707070;
       font-size: 0.9em;
       font-weight: 600;
+    }
+    span.selecionado {
+      color: black;
     }
     ion-icon {
       margin-bottom: 10px;
