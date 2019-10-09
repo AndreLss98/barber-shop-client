@@ -15,7 +15,7 @@
         </ion-row>
         <ion-row class="ion-justify-content-center">
           <ion-col text-center>
-            <ion-button shape="round">Visualizar sua agenda</ion-button>
+            <ion-button shape="round" (click)="visualizeSchedule()">Visualizar sua agenda</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -39,12 +39,12 @@
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-col text-center>
-        <span>11 de setembro de 2019</span>
+        <span>{{ currentDay }} de {{ currentMonth }} de {{ currentYear }}</span>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-col size="2">
-        <ion-fab-button id="checkBtn">
+        <ion-fab-button id="checkBtn" (click)="goHome()">
           <ion-icon name="checkmark"></ion-icon>
         </ion-fab-button>
       </ion-col>
