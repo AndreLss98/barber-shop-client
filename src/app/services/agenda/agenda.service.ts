@@ -44,7 +44,7 @@ export class AgendaService {
   }
 
   public getDay() {
-    return this.currentDate;
+    return this.currentDay;
   }
 
   public getYear() {
