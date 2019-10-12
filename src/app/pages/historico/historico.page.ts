@@ -11,8 +11,8 @@ import { Historico } from 'src/app/models/historico.model';
 export class HistoricoPage implements OnInit {
 
   public abaSelecionada: string = 'realizado';
-  public historicoRealizados: Historico[];
-  public historicoCancelados: Historico[];
+  public historicoRealizados: Historico[] = [];
+  public historicoCancelados: Historico[] = [];
 
   constructor(
     private historicoService: HistoricoService
@@ -22,9 +22,9 @@ export class HistoricoPage implements OnInit {
 
   ngOnInit() {
     this.historicoRealizados = this.historicoService.getHistorico();
-    this.historicoService.getHistoricoCancelado().subscribe((data) => {
+    /* this.historicoService.getHistoricoCancelado().subscribe((data) => {
       this.historicoCancelados = data;
-    });
+    }); */
   }
 
 }

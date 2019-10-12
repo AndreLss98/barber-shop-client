@@ -44,6 +44,16 @@ ion-content {
     ion-label.selecionado {
         color: white;
     }
+
+    #listaVazia {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        span.title {
+            color: white;
+            font-weight: 800;
+        };
+    }
 }
 
 #historicoRealizado {

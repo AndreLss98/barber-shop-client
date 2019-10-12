@@ -18,11 +18,14 @@
     </div>
   </div>
   <div id="historicoRealizado" *ngIf="abaSelecionada === 'realizado'">
-    <div class="itemList" *ngFor="let hist of historicoRealizados">
-      <div>
-        <p>{{ hist.dia }}</p>
-        <div *ngFor="let item of hist.data">
-          <historicoComponent [nome]="item.barberName" [local]="item.local" [valor]="item.valor" [horario]="item.horas"></historicoComponent>
+    <div *ngIf="historicoCancelados && historicoRealizados.length > 0">
+      <div class="itemList" *ngFor="let hist of historicoRealizados">
+        <div>
+          <p>{{ hist.dia }}</p>
+          <div *ngFor="let item of hist.data">
+            <historicoComponent [nome]="item.barberName" [local]="item.local" [valor]="item.valor"
+              [horario]="item.horas"></historicoComponent>
+          </div>
         </div>
       </div>
     </div>
@@ -32,9 +35,29 @@
       <div>
         <p>{{ hist.dia }}</p>
         <div *ngFor="let item of hist.data">
-          <historicoComponent [nome]="item.barberName" [local]="item.local" [valor]="item.valor" [horario]="item.horas"></historicoComponent>
+          <historicoComponent [nome]="item.barberName" [local]="item.local" [valor]="item.valor" [horario]="item.horas">
+          </historicoComponent>
         </div>
       </div>
     </div>
   </div>
+  <div id="listaVazia" *ngIf="((abaSelecionada == 'realizado' && (!historicoRealizados || historicoRealizados.length == 0)) || (abaSelecionada == 'cancelado' && (!historicoCancelados || historicoCancelados.length == 0)))">
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col text-center>
+            <img src="./../../../assets/NoHistory.svg" />
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col text-center>
+            <span class="title">Sem histórico</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col text-center>
+            <span>Você não tem histórico registrado.</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 </ion-content>
