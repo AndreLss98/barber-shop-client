@@ -1,0 +1,29 @@
+<ion-content slot="fixed">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col text-center>
+        <img src="./../../../assets/warning.svg" />
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col text-center>
+        <span style="font-size: 1.4em">Oh não!</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col text-center>
+        <span>Um erro ocorreu</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10" text-center>
+        <span class="text">Por favor verifique seus dados informados. Se já é cadastrado por favor informe seu login e senha em seguida clique em Entrar</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col text-center>
+        <ion-button (click)="goToLogin()" shape="round">Entrar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

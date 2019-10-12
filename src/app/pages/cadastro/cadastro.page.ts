@@ -11,12 +11,10 @@ import { Router } from '@angular/router';
 export class CadastroPage implements OnInit {
 
   public cadastroForm: FormGroup;
-  private alert: any;
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder,
-    private alertCtrl: AlertController
+    private formBuilder: FormBuilder
   ) {
     this.cadastroForm = this.formBuilder.group({
       name: [null, [Validators.minLength(3), Validators.required]],
@@ -31,20 +29,7 @@ export class CadastroPage implements OnInit {
   }
 
   public async registrarCadastro() {
-    this.alert = await this.alertCtrl.create({
-      message: "Cadastro realizado com sucesso!",
-      buttons: [
-        {
-          text: "OK",
-          handler: () => {
-            this.router.navigateByUrl('/login');
-          }
-        }
-      ],
-      backdropDismiss: false
-    });
-
-    await this.alert.present();
+    this.router.navigateByUrl('erro-cadastro');
   }
 
 }
