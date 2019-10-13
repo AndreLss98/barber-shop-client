@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid *ngIf="cartoes.length > 0">
     <ion-row id="header">
       <ion-col id="label">
         Cartões Salvos
@@ -17,7 +17,7 @@
         <ion-icon style="margin-right: 5px" name="add-circle-outline" slort="start"></ion-icon>Add Cartão
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="cartoes.length > 0" no-padding>
+    <ion-row no-padding>
       <ion-col>
         <ion-slides [options]="sliderConfigs" pager>
           <ion-slide *ngFor="let card of cartoes">
@@ -44,6 +44,28 @@
             </ion-card>
           </ion-slide>
         </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="cartoes.length === 0">
+    <ion-row>
+      <ion-col text-start align-self-end (click)="addCartao()" style="display: flex; justify-content: flex-start">
+        <ion-icon style="margin-right: 5px" name="add-circle-outline" slort="start"></ion-icon>Add Cartão
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col id="noHistory" size="10" text-center>
+        <img src="assets/NoCreditCard.svg" />
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="9" text-center>
+        <span class="title">Não há cartão salvo</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10" text-center>
+        <span class="text">Para cadastrar basta clicar em Add Cartão</span>
       </ion-col>
     </ion-row>
   </ion-grid>

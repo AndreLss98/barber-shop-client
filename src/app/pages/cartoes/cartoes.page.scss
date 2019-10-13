@@ -73,6 +73,20 @@ ion-card ion-card-content {
     }
 }
 
+#noHistory {
+    margin-top: 5em;
+    margin-bottom: 3em;
+}
+
+span.title {
+    font-weight: 700;
+}
+
+span.text {
+    font-size: .8em;
+    color: #dedede;
+}
+
 ion-footer {
     --ion-background-color: #313131;
 }

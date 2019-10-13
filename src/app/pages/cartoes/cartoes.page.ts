@@ -41,9 +41,9 @@ export class CartoesPage implements OnInit {
 
   public getCartao(cartao) {
     if (cartao.category === "MasterCard") {
-      return "./../../../assets/logoMastercard.svg";
+      return "assets/logoMastercard.svg";
     } else {
-      return "./../../../assets/logoVisacard.svg";
+      return "assets/logoVisacard.svg";
     }
   }
 
