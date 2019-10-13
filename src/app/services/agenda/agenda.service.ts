@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { itemAgenda } from 'src/app/models/itemAgenda';
+import { itemAgenda, itemDateAgenda } from 'src/app/models/itemAgenda';
 
 const nameMoths = ["Janeiro", "Fevereiro", "Março", "Abril",  "Maio","Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 const nameWeekDays = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
@@ -9,20 +9,27 @@ const nameWeekDays = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
 })
 export class AgendaService {
 
-  private data: itemAgenda[] = [
+  private data: itemDateAgenda[] = [
     {
-      local: "Rua Recife - QD 05 LT 13 - CEP: 745656-089",
-      horario: "08:00",
-      servico: "Corte de cabelo",
-      valor: 30,
-      nome: "Dione Moreira"
-    },
-    {
-      local: "Rua Recife - QD 05 LT 13 - CEP: 745656-089",
-      horario: "08:00",
-      servico: "Corte de cabelo",
-      valor: 30,
-      nome: "Dione Moreira"
+      day: 17,
+      month: 'outubro',
+      year: 2019,
+      items: [
+        {
+          local: "Rua Recife - QD 05 LT 13 - CEP: 745656-089",
+          horario: "08:00",
+          servico: "Corte de cabelo",
+          valor: 30,
+          nome: "Dione Moreira"
+        },
+        {
+          local: "Rua Recife - QD 05 LT 13 - CEP: 745656-089",
+          horario: "08:00",
+          servico: "Corte de cabelo",
+          valor: 30,
+          nome: "Dione Moreira"
+        }
+      ]
     }
   ]
 
@@ -35,8 +42,14 @@ export class AgendaService {
 
   }
 
-  public getAgenda() {
-    return this.data;
+  public getAgenda(month: string, year: number): itemDateAgenda[] {
+    let filteredData: itemDateAgenda[] = [];
+    this.data.forEach(element => {
+      if (element.month === month.toLowerCase() && element.year === year) {
+        filteredData.push(element);
+      }
+    })
+    return filteredData;
   }
 
   public getDate() {
@@ -81,7 +94,7 @@ export class AgendaService {
     let month = [];
     let numberDay = date.getDay();
     for (let i = date.getDate(); i <= this.getTotalDays(date.getMonth()); i++) {
-      month.push({day: i, nameDay: nameWeekDays[numberDay]});
+      month.push({day: i, nameDay: nameWeekDays[numberDay], hasService: false});
       numberDay++;
       if(numberDay === 7) {
         numberDay = 0;

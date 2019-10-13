@@ -52,14 +52,17 @@
             <div class="header">Valor</div>
           </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col>
-            <div>R$ {{ valor }}</div>
-          </ion-col>
+        <ion-row class="ion-justify-content-center">
+         <ion-col>
+           <div>
+             <span class="cifrao">R$ </span>
+             <span class="valor">{{ valor }}</span>
+           </div>
+         </ion-col>
         </ion-row>
         <ion-row>
           <ion-col text-center align-self-center>
-            <ion-button>Cancelar</ion-button>
+            <ion-button (click)="cancelService()">Cancelar</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

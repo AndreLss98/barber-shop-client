@@ -38,6 +38,35 @@ ion-content {
     }
 }
 
+div.dayWeekend {
+    font-size: .65em;
+    margin-bottom: .5em;
+}
+
+div.dayMonth {
+    height: 1.7em;
+    width: 1.7em;
+    border-radius: 1em;
+    padding: .2em .3em .2em .2em;
+    font-size: .7em;
+    margin-bottom: .4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.dayMonth.selected {
+    background-color: var(--ion-color-primary);
+    color: white;
+}
+
+div.hasService {
+    background-color: gray;
+    height: .4em;
+    width: .4em;
+    border-radius: 1em;
+}
+
 ion-col.diaSemana {
     font-size: 10px;
 }

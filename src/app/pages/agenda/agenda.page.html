@@ -21,10 +21,11 @@
     </ion-row>
     <ion-row>
       <ion-slides [options]="slidesConfig">
-        <ion-slide *ngFor="let day of month">
-          <div style="display: flex; flex-direction: column">
-            <div>{{ day.nameDay }}</div>
-            <div>{{ day.day }}</div>
+        <ion-slide *ngFor="let day of month; let i = index" (click)="selectDay(day, i)">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <div class="dayWeekend">{{ day.nameDay }}</div>
+            <div class="dayMonth" [class.selected]="selectedDay === i">{{ day.day }}</div>
+            <div class="hasService" *ngIf="day.hasService"></div>
           </div>
         </ion-slide>
       </ion-slides>
@@ -36,7 +37,7 @@
         <div></div>
       </ion-col>
     </ion-row>
-    <ion-row *ngFor="let item of agenda">
+    <ion-row *ngFor="let item of agendaFiltrada">
       <ion-col>
         <item-agenda [local]="item.local" [horario]="item.horario" [servico]="item.servico" [valor]="item.valor" [nome]="item.nome"></item-agenda>
       </ion-col>

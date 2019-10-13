@@ -37,8 +37,19 @@ img {
     height: auto;
 }
 
+span.cifrao {
+    font-size: 1.6em;
+    vertical-align: super;
+}
+
+span.valor {
+    color: var(--ion-color-primary);
+    font-size: 2.6em;
+    font-weight: 700;
+}
+
 ion-button {
     --color: white;
     --border-radius: 25px !important;
-    --background: linear-gradient(152deg, rgba(245,201,112,1) 0%, rgba(215,168,100,1) 75%);
+    --background: linear-gradient(152deg, #eb5161 0%, #d7293a 75%);
 }
