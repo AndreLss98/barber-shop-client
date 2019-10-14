@@ -51,6 +51,7 @@ export class CartoesPage implements OnInit {
     this.slides.getActiveIndex().then((resp) => {
       this.cartoes = this.cardService.deleteCard(resp);
       this.slides.update();
+      this.showInfoAlert("Cartão excluido com sucesso!");
     })
   }
 
@@ -78,7 +79,7 @@ export class CartoesPage implements OnInit {
       alertElement.present();
     });
     alertElement.onDidDismiss().then(() => {
-      this.showInfoAlert("Cartão excluido com sucesso!");
+      
     });
   }
 
