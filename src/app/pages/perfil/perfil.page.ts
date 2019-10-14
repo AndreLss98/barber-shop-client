@@ -8,6 +8,9 @@ import { NavController } from '@ionic/angular';
 })
 export class PerfilPage implements OnInit {
 
+  public isExpendedName: boolean = false;
+  public arrowName: string = 'ios-arrow-forward';
+
   constructor(
     private navCtrl: NavController
   ) {
@@ -20,6 +23,11 @@ export class PerfilPage implements OnInit {
 
   public logout() {
     this.navCtrl.navigateBack('login');
+  }
+
+  public extendColName() {
+    this.isExpendedName = !this.isExpendedName;
+    this.isExpendedName? this.arrowName = 'ios-arrow-down' : this.arrowName = 'ios-arrow-forward';
   }
 
 }

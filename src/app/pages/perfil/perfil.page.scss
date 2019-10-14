@@ -33,6 +33,9 @@ ion-content {
             border-bottom: 1px solid white;
             padding-bottom: 15px;
         }
+        ion-row ion-col ion-label.header {
+            color: #80828b !important;
+        }
         ion-row ion-col ion-label.subHeader {
             color: #D6A763;
         }
@@ -41,4 +44,9 @@ ion-content {
             font-weight: bolder;
         }
     }
+}
+
+#extendedName {
+    align-items: center;
+    font-size: 4.5em;
 }
