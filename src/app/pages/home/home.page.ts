@@ -113,7 +113,7 @@ export class HomePage {
 
   public clickEvent(event) {
     console.log(event.target.attributes[0].value)
-    if ((event.target.attributes.length !== 0) && (event.target.attributes[0].value === 'round' || event.target.attributes[0].value === 'map-item ios button button-solid ion-activatable ion-focusable hydrated activated')) {
+    if ((event.target.attributes.length !== 0) && (event.target.attributes[0].value === 'round')) {
       this.modalCtrl.create({
         component: SelecaoServicoPage
       }).then((modal) => {
