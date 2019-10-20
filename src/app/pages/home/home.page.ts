@@ -112,7 +112,6 @@ export class HomePage {
   }
 
   public clickEvent(event) {
-    console.log(event.target.attributes[0].value)
     if ((event.target.attributes.length !== 0) && (event.target.attributes[0].value === 'round')) {
       this.modalCtrl.create({
         component: SelecaoServicoPage

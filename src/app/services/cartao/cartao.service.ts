@@ -6,7 +6,7 @@ import { card } from 'src/app/models/cartao';
 })
 export class CartaoService {
 
-
+  private selectedSessionCard;
   private data: card[] = [
     {
       category: 'MasterCard',

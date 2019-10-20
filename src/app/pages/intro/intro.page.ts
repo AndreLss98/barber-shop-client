@@ -25,9 +25,8 @@ export class IntroPage implements OnInit {
     
   }
 
-  public slideChanged(){
+  public slideChanged() {
     this.slides.getActiveIndex().then((res)=>{
-      console.log(res)
       res === 2? this.nameButton = "Pronto": this.nameButton = "Avançar";
     });
   }
