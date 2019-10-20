@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-slides pager>
+  <ion-slides pager (ionSlideDidChange)="slideChanged()">
     <ion-slide>
       <ion-grid>
         <ion-row>
@@ -9,12 +9,12 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-title>O app Barber Home</ion-title>
+            <ion-title>BARBER HOME</ion-title>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <p>Você agenda o seu corte de cabelo, barba e bigode sem sair de casa!</p>
+            <p>Aqui voce faz o agendamento do seu corte de cabelo, barba e bigode sem sair de casa.</p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -30,12 +30,12 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-title>Para sua comodidade</ion-title>
+            <ion-title>BARBER MAN</ion-title>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <p>O nosso Barber Man irá lhe atender na sua casa conforme seu agendamento</p>
+            <p>O Barbeiro em sua casa, conforme agendamento de sua escolha</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -49,11 +49,11 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-title>Relaxe, Renove, Revitalize</ion-title>
+            <ion-title>COMODIDADES</ion-title>
           </ion-col>
         </ion-row>
         <ion-row>
-          <p>App Barber Home, é um sistema de agendamento online, mas o melhor</p>
+          <p>O App Barber Home tem seu funcionamento online, de fácil usabilidade e na palma da sua mão</p>
         </ion-row>
       </ion-grid>
     </ion-slide>

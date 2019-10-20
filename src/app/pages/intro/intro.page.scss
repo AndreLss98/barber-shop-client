@@ -1,5 +1,18 @@
 ion-content {
     --ion-background-color: #313131;
+    ion-title{
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        font-size: 21px;
+    }
+}
+
+// img{
+//     transform: scale(1.6);
+// }
+
+ion-row{
+    margin-bottom: 10px;
 }
 
 ion-content ion-slides {
@@ -10,6 +23,9 @@ ion-content ion-slides ion-slide {
     color: white;
     p {
         color: gray;
+        font-family: 'Poppins', sans-serif;
+        font-weight: normal;
+        font-size: 15px;
     }
 }
 
@@ -31,6 +47,9 @@ ion-footer ion-toolbar {
 }
 
 ion-footer ion-toolbar ion-button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
     --color: white;
     --border-radius: 25px !important;
 }
