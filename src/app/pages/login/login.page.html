@@ -7,26 +7,26 @@
           <img src="./../../../assets/logo.svg">
         </div>
         <div class="item">
-          <img class="iconLeft" src="./../../../assets/perfil.svg">
-          <input placeholder="nome" type="text" />
+          <img class="iconLeft" src="./../../../assets/icon_email.svg">
+          <input class="inputEmail" placeholder="Email" type="text" />
         </div>
         <div class="item">
           <img class="iconLeft II" src="./../../../assets/icon_senha.svg">
-          <input class="inputSenha" placeholder="senha" type="password" />
+          <input class="inputSenha" placeholder="Senha" type="password" />
           <img class="iconRight" src="./../../../assets/icon_hide_senha.svg">
         </div>
-        <ion-note (click)="recuperarSenha()">Esqueceu a senha?</ion-note>
+        <ion-note class="noteForm" (click)="recuperarSenha()">Esqueceu a senha?</ion-note>
       </ion-row>
       <ion-row class="signin-col">
         <ion-button (click)="login()">
-          <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+          <ion-icon slot="icon-only" name="md-arrow-round-forward"></ion-icon>
         </ion-button>
       </ion-row>
     </ion-grid>
     <ion-grid id="cadastro" routerLink="cadastro">
       <ion-row>
         <ion-col>
-          <ion-note>Novo no <u>Barber Home?</u></ion-note>
+          <ion-note class="noteFooter" >Novo no <u>Barber Home?</u></ion-note>
         </ion-col>
       </ion-row>
     </ion-grid>
