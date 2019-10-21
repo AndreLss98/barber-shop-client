@@ -5,7 +5,7 @@ import { ChatResolveService } from './resolver/chat-resolve.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'intro',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'login/cadastro', loadChildren: './pages/cadastro/cadastro.module#CadastroPageModule' },
   { path: 'intro', loadChildren: './pages/intro/intro.module#IntroPageModule' },
-  {  path: 'login/intro', loadChildren: './pages/modals/intro-modal/intro-modal.module#IntroModalPageModule' },
+  { path: 'login/intro', loadChildren: './pages/modals/intro-modal/intro-modal.module#IntroModalPageModule' },
   { path: 'home/perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'home/cartoes', loadChildren: './pages/cartoes/cartoes.module#CartoesPageModule' },
   { path: 'home/historico', loadChildren: './pages/historico/historico.module#HistoricoPageModule' },
@@ -31,7 +31,8 @@ const routes: Routes = [
       conversas: ChatResolveService
     },
     loadChildren: './pages/chat/chat.module#ChatPageModule'
-  },  { path: 'load-atendimento', loadChildren: './pages/load-atendimento/load-atendimento.module#LoadAtendimentoPageModule' },
+  },
+  { path: 'load-atendimento', loadChildren: './pages/load-atendimento/load-atendimento.module#LoadAtendimentoPageModule' },
   { path: 'confirmacao-agenda', loadChildren: './pages/confirmacao-agenda/confirmacao-agenda.module#ConfirmacaoAgendaPageModule' },
   { path: 'cadastro-sucesso', loadChildren: './pages/cadastro-sucesso/cadastro-sucesso.module#CadastroSucessoPageModule' },
   { path: 'erro-cadastro', loadChildren: './pages/erro-cadastro/erro-cadastro.module#ErroCadastroPageModule' }
