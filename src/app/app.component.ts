@@ -1,11 +1,13 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-
 import { Platform, MenuController } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+
 
 import { MapService } from './services/map/map.service';
-import { Router } from '@angular/router';
+import { NetworkService } from './services/network/network.service';
 
 @Component({
   selector: 'app-root',
@@ -27,21 +29,23 @@ export class AppComponent {
   ];
 
   constructor(
+    private router: Router,
     private platform: Platform,
-    private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private menuCtrl: MenuController,
     private mapService: MapService,
-    private router: Router
+    private network: NetworkService,
+    private menuCtrl: MenuController,
+    private splashScreen: SplashScreen
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.statusBar.styleDefault();
       this.mapService.initializeMap();
+      this.network.initializeNetworkEvents();
     });
   }
 
