@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 import { RecuperarSenhaPage } from '../modals/recuperar-senha/recuperar-senha.page';
+import { ConectionStatusPage } from '../modals/conection-status/conection-status.page';
+
+import { topDownAnimation } from '../../animations/top-down-animation';
+import { downTopAnimation } from './../../animations/down-top-animation';
 
 @Component({
   selector: 'app-login',
@@ -27,12 +31,15 @@ export class LoginPage implements OnInit {
     this.route.navigate(['login/intro']);
   }
 
-  public async recuperarSenha() {
-    const modal = await this.modalCtrl.create({
+  public recuperarSenha() {
+    /* this.modalCtrl.create({
       component: RecuperarSenhaPage
-    });
-
-    modal.present();
+    }).then((modal) => modal.present()); */
+    this.modalCtrl.create({
+      component: ConectionStatusPage,
+      enterAnimation: topDownAnimation,
+      leaveAnimation: downTopAnimation
+    }).then((modal) => modal.present());
   }
 
 }

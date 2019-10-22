@@ -17,14 +17,14 @@ import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.mod
 import { CadastroCartaoPage } from './pages/modals/cadastro-cartao/cadastro-cartao.page';
 import { CadastroCartaoPageModule } from './pages/modals/cadastro-cartao/cadastro-cartao.module';
 import { SelecaoServicoPage } from './pages/modals/selecao-servico/selecao-servico.page';
-import { ConnectionStatusPage } from './pages/modals/connection-status/connection-status.page';
+import { ConectionStatusPage } from './pages/modals/conection-status/conection-status.page';
 
 @NgModule({
-  declarations: [AppComponent, SelecaoServicoPage, ConnectionStatusPage],
+  declarations: [AppComponent, SelecaoServicoPage, ConectionStatusPage],
   entryComponents: [
     CadastroCartaoPage,
     SelecaoServicoPage,
-    ConnectionStatusPage
+    ConectionStatusPage
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,17 @@
-<ion-header>
+<ion-header id="conectionLostHeader">
   <ion-grid>
     <ion-row>
-      <ion-col>
+      <ion-col class="ion-align-self-center" text-end size="3">
         <img src="assets/NoConnection.svg" />
       </ion-col>
       <ion-col>
-        <ion-row>
-          <ion-col>
+        <ion-row class="ion-justify-content-center">
+          <ion-col text-center>
             <span>Sem conexão</span>
           </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col>
+        <ion-row class="ion-justify-content-center">
+          <ion-col text-center>
             <span>Por favor verifique sua internet.</span>
           </ion-col>
         </ion-row>
@@ -20,6 +20,6 @@
   </ion-grid>
 </ion-header>
 
-<ion-content>
-
+<ion-content (click)="closeModal()">
+  
 </ion-content>
