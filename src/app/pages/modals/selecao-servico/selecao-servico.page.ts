@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AgendaService } from 'src/app/services/agenda/agenda.service';
-import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Validators, FormBuilder } from '@angular/forms';
+import { ModalController, AlertController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+
+import { AgendaService } from 'src/app/services/agenda/agenda.service';
+import { CartaoService } from 'src/app/services/cartao/cartao.service';
+import { card } from 'src/app/models/cartao';
+import { CadastroCartaoPage } from '../cadastro-cartao/cadastro-cartao.page';
 
 @Component({
   selector: 'app-selecao-servico',
@@ -11,7 +14,6 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 export class SelecaoServicoPage implements OnInit {
 
-  public formGroup: any;
   public slidesConfig = {
     slidesPerView: 4
   }
@@ -26,20 +28,39 @@ export class SelecaoServicoPage implements OnInit {
   public pathHairSvg: string = 'assets/hair.svg';
   public pathMustacheSvg: string = 'assets/mustache.svg';
   public currentMoth;
-  public moth = [];
+  public month = [];
+  public horarios = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+  public isDesactiveBtn: boolean = true;
+  public sessionCard: card;
+  public lastFourDigits: string;
 
-  public horarios = [ '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00' ];
-
-  constructor(private agendaService: AgendaService, private modaCtrl: ModalController, private route: Router, private modalCtrl: ModalController, private formBuilder: FormBuilder) {
-    this.formGroup = formBuilder.group({
-
-    });
+  constructor(
+    private route: Router,
+    private modaCtrl: ModalController,
+    private cardService: CartaoService,
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private agendaService: AgendaService,
+  ) {
     this.currentMoth = agendaService.getMonthName(this.agendaService.getMonth());
-    this.moth = agendaService.constructMonth(this.agendaService.getDate());
+    this.month = agendaService.constructMonth(this.agendaService.getDate());
+    this.sessionCard = this.cardService.getSessionCard();
+
+    if (!this.isEmpty(this.sessionCard)) {
+      this.lastFourDigits = this.sessionCard.numero.substr(this.sessionCard.numero.length - 4);
+    }
   }
 
   ngOnInit() {
     this.formataValorTotal();
+  }
+
+  ngDoCheck() {
+    if (this.diaSelecionado && this.horarioSelecionado && (this.isBeardSelecionada || this.isHairSelecionado || this.isMustacheSelecionado)) {
+      this.isDesactiveBtn = false;
+    } else {
+      this.isDesactiveBtn = true;
+    }
   }
 
   public closeModal() {
@@ -87,10 +108,78 @@ export class SelecaoServicoPage implements OnInit {
     this.totalFormatado = this.totalFormatado.replace('.', ',');
   }
 
-  public requestService() {
-    this.modaCtrl.dismiss().then(() => {
+  public requestService(): void {
+    /* this.modaCtrl.dismiss().then(() => {
       this.route.navigateByUrl('load-atendimento');
-    });
+    }); */
+    if ((this.horarioSelecionado === undefined || this.horarioSelecionado === null) || (this.diaSelecionado === undefined || this.diaSelecionado === null)) {
+      this.showAlert('Por favor escolha o dia e horário.');
+      return;
+    }
+    if (!this.isBeardSelecionada && !this.isHairSelecionado && !this.isMustacheSelecionado) {
+      this.showAlert('Por favor escolha o tipo de serviço');
+      return;
+    }
+    if (this.sessionCard == null || this.sessionCard == undefined || this.isEmpty(this.sessionCard)) {
+      this.showCardAlert();
+      return;
+    }
+  }
+
+  public isEmpty(obj) {
+    for (let propertie in obj) {
+      if (obj.hasOwnProperty(propertie)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private showAlert(message: string): void {
+    this.alertCtrl.create({
+      header: 'Atenção',
+      message: message,
+      buttons:
+        [
+          {
+            text: 'OK'
+          }
+        ],
+      backdropDismiss: false,
+      mode: 'ios'
+    }).then((alert) => alert.present());
+  }
+
+  private showCardAlert(): void {
+    this.alertCtrl.create({
+      header: 'Forma de pagamento não informado!',
+      message: 'Deseja cadastrar seu cartão de crédito?',
+      buttons:
+        [
+          {
+            text: 'Não',
+            role: 'cancel',
+            handler: () => {
+
+            }
+          },
+          {
+            text: 'Sim',
+            handler: () => {
+              this.modalCtrl.create({ component: CadastroCartaoPage }).then((modal) => modal.present().then(() => {
+                modal.onDidDismiss().then(() => {
+                  this.sessionCard = this.cardService.getSessionCard();
+                  if (!this.isEmpty(this.sessionCard)) {
+                    this.lastFourDigits = this.sessionCard.numero.substr(this.sessionCard.numero.length - 4);
+                  }
+                })
+              }));
+            }
+          }
+        ],
+      backdropDismiss: false,
+      mode: 'ios'
+    }).then((alert) => alert.present());
   }
 
 }

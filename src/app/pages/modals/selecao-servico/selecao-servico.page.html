@@ -6,92 +6,94 @@
 </ion-header>
 <ion-content>
   <div id="content">
-    <form [formGroup]="formGroup">
-      <ion-grid>
-        <ion-row class="ion-justify-content-center">
-          <ion-col size="7" offset="3">
-            <span>Agendar Atendimento</span>
-          </ion-col>
-          <ion-col size="2" text-end (click)="closeModal()">
-            <ion-icon name="close"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-          <ion-col size="4" class="line"></ion-col>
-        </ion-row>
-        <ion-row id="slidesDay">
-          <ion-slides [options]="slidesConfig">
-            <ion-slide *ngFor="let day of moth; let i = index" (click)="diaSelecionado = i">
-              <div class="itemDay" [class.selecionado]="diaSelecionado === i">
-                <div *ngIf="i === 0" id="currentDay">Hoje</div>
-                <div class="dia-mes">{{ day.day }} {{ currentMoth }}</div>
-                <div>{{ day.nameDay }}</div>
-              </div>
-            </ion-slide>
-          </ion-slides>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-          <ion-col size="4" text-center>
-            <span>Horário</span>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-          <ion-col size="4" class="line"></ion-col>
-        </ion-row>
-        <ion-row id="slideHorarios">
-          <ion-slides [options]="slidesConfig">
-            <ion-slide *ngFor="let hora of horarios; let i = index" (click)="horarioSelecionado = i">
-              <div [class.selecionado]="horarioSelecionado === i">{{ hora }}</div>
-            </ion-slide>
-          </ion-slides>
-        </ion-row>
-        <ion-row class="ion-justify-content-center" style="margin-top: 20px">
-          <ion-col size="4" text-center>
-            <span>Serviços</span>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-          <ion-col id="colServicos" size="10">
-            <ion-grid id="servicos">
-              <ion-row class="ion-justify-content-center">
-                <ion-col size="4" text-center (click)="selectBeardService()">
-                  <span [class.selecionado]="isBeardSelecionada">Barba</span>
-                  <ion-icon [src]="pathBeardSvg"></ion-icon>
-                  <span [class.selecionado]="isBeardSelecionada">R$ 20</span>
-                </ion-col>
-                <ion-col size="4" text-center (click)="selectHairService()">
-                  <span [class.selecionado]="isHairSelecionado">Cabelo</span>
-                  <ion-icon [src]="pathHairSvg"></ion-icon>
-                  <span [class.selecionado]="isHairSelecionado">R$ 30</span>
-                </ion-col>
-                <ion-col size="4" text-center (click)="selectMustacheService()">
-                  <span [class.selecionado]="isMustacheSelecionado">Bigode</span>
-                  <ion-icon [src]="pathMustacheSvg"></ion-icon>
-                  <span [class.selecionado]="isMustacheSelecionado">R$ 15</span>
-                </ion-col>
-              </ion-row>
-              <ion-row class="ion-justify-content-center">
-                <ion-col size="2" class="line-2"></ion-col>
-              </ion-row>
-              <ion-row id="servicosBottom" class="ion-justify-content-around">
-                <ion-col size="8" class="start">
-                  <span>Formas de pagamento</span>
-                  <ion-icon src="./../../../../assets/mini_cartao.svg"></ion-icon>
-                </ion-col>
-                <ion-col size="4" class="end">
-                  <span>Total</span>
-                  <span>R$ {{ totalFormatado }}</span>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-          <ion-col text-center>
-            <ion-button shape="round" (click)="requestService()">Confirmar</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </form>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="7" offset="3">
+          <span>Agendar Atendimento</span>
+        </ion-col>
+        <ion-col size="2" text-end (click)="closeModal()">
+          <ion-icon name="close"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="4" class="line"></ion-col>
+      </ion-row>
+      <ion-row id="slidesDay">
+        <ion-slides [options]="slidesConfig">
+          <ion-slide *ngFor="let day of month; let i = index" (click)="diaSelecionado = i">
+            <div class="itemDay" [class.selecionado]="diaSelecionado === i">
+              <div *ngIf="i === 0" id="currentDay">Hoje</div>
+              <div class="dia-mes">{{ day.day }} {{ currentMoth }}</div>
+              <div>{{ day.nameDay }}</div>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="4" text-center>
+          <span>Horário</span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="4" class="line"></ion-col>
+      </ion-row>
+      <ion-row id="slideHorarios">
+        <ion-slides [options]="slidesConfig">
+          <ion-slide *ngFor="let hora of horarios; let i = index" (click)="horarioSelecionado = i">
+            <div [class.selecionado]="horarioSelecionado === i">{{ hora }}</div>
+          </ion-slide>
+        </ion-slides>
+      </ion-row>
+      <ion-row class="ion-justify-content-center" style="margin-top: 20px">
+        <ion-col size="4" text-center>
+          <span>Serviços</span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col id="colServicos" size="10">
+          <ion-grid id="servicos">
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="4" text-center (click)="selectBeardService()">
+                <span [class.selecionado]="isBeardSelecionada">Barba</span>
+                <ion-icon [src]="pathBeardSvg"></ion-icon>
+                <span [class.selecionado]="isBeardSelecionada">R$ 20</span>
+              </ion-col>
+              <ion-col size="4" text-center (click)="selectHairService()">
+                <span [class.selecionado]="isHairSelecionado">Cabelo</span>
+                <ion-icon [src]="pathHairSvg"></ion-icon>
+                <span [class.selecionado]="isHairSelecionado">R$ 30</span>
+              </ion-col>
+              <ion-col size="4" text-center (click)="selectMustacheService()">
+                <span [class.selecionado]="isMustacheSelecionado">Bigode</span>
+                <ion-icon [src]="pathMustacheSvg"></ion-icon>
+                <span [class.selecionado]="isMustacheSelecionado">R$ 15</span>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="2" class="line-2"></ion-col>
+            </ion-row>
+            <ion-row id="servicosBottom" class="ion-justify-content-around">
+              <ion-col size="8" class="start">
+                <span>Formas de pagamento</span>
+                <div style="display: flex;">
+                  <div><ion-icon src="assets/mini_cartao.svg"></ion-icon></div>
+                  <div><span>{{ lastFourDigits }}</span></div>
+                </div>
+              </ion-col>
+              <ion-col size="4" class="end">
+                <span>Total</span>
+                <span>R$ {{ totalFormatado }}</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col text-center>
+          <ion-button shape="round" (click)="requestService()">Confirmar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>
