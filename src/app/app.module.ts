@@ -1,21 +1,23 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Network } from '@ionic-native/network/ngx';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { Network } from '@ionic-native/network/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
-import { RecuperarSenhaPageModule } from './pages/modals/recuperar-senha/recuperar-senha.module';
+import { AppComponent } from './app.component';
+
+import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.module';
-import { CadastroCartaoPage } from './pages/modals/cadastro-cartao/cadastro-cartao.page';
+import { RecuperarSenhaPageModule } from './pages/modals/recuperar-senha/recuperar-senha.module';
 import { CadastroCartaoPageModule } from './pages/modals/cadastro-cartao/cadastro-cartao.module';
+
+import { CadastroCartaoPage } from './pages/modals/cadastro-cartao/cadastro-cartao.page';
 import { SelecaoServicoPage } from './pages/modals/selecao-servico/selecao-servico.page';
 import { ConectionStatusPage } from './pages/modals/conection-status/conection-status.page';
 
@@ -28,11 +30,11 @@ import { ConectionStatusPage } from './pages/modals/conection-status/conection-s
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    RecuperarSenhaPageModule,
     IntroModalPageModule,
+    IonicModule.forRoot(),
+    RecuperarSenhaPageModule,
     CadastroCartaoPageModule
   ],
   providers: [
@@ -40,6 +42,7 @@ import { ConectionStatusPage } from './pages/modals/conection-status/conection-s
     StatusBar,
     Geolocation,
     SplashScreen,
+    LocationAccuracy,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],

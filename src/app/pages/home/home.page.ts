@@ -2,17 +2,11 @@ import { Component } from '@angular/core';
 import { LoadingController, AlertController, ModalController } from '@ionic/angular';
 
 import mapboxgl from 'mapbox-gl';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
 
-import { MapService } from 'src/app/services/map/map.service';
-import { MAPBOX_TOKEN } from './../../../environments/environment';
 import { SelecaoServicoPage } from '../modals/selecao-servico/selecao-servico.page';
 
-const gpsOptions = {
-  maximumAge: 2000,
-  timeout: 1000,
-  enableHighAccuracy: true
-}
+import { MapService } from 'src/app/services/map/map.service';
 
 @Component({
   selector: 'app-home',
@@ -21,17 +15,14 @@ const gpsOptions = {
 })
 export class HomePage {
   private mapObj: any = {};
-  private position;
-  private isLoaded: boolean = false;
-  private loading: HTMLIonLoadingElement;
   private content: HTMLElement;
+  private myPositionMarker: any;
 
   constructor(
-    private geolocation: Geolocation,
-    private loadinController: LoadingController,
-    private alertCtrl: AlertController,
     private mapService: MapService,
-    private modalCtrl: ModalController
+    private geolocation: Geolocation,
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController
   ) {
 
   }
@@ -40,56 +31,45 @@ export class HomePage {
 
   }
 
-  ionViewWillEnter() {
-
-  }
-
   ionViewDidEnter() {
     this.mapObj = this.mapService.getMap();
     this.content = document.querySelector('#content');
     this.content.appendChild(this.mapObj.mapElement);
     this.mapObj.map.resize();
-    this.centerMap();
-  }
-
-  ionViewDidLoad() {
-
+    this.setMyPosition();
   }
 
   public async getAtualPosition() {
-    return await this.geolocation.getCurrentPosition().then((resp) => {
+
+    const gpsOptions: GeolocationOptions = {
+      enableHighAccuracy: true,
+      maximumAge: 15000,
+      timeout: 10000
+    }
+
+    return await this.geolocation.getCurrentPosition(gpsOptions).then((resp) => {
       return resp.coords;
     });
   }
 
-  private async setPosition(longitude: any, latitude: any) {
-    this.mapObj.map.setCenter([longitude, latitude]);
-    await this.markerCurrentPosition(longitude, latitude);
-  }
-
-  public centerMap() {
+  public setMyPosition(): void {
     this.getAtualPosition().then(data => {
-      this.setPosition(data.longitude, data.latitude);
+      this.flyToPosition(data.longitude, data.latitude);
     }).catch(() => {
       this.showAlert('Desculpe', 'Falha no gps', 'Não foi possível localiza-lo');
     });
   }
 
+  private flyToPosition(longitude: any, latitude: any): void {
+    this.mapObj.map.flyTo({ center: [longitude, latitude] });
+    this.markerCurrentPosition(longitude, latitude);
+  }
+
   private async markerCurrentPosition(longitude: any, latitude: any) {
-    await new mapboxgl.Marker({ color: '#D6A763' }).setLngLat([longitude, latitude]).addTo(this.mapObj.map);
-  }
-
-  private async openLoading() {
-    await this.loadinController.create({
-      message: 'Carregando mapa...'
-    }).then(res => {
-      this.loading = res;
-      this.loading.present();
-    });
-  }
-
-  private async closeLoading() {
-    await this.loading.dismiss();
+    if (this.myPositionMarker) {
+      this.myPositionMarker.remove();
+    }
+    this.myPositionMarker = await new mapboxgl.Marker({ color: '#D6A763' }).setLngLat([longitude, latitude]).addTo(this.mapObj.map);
   }
 
   private async showAlert(header: string, subHeader: string, message: string) {

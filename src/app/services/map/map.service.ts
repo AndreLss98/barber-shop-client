@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+import { GeoJson, FeatureCollection } from 'src/app/classes/map';
+
+import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
+
+import { MARKERS } from 'src/app/constants/mock-markers';
 import { MAPBOX_TOKEN } from '../../../environments/environment';
 
 import mapboxgl from 'mapbox-gl';
-import { GeoJson, FeatureCollection } from 'src/app/classes/map';
-import { MARKERS } from 'src/app/constants/mock-markers';
-import { MapItemComponent } from 'src/app/components/map-item/map-item.component';
-
-const gpsOptions = {
-  maximumAge: 15000,
-  timeout: 10000
-}
 
 const SOURCE_MARKERS_NAME = 'markers';
 
@@ -46,6 +42,13 @@ export class MapService {
   }
 
   public async initializeMap() {
+
+    const gpsOptions: GeolocationOptions = {
+      enableHighAccuracy: true,
+      maximumAge: 15000,
+      timeout: 10000
+    }
+
     await this.geolocation.getCurrentPosition(gpsOptions).then((position) => {
       let map = this.buildMap(position);
       this.setMap({ mapElement: this.mapElement, map: map });
@@ -79,13 +82,6 @@ export class MapService {
           coordinates[0] += position.lngLat.lng > coordinates[0] ? 360 : -360;
         }
         popup.setLngLat(coordinates).setHTML(this.generateHTMLItemToMap(content['nome'])).addTo(map);
-      } else {
-        /* const coordinates = [position.lngLat.lng, position.lngLat.lat];
-        const newMarker = new GeoJson(coordinates, { nome: "Claude Castro" });
-        this.pushNewMarker(newMarker);
-        const data = new FeatureCollection(this.getMarkers());
-        console.log(JSON.stringify(this.getMarkers()));
-        map.getSource(SOURCE_MARKERS_NAME).setData(data); */
       }
     });
     return map;
@@ -117,11 +113,6 @@ export class MapService {
   private getMarkers() {
     // return this.markers;
     return MARKERS;
-  }
-
-  private pushNewMarker(newMarker: GeoJson) {
-    this.markers.push(newMarker);
-    // console.log(JSON.stringify(this.markers));
   }
 
   private generateHTMLItemToMap(name: string): string {

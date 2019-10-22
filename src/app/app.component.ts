@@ -5,8 +5,8 @@ import { Platform, MenuController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
-
 import { MapService } from './services/map/map.service';
+import { GpsService } from './services/gps/gps.service';
 import { NetworkService } from './services/network/network.service';
 
 @Component({
@@ -35,7 +35,8 @@ export class AppComponent {
     private mapService: MapService,
     private network: NetworkService,
     private menuCtrl: MenuController,
-    private splashScreen: SplashScreen
+    private splashScreen: SplashScreen,
+    private gpsService: GpsService
   ) {
     this.initializeApp();
   }
@@ -44,8 +45,11 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.splashScreen.hide();
       this.statusBar.styleDefault();
-      this.mapService.initializeMap();
       this.network.initializeNetworkEvents();
+      
+      this.gpsService.ativarGps().then((response) => {
+        this.mapService.initializeMap();
+      }, (error) => console.error(error));
     });
   }
 
