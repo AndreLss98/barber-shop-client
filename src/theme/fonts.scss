@@ -1,18 +1,35 @@
+// Poppins
 @font-face {
     font-family: 'Poppins';
-    src: url('../assets/fonts/Poppins-Bold.ttf');
+    src: url('../assets/fonts/Poppins/Poppins-Bold.ttf');
     font-weight: bold;
     font-style: normal;
   }
   @font-face {
     font-family: 'Poppins';
-    src: url('../assets/fonts/Poppins-Regular.ttf');
+    src: url('../assets/fonts/Poppins/Poppins-Regular.ttf');
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'Poppins';
-    src: url('../assets/fonts/Poppins-Medium.ttf');
+    src: url('../assets/fonts/Poppins/Poppins-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Poppins';
+    src: url('../assets/fonts/Poppins/Poppins-Light.ttf');
     font-weight: lighter;
     font-style: normal;
   }
+
+// Avenir
+  @font-face {
+    font-family: 'Avenir';
+    src: url('../assets/fonts/Avenir/Avenir.ttc');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  
