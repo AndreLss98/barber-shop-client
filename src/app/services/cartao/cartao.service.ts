@@ -6,7 +6,8 @@ import { card } from 'src/app/models/cartao';
 })
 export class CartaoService {
 
-  private selectedSessionCard;
+  private selectedSessionCard: card = new Object() as card;
+  
   private data: card[] = [
     {
       category: 'MasterCard',
@@ -24,9 +25,19 @@ export class CartaoService {
     }
   ]
 
-  constructor() { }
+  constructor() {
 
-  public getCards() {
+  }
+
+  public getSessionCard(): card {
+    return this.selectedSessionCard;
+  }
+
+  public setSelectedCard(card: card) {
+    this.selectedSessionCard = card;
+  }
+
+  public getCards(): card[] {
     return this.data;
   }
 

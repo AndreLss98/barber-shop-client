@@ -29,15 +29,11 @@ export class CadastroCartaoPage implements OnInit {
       data: ['', [Validators.required, Validators.maxLength(5)]],
       cvv: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(4)]],
       isForSave: [false]
-    })
+    });
   }
 
   ngOnInit() {
 
-  }
-
-  public backPage() {
-    this.modalCtrl.dismiss();
   }
 
   public getBandeira(cardNumber: string) {
@@ -73,6 +69,11 @@ export class CadastroCartaoPage implements OnInit {
     if (this.formGroup.value.isForSave) {
       this.cardService.addCard(this.cartao);
     }
+    this.cardService.setSelectedCard(this.cartao);
+    this.closeModal();
+  }
+
+  public closeModal(): void {
     this.modalCtrl.dismiss();
   }
 
