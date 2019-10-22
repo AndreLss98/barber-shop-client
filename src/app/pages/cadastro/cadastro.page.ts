@@ -29,7 +29,7 @@ export class CadastroPage implements OnInit {
   }
 
   public async registrarCadastro() {
-    this.router.navigateByUrl('erro-cadastro');
+    this.router.navigateByUrl('cadastro-sucesso');
   }
 
 }

@@ -33,6 +33,7 @@ export class RecuperarSenhaPage implements OnInit {
       header: "Atenção",
       message: "E-mail enviado com sucesso para recuperar a senha.",
       backdropDismiss: false,
+      mode: 'ios',
       buttons: [
         {
           text: "Ok",
