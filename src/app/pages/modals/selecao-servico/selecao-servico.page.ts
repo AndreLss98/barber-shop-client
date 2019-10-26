@@ -109,9 +109,6 @@ export class SelecaoServicoPage implements OnInit {
   }
 
   public requestService(): void {
-    /* this.modaCtrl.dismiss().then(() => {
-      this.route.navigateByUrl('load-atendimento');
-    }); */
     if ((this.horarioSelecionado === undefined || this.horarioSelecionado === null) || (this.diaSelecionado === undefined || this.diaSelecionado === null)) {
       this.showAlert('Por favor escolha o dia e horário.');
       return;
@@ -124,6 +121,9 @@ export class SelecaoServicoPage implements OnInit {
       this.showCardAlert();
       return;
     }
+    this.modaCtrl.dismiss().then(() => {
+      this.route.navigateByUrl('load-atendimento');
+    });
   }
 
   public isEmpty(obj) {

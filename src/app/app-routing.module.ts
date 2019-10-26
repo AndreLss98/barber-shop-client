@@ -32,11 +32,10 @@ const routes: Routes = [
     },
     loadChildren: './pages/chat/chat.module#ChatPageModule'
   },
+  { path: 'erro-cadastro', loadChildren: './pages/erro-cadastro/erro-cadastro.module#ErroCadastroPageModule' },
   { path: 'load-atendimento', loadChildren: './pages/load-atendimento/load-atendimento.module#LoadAtendimentoPageModule' },
-  { path: 'confirmacao-agenda', loadChildren: './pages/confirmacao-agenda/confirmacao-agenda.module#ConfirmacaoAgendaPageModule' },
   { path: 'cadastro-sucesso', loadChildren: './pages/cadastro-sucesso/cadastro-sucesso.module#CadastroSucessoPageModule' },
-  { path: 'erro-cadastro', loadChildren: './pages/erro-cadastro/erro-cadastro.module#ErroCadastroPageModule' }
-
+  { path: 'confirmacao-agenda', loadChildren: './pages/confirmacao-agenda/confirmacao-agenda.module#ConfirmacaoAgendaPageModule' },  { path: 'falha-pagamento', loadChildren: './pages/falha-pagamento/falha-pagamento.module#FalhaPagamentoPageModule' }
 
 ];
 

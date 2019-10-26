@@ -20,7 +20,7 @@ export class ItemAgendaComponent implements OnInit {
 
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.valor = Number(this.valor).toFixed(2).replace('.', ',');
   }
 
@@ -45,5 +45,4 @@ export class ItemAgendaComponent implements OnInit {
       action.present();
     });
   }
-
 }

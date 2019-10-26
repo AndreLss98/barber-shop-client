@@ -1,4 +1,4 @@
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
@@ -19,9 +19,10 @@ export class CadastroCartaoPage implements OnInit {
   private cartao: card = new Object() as card;
 
   constructor(
-    private modalCtrl: ModalController,
     private formBuilder: FormBuilder,
-    private cardService: CartaoService
+    private cardService: CartaoService,
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController
   ) {
     this.formGroup = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.maxLength(26)]],
@@ -70,11 +71,30 @@ export class CadastroCartaoPage implements OnInit {
       this.cardService.addCard(this.cartao);
     }
     this.cardService.setSelectedCard(this.cartao);
-    this.closeModal();
+    this.cartaoCadastrado(); 
   }
 
   public closeModal(): void {
     this.modalCtrl.dismiss();
+  }
+
+  private cartaoCadastrado(): void {
+    this.alertCtrl.create({
+      message: 'Cartão cadastrado com sucesso',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.closeModal();
+          }
+        }
+      ],
+      mode: 'ios'
+    }).then((alert) => {
+      alert.present();
+      alert.onDidDismiss().then(() => this.closeModal());
+    });
   }
 
 }

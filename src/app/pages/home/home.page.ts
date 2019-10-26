@@ -7,6 +7,7 @@ import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
 import { SelecaoServicoPage } from '../modals/selecao-servico/selecao-servico.page';
 
 import { MapService } from 'src/app/services/map/map.service';
+import { NotificacaoSolicitacaoNegadaPage } from '../modals/notificacao-solicitacao-negada/notificacao-solicitacao-negada.page';
 
 @Component({
   selector: 'app-home',

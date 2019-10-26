@@ -21,3 +21,18 @@ ion-content {
     --ion-background-color: #313131;
     --color: white;
 }
+
+#chatVazio {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    span.title {
+        color: white;
+        font-weight: 800;
+    }
+    span.message {
+        color: #dedede;
+    }
+}

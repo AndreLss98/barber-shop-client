@@ -8,5 +8,28 @@
 </ion-header>
 
 <ion-content>
-  <chat-item *ngFor="let conversa of conversas; let i = index" [nome]="conversa.nome" [ulitmaMensagem]="conversa.conversas.minhasMensagens[0].mensagen" [hora]="conversa.conversas.minhasMensagens[0].hora" (click)="viewChat(i)"></chat-item>
+  <div *ngIf="conversas && conversas.length > 0; else chatVazio">
+    <chat-item *ngFor="let conversa of conversas; let i = index" [nome]="conversa.nome"
+      [ulitmaMensagem]="conversa.conversas.minhasMensagens[0].mensagen"
+      [hora]="conversa.conversas.minhasMensagens[0].hora" (click)="viewChat(i)"></chat-item>
+  </div>
+  <ng-template #chatVazio>
+    <ion-grid id="chatVazio">
+      <ion-row>
+        <ion-col>
+          <img src="assets/NoMessages.svg" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <span class="title">Sem mensagens</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <span class="message">Você não tem chat ativo</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
 </ion-content>

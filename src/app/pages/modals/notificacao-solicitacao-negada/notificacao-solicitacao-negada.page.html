@@ -4,11 +4,8 @@
       <div id="enderecoContainer">
         <ion-grid id="endereco">
           <ion-row class="ion-justify-content-center">
-            <ion-col text-center class="ion-align-self-center" size="2">
-              <ion-icon src="assets/entypo-location.svg"></ion-icon>
-            </ion-col>
-            <ion-col text-center class="ion-justify-content-center">
-              <span>Rua Recife - QD 05 LT 13 - St Urias</span>
+            <ion-col text-center class="ion-align-self-center" size="10">
+              <img src="assets/warning.svg" />
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -19,17 +16,17 @@
       <ion-grid>
         <ion-row class="ion-justify-content-center">
           <ion-col size="12" text-center>
-            <span class="colored">Seu barbeiro agendou seu horário.</span>
+            <span class="colored">O Seu barbeiro não pode lhe atender.</span>
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-centerfd">
           <ion-col size="11" text-center>
-            <span>Fique a vontade em falar com seu barbeiro, caso tenha imprevisto poderá falar com ele via chat.</span>
+            <span>Mas fique tranquilo, tente novamente mais tarde.</span>
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
           <ion-col text-center>
-            <ion-button shape="round">Visualizar Agenda</ion-button>
+            <ion-button shape="round" (click)="closeModal()">Fechar</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

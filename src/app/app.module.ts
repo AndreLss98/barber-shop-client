@@ -20,13 +20,17 @@ import { CadastroCartaoPageModule } from './pages/modals/cadastro-cartao/cadastr
 import { CadastroCartaoPage } from './pages/modals/cadastro-cartao/cadastro-cartao.page';
 import { SelecaoServicoPage } from './pages/modals/selecao-servico/selecao-servico.page';
 import { ConectionStatusPage } from './pages/modals/conection-status/conection-status.page';
+import { NotificaoSolicitacaoPage } from './pages/modals/notificao-solicitacao/notificao-solicitacao.page';
+import { NotificacaoSolicitacaoNegadaPage } from './pages/modals/notificacao-solicitacao-negada/notificacao-solicitacao-negada.page';
 
 @NgModule({
-  declarations: [AppComponent, SelecaoServicoPage, ConectionStatusPage],
+  declarations: [AppComponent, SelecaoServicoPage, ConectionStatusPage, NotificaoSolicitacaoPage, NotificacaoSolicitacaoNegadaPage],
   entryComponents: [
     CadastroCartaoPage,
     SelecaoServicoPage,
-    ConectionStatusPage
+    ConectionStatusPage,
+    NotificaoSolicitacaoPage,
+    NotificacaoSolicitacaoNegadaPage
   ],
   imports: [
     BrowserModule,

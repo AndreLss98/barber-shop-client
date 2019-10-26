@@ -14,7 +14,7 @@ export class LoadAtendimentoPage implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.route.navigateByUrl('confirmacao-agenda');
+      this.route.navigateByUrl('falha-pagamento');
     }, 1000);
   }
 

@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificaoSolicitacaoPage implements OnInit {
 
-  constructor() { }
+  constructor() {
+    
+  }
 
   ngOnInit() {
+    
   }
 
 }

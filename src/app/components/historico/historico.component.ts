@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -14,26 +15,26 @@ export class HistoricoComponent implements OnInit {
 
   public qtdStar: number = 0;
 
-  public stars: Array<{src:string}> = [
+  public stars: Array<{ src: string }> = [
     {
-      src: './../../../assets/star.svg'
+      src: 'assets/star.svg'
     },
     {
-      src: './../../../assets/star.svg'
+      src: 'assets/star.svg'
     },
     {
-      src: './../../../assets/star.svg'
+      src: 'assets/star.svg'
     },
     {
-      src: './../../../assets/star.svg'
+      src: 'assets/star.svg'
     },
     {
-      src: './../../../assets/star.svg'
+      src: 'assets/star.svg'
     }
   ]
 
-  constructor() {
-    
+  constructor(private alertCtrl: AlertController) {
+
   }
 
   ngOnInit() {
@@ -43,13 +44,29 @@ export class HistoricoComponent implements OnInit {
   }
 
   public toggleStars(pos: number) {
-    for (let i=0; i<pos; i++) {
-      this.stars[i].src = './../../../assets/starColored.svg';
+    for (let i = 0; i < pos; i++) {
+      this.stars[i].src = 'assets/starColored.svg';
     }
 
-    for (let i=pos; i<this.stars.length; i++) {
-      this.stars[i].src = './../../../assets/star.svg';
+    for (let i = pos; i < this.stars.length; i++) {
+      this.stars[i].src = 'assets/star.svg';
     }
+  }
+
+  public showAlert(): void {
+    this.alertCtrl.create({
+      message: 'Obrigado pela sua avaliação',
+      mode: 'ios',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'Feito',
+          handler: () => {
+
+          }
+        }
+      ]
+    }).then((alert) => alert.present());
   }
 
 }

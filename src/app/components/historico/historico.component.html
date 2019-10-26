@@ -34,7 +34,7 @@
               </div>
             </ion-col>
             <ion-col size="4">
-              <ion-button size="small" expand="block" [disabled]="qtdStar === 0">Avaliar</ion-button>
+              <ion-button (click)="showAlert()" size="small" expand="block" [disabled]="qtdStar === 0">Avaliar</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>

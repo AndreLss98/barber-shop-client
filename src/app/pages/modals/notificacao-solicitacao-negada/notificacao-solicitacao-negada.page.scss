@@ -21,7 +21,7 @@ ion-card {
 span.colored {
     color: var(--ion-color-primary) !important;
     font-weight: 700;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 #miniMapContent {
@@ -34,16 +34,8 @@ span.colored {
     position: absolute;
     top: .8em;
     width: 99%;
-}
-
-#endereco {
-    padding: 1.4em;
-    ion-row {
-        background-color: white;
-        border-radius: 8px;
-        padding: 5px;
-        span {
-            color: black;
-        }
+    img {
+        width: 80%;
+        display: unset !important;
     }
 }
