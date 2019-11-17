@@ -13,6 +13,9 @@ import { LoginService } from 'src/app/services/service/login.service';
 })
 export class LoginPage implements OnInit {
 
+  public email: string = '';
+  public senha: string = '';
+
   constructor(
     private route: Router,
     private loginService: LoginService,
@@ -26,10 +29,15 @@ export class LoginPage implements OnInit {
   }
 
   public login() {
-    this.loginService.login('aistiger.98@gmail.com', '123456').subscribe((cliente: any) => {
-      this.loginService.usuario = cliente.data.loginCliente;
-      this.route.navigate(['login/intro']);
-    });
+    this.loginService.login(this.email, this.senha).subscribe((cliente: any) => {
+      //TODO: pesquisar uma forma de retornar o status do erro
+      if (cliente.errors) {
+        console.log(cliente.errors[0]);
+      } else {
+        this.loginService.usuario = cliente.data.loginCliente;
+        this.route.navigate(['login/intro']);
+      }
+    }, (errors) => console.log(errors));
   }
 
   public recuperarSenha() {
