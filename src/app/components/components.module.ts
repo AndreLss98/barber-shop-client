@@ -7,13 +7,15 @@ import { HistoricoComponent } from './historico/historico.component';
 import { ItemAgendaComponent } from './item-agenda/item-agenda.component';
 import { ChatComponent } from './chat/chat.component';
 import { MesAgendaComponent } from './popovers/mes-agenda/mes-agenda.component';
+import { MapItemComponent } from './map-item/map-item.component';
 
 @NgModule({
   declarations: [
+    ChatComponent,
+    MapItemComponent,
+    MesAgendaComponent,
     HistoricoComponent,
     ItemAgendaComponent,
-    ChatComponent,
-    MesAgendaComponent
   ],
   imports: [
     CommonModule,

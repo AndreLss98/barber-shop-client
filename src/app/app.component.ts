@@ -32,11 +32,11 @@ export class AppComponent {
     private router: Router,
     private platform: Platform,
     private statusBar: StatusBar,
+    private gpsService: GpsService,
     private mapService: MapService,
     private network: NetworkService,
     private menuCtrl: MenuController,
-    private splashScreen: SplashScreen,
-    private gpsService: GpsService
+    private splashScreen: SplashScreen
   ) {
     this.initializeApp();
   }
@@ -44,10 +44,11 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.splashScreen.hide();
-      this.statusBar.styleDefault();
+      this.statusBar.hide();
       this.network.initializeNetworkEvents();
       
       this.gpsService.ativarGps().then((response) => {
+        console.log("Mapa inicializado");
         this.mapService.initializeMap();
       }, (error) => console.error(error));
     });

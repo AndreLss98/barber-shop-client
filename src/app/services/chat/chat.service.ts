@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
+
 import { chat } from 'src/app/models/chat';
-
-
 
 @Injectable({
   providedIn: 'root'

@@ -18,7 +18,7 @@ export class MapService {
 
   private markers: GeoJson[] = [];
 
-  private mapObj: any = {};
+  private mapObj: any = null;
   private style = 'mapbox://styles/dionim/cjzwtgft014k41csdy9xmjcyq';
   private mapElement: HTMLElement = null;
 

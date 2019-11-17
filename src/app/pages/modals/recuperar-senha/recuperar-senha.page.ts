@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import creditCardType from 'credit-card-type';
-
 @Component({
   selector: 'app-recuperar-senha',
   templateUrl: './recuperar-senha.page.html',

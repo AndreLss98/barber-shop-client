@@ -27,7 +27,7 @@ export class IntroModalPage implements OnInit {
   ionViewDidEnter() {
 
     setTimeout(() => {
-      if (this.mapObj.map && this.mapObj.map.loaded()) {
+      /* if (this.mapObj.map && this.mapObj.map.loaded()) {
         this.navCtrl.navigateBack('login/home');
       } else if (this.mapObj.map) {
         this.mapObj.map.on('load', () => {
@@ -38,7 +38,8 @@ export class IntroModalPage implements OnInit {
         });
       } else {
         console.log(this.mapObj.error);
-      }
+      } */
+      this.navCtrl.navigateBack('login/home');
     }, 1500);
 
   }

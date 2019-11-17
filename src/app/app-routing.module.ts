@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
 import { ChatResolveService } from './resolver/chat-resolve.service';
 
 const routes: Routes = [
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: 'erro-cadastro', loadChildren: './pages/erro-cadastro/erro-cadastro.module#ErroCadastroPageModule' },
   { path: 'load-atendimento', loadChildren: './pages/load-atendimento/load-atendimento.module#LoadAtendimentoPageModule' },
   { path: 'cadastro-sucesso', loadChildren: './pages/cadastro-sucesso/cadastro-sucesso.module#CadastroSucessoPageModule' },
-  { path: 'confirmacao-agenda', loadChildren: './pages/confirmacao-agenda/confirmacao-agenda.module#ConfirmacaoAgendaPageModule' },  { path: 'falha-pagamento', loadChildren: './pages/falha-pagamento/falha-pagamento.module#FalhaPagamentoPageModule' }
+  { path: 'confirmacao-agenda', loadChildren: './pages/confirmacao-agenda/confirmacao-agenda.module#ConfirmacaoAgendaPageModule' },
+  { path: 'falha-pagamento', loadChildren: './pages/falha-pagamento/falha-pagamento.module#FalhaPagamentoPageModule' }
 
 ];
 

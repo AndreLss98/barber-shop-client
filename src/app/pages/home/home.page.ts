@@ -33,11 +33,25 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
+    this.checkMap();
+  }
+
+  public checkMap(): void {
     this.mapObj = this.mapService.getMap();
-    this.content = document.querySelector('#content');
-    this.content.appendChild(this.mapObj.mapElement);
-    this.mapObj.map.resize();
-    this.setMyPosition();
+    if (this.mapObj) {
+      this.content = document.querySelector('#content');
+      this.content.appendChild(this.mapObj.mapElement);
+      this.mapObj.map.resize();
+      this.setMyPosition();
+    } else {
+      this.mapService.initializeMap().then((response) => {
+        this.mapObj = this.mapService.getMap();
+        this.content = document.querySelector('#content');
+        this.content.appendChild(this.mapObj.mapElement);
+        this.mapObj.map.resize();
+        this.setMyPosition();
+      });
+    }
   }
 
   public async getAtualPosition() {
