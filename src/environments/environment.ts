@@ -7,6 +7,7 @@ export const environment = {
 };
 
 export const MAPBOX_TOKEN = 'pk.eyJ1IjoiZGlvbmltIiwiYSI6ImNqejA0Mm54OTA0MHkzb3Fpemo5cnhmYWcifQ.gbYcjV1OcISZp1Ym1xw8pw';
+export const BASE_URL = 'http://localhost:8080/api';
 
 /*
  * For easier debugging in development mode, you can import the following file

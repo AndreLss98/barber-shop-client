@@ -1,4 +1,5 @@
 import { RouteReuseStrategy } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -34,12 +35,13 @@ import { NotificacaoSolicitacaoNegadaPage } from './pages/modals/notificacao-sol
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     IntroModalPageModule,
     IonicModule.forRoot(),
     RecuperarSenhaPageModule,
-    CadastroCartaoPageModule
+    CadastroCartaoPageModule,
   ],
   providers: [
     Network,

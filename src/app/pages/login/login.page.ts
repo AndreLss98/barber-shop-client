@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 import { RecuperarSenhaPage } from '../modals/recuperar-senha/recuperar-senha.page';
+import { LoginService } from 'src/app/services/service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private route: Router,
-    private modalCtrl: ModalController
+    private loginService: LoginService,
+    private modalCtrl: ModalController,
   ) {
 
   }
@@ -24,7 +26,10 @@ export class LoginPage implements OnInit {
   }
 
   public login() {
-    this.route.navigate(['login/intro']);
+    this.loginService.login('aistiger.98@gmail.com', '123456').subscribe((cliente: any) => {
+      this.loginService.usuario = cliente.data.loginCliente;
+      this.route.navigate(['login/intro']);
+    });
   }
 
   public recuperarSenha() {

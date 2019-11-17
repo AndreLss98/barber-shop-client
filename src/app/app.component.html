@@ -5,8 +5,8 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              <ion-note>Andre Luis<br></ion-note>
-              <ion-note>+55 9 8124 2373</ion-note>
+              <ion-note>{{ loginService.usuario?.nome }}<br></ion-note>
+              <ion-note>{{ loginService.usuario?.telefone }}</ion-note>
             </ion-col>
             <ion-col size="1" (click)="toggleMenu()">
               <ion-icon name="close"></ion-icon>
