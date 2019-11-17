@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 import { RecuperarSenhaPage } from '../modals/recuperar-senha/recuperar-senha.page';
-import { LoginService } from 'src/app/services/service/login.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-login',

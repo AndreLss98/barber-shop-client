@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { BASE_URL } from './../../../environments/environment'
+import { BASE_URL } from '../../../environments/environment'
 import { Client } from 'src/app/models/cliente.model';
 
 const httpOptions = {
