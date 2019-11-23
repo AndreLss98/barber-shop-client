@@ -1,0 +1,32 @@
+ion-header {
+    background-color: transparent;
+}
+
+ion-header::after {
+    display: none;
+}
+
+ion-grid {
+    border-radius: 0 0 20px 20px;
+    background-color: #313131;
+    color: white;
+    padding: 0 1em .5em;
+    ion-icon {
+        color: white;
+        font-size: 1.5em;
+    }
+    ion-col.iconCol {
+        margin-right: .5em;
+    }
+    span {
+        color: white;
+    }
+    ion-note {
+        color: white;
+        font-size: 1em;
+    }
+}
+
+ion-content {
+    --ion-background-color: transparent;
+}

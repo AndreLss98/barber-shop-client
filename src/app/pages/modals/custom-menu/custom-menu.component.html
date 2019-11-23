@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-note>{{ userService.user?.nome }}<br></ion-note>
+        <ion-note>{{ userService.user?.telefone }}</ion-note>
+      </ion-col>
+      <ion-col size="1" (click)="toggleMenu()">
+        <ion-icon name="close"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="navigatePage('perfil')">
+      <ion-col size="1" class="iconCol">
+        <ion-icon name="ios-contact"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-note>Perfil</ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="navigatePage('cartao')">
+      <ion-col size="1" class="iconCol">
+        <ion-icon name="card"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-note>Ganhos</ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="1" class="iconCol">
+        <ion-icon name="bookmarks"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-note>Termo de uso</ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="navigatePage('agenda')">
+      <ion-col size="1" class="iconCol">
+        <ion-icon name="calendar"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-note>Agenda</ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="navigatePage('historico')">
+      <ion-col size="1" class="iconCol">
+        <ion-icon name="pin"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-note>Histórico</ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="navigatePage('chat')">
+      <ion-col size="1" class="iconCol">
+        <ion-icon name="chatboxes"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-note>Chat</ion-note>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<ion-content (click)="closeMenu()"></ion-content>

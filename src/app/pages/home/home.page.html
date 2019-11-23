@@ -1,9 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
+<ion-header mode="ios">
+  <ion-grid>
+    <ion-row class="ion-justify-conten-start">
+      <ion-col>
+        <ion-icon name="menu" color="primary" (click)="openMenu()"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
 <ion-content id="content" (click)="clickEvent($event)"></ion-content>

@@ -8,6 +8,7 @@ import { SelecaoServicoPage } from '../modals/selecao-servico/selecao-servico.pa
 
 import { MapService } from 'src/app/services/map/map.service';
 import { NotificacaoSolicitacaoNegadaPage } from '../modals/notificacao-solicitacao-negada/notificacao-solicitacao-negada.page';
+import { CustomMenuComponent } from '../modals/custom-menu/custom-menu.component';
 
 @Component({
   selector: 'app-home',
@@ -115,5 +116,9 @@ export class HomePage {
         modal.present();
       });
     }
+  }
+
+  public openMenu(): void {
+    this.modalCtrl.create({ component: CustomMenuComponent }).then((modal) => modal.present());
   }
 }

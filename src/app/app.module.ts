@@ -23,13 +23,22 @@ import { SelecaoServicoPage } from './pages/modals/selecao-servico/selecao-servi
 import { ConectionStatusPage } from './pages/modals/conection-status/conection-status.page';
 import { NotificaoSolicitacaoPage } from './pages/modals/notificao-solicitacao/notificao-solicitacao.page';
 import { NotificacaoSolicitacaoNegadaPage } from './pages/modals/notificacao-solicitacao-negada/notificacao-solicitacao-negada.page';
+import { CustomMenuComponent } from './pages/modals/custom-menu/custom-menu.component';
 
 @NgModule({
-  declarations: [AppComponent, SelecaoServicoPage, ConectionStatusPage, NotificaoSolicitacaoPage, NotificacaoSolicitacaoNegadaPage],
+  declarations: [
+    AppComponent,
+    SelecaoServicoPage,
+    ConectionStatusPage,
+    CustomMenuComponent,
+    NotificaoSolicitacaoPage,
+    NotificacaoSolicitacaoNegadaPage,
+  ],
   entryComponents: [
     CadastroCartaoPage,
     SelecaoServicoPage,
     ConectionStatusPage,
+    CustomMenuComponent,
     NotificaoSolicitacaoPage,
     NotificacaoSolicitacaoNegadaPage
   ],
