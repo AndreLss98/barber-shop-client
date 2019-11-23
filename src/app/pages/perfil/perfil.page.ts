@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-perfil',
@@ -12,7 +14,8 @@ export class PerfilPage implements OnInit {
   public arrowName: string = 'ios-arrow-forward';
 
   constructor(
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private userService: UserService
   ) {
 
   }
@@ -23,6 +26,7 @@ export class PerfilPage implements OnInit {
 
   public logout() {
     this.navCtrl.navigateBack('login');
+    this.userService.user = null;
   }
 
   public extendColName() {
