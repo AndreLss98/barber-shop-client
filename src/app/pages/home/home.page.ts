@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoadingController, AlertController, ModalController } from '@ionic/angular';
 
 import mapboxgl from 'mapbox-gl';
+import { UserService } from 'src/app/services/user.service';
 import { MapService } from 'src/app/services/map/map.service';
 import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
 
@@ -26,6 +27,7 @@ export class HomePage {
   constructor(
     private mapService: MapService,
     private geolocation: Geolocation,
+    private userService: UserService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController
   ) {
@@ -72,8 +74,11 @@ export class HomePage {
   }
 
   public setMyPosition(): void {
-    this.getAtualPosition().then(data => {
-      this.flyToPosition(data.longitude, data.latitude);
+    this.getAtualPosition().then(position => {
+      this.userService.updateUserPosition(position).subscribe((response) => {
+        console.log(response);
+        this.flyToPosition(position.longitude, position.latitude);
+      }, (error) => console.log(error));
     }).catch(() => {
       this.showAlert('Desculpe', 'Falha no gps', 'Não foi possível localiza-lo');
     });
