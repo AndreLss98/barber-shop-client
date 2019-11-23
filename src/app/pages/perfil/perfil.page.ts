@@ -15,7 +15,7 @@ export class PerfilPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private userService: UserService
+    public userService: UserService
   ) {
 
   }
