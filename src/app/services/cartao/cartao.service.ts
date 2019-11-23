@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { card } from 'src/app/models/cartao';
+import { card } from 'src/app/models/cartao.model';
 
 @Injectable({
   providedIn: 'root'

@@ -5,6 +5,8 @@ import { ModalController } from '@ionic/angular';
 
 import { RecuperarSenhaPage } from '../modals/recuperar-senha/recuperar-senha.page';
 import { LoginService } from 'src/app/services/login/login.service';
+import { UserService } from 'src/app/services/user.service';
+import { ConectionStatusPage } from '../modals/conection-status/conection-status.page';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +20,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private route: Router,
+    private userService: UserService,
     private loginService: LoginService,
     private modalCtrl: ModalController,
   ) {
@@ -32,19 +35,26 @@ export class LoginPage implements OnInit {
     this.loginService.login(this.email, this.senha).subscribe((cliente: any) => {
       //TODO: pesquisar uma forma de retornar o status do erro
       if (cliente.errors) {
-        console.log(cliente.errors[0]);
+        const error = JSON.parse(cliente.errors[0].message);
+        console.log(error);
       } else {
-        this.loginService.usuario = cliente.data.loginCliente;
+        this.userService.user = cliente.data.loginCliente;
         this.route.navigate(['login/intro']);
       }
-    }, (errors) => console.log(errors));
+    }, (errors) => {
+      console.log(errors);
+      if (errors.name === 'TimeoutError') {
+        this.connectionError();
+      }
+    });
   }
 
   public recuperarSenha() {
-    this.modalCtrl.create({
-      component: RecuperarSenhaPage
-    }).then((modal) => modal.present());
-    
+    this.modalCtrl.create({ component: RecuperarSenhaPage }).then((modal) => modal.present());
+  }
+
+  private connectionError(): void {
+    this.modalCtrl.create({ component: ConectionStatusPage }).then((modal) => modal.present());
   }
 
 }

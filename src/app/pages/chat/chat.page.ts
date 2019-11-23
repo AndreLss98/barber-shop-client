@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 
-import { chat } from 'src/app/models/chat';
+import { chat } from 'src/app/models/chat.model';
 
 import { ChatService } from 'src/app/services/chat/chat.service';
 

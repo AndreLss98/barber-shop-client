@@ -7,8 +7,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { MapService } from './services/map/map.service';
 import { GpsService } from './services/gps/gps.service';
+import { UserService } from './services/user.service';
 import { NetworkService } from './services/network/network.service';
-import { LoginService } from './services/login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -36,9 +36,9 @@ export class AppComponent {
     private gpsService: GpsService,
     private mapService: MapService,
     private network: NetworkService,
+    public userService: UserService,
     private menuCtrl: MenuController,
     private splashScreen: SplashScreen,
-    public loginService: LoginService
   ) {
     this.initializeApp();
   }

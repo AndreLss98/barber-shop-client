@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AgendaService } from 'src/app/services/agenda/agenda.service';
 import { CartaoService } from 'src/app/services/cartao/cartao.service';
-import { card } from 'src/app/models/cartao';
+import { card } from 'src/app/models/cartao.model';
 import { CadastroCartaoPage } from '../cadastro-cartao/cadastro-cartao.page';
 
 @Component({

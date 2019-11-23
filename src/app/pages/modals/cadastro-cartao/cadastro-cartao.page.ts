@@ -4,7 +4,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 
 import creditCardType from 'credit-card-type';
 
-import { card } from 'src/app/models/cartao';
+import { card } from 'src/app/models/cartao.model';
 import { CartaoService } from 'src/app/services/cartao/cartao.service';
 
 @Component({
