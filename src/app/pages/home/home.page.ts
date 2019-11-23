@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { LoadingController, AlertController, ModalController } from '@ionic/angular';
 
 import mapboxgl from 'mapbox-gl';
+import { MapService } from 'src/app/services/map/map.service';
 import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
 
-import { SelecaoServicoPage } from '../modals/selecao-servico/selecao-servico.page';
+import { topDownAnimation } from 'src/app/animations/top-down-animation';
+import { downTopAnimation } from 'src/app/animations/down-top-animation';
 
-import { MapService } from 'src/app/services/map/map.service';
+import { SelecaoServicoPage } from '../modals/selecao-servico/selecao-servico.page';
 import { NotificacaoSolicitacaoNegadaPage } from '../modals/notificacao-solicitacao-negada/notificacao-solicitacao-negada.page';
+
 import { CustomMenuComponent } from '../modals/custom-menu/custom-menu.component';
 
 @Component({
@@ -119,6 +122,10 @@ export class HomePage {
   }
 
   public openMenu(): void {
-    this.modalCtrl.create({ component: CustomMenuComponent }).then((modal) => modal.present());
+    this.modalCtrl.create({
+      component: CustomMenuComponent,
+      enterAnimation: topDownAnimation,
+      leaveAnimation: downTopAnimation
+    }).then((modal) => modal.present());
   }
 }
