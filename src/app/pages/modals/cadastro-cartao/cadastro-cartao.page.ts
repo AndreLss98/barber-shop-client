@@ -63,7 +63,7 @@ export class CadastroCartaoPage implements OnInit {
 
   public cadastrarCartao() {
     this.cartao.nome = this.formGroup.value.nome;
-    this.cartao.expDate = this.formGroup.value.data;
+    this.cartao.datavalidade = this.formGroup.value.data;
     this.cartao.numero = this.formGroup.value.numero;
     this.cartao.cvv = this.formGroup.value.cvv;
     

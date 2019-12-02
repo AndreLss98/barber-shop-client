@@ -15,7 +15,7 @@ export class LoginService {
   }
 
   public login(email: string, senha: string) {
-    const body = `{loginCliente(input: {email: "${email}", senha:"${senha}"}){idcliente nome telefone email}}`;
+    const body = `{loginCliente(email: "${email}", senha:"${senha}"){idcliente nome email telefones{ddd numero}}}`;
     return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 }

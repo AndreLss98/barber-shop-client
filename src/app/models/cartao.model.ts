@@ -1,6 +1,7 @@
 export interface card {
+    idcartao: number;
     category: string;
-    expDate: string;
+    datavalidade: string;
     nome: string;
     numero: string;
     cvv: number;
