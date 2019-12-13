@@ -33,13 +33,12 @@ export class CartoesPage implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchCards();
+    // this.fetchCards();
   }
 
   public fetchCards() {
     this.cardService.getCards(this.userService.user.idcliente).subscribe((cartoes: any) => {
       this.cartoes = this.cardService.getBandeiras(cartoes.data.cartoesCliente);
-      console.log(this.cartoes);
     });
   }
 

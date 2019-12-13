@@ -89,10 +89,12 @@ export class CadastroCartaoPage implements OnInit {
     this.cartao.cvv = this.formGroup.value.cvv;
     
     if (this.formGroup.value.isForSave) {
-      this.cardService.addCard(this.cartao);
+      //TODO: Implementar serviço para enviar cartao para o banco
+    } else {
+      this.cardService.updateLocalCards(this.cartao);
     }
     this.cardService.setSelectedCard(this.cartao);
-    this.cartaoCadastrado(); 
+    this.cartaoCadastrado();
   }
 
   public closeModal(): void {

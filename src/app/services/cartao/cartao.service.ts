@@ -17,11 +17,20 @@ export class CartaoService {
   private selectedSessionCard: card = new Object() as card;
   
   private data: card[] = [];
+  private _localCards: card[] = [];
 
   constructor(
     private http: HttpClient
   ) {
 
+  }
+
+  get localCards(): card[] {
+    return this._localCards;
+  }
+
+  public updateLocalCards(card: card) {
+    this._localCards.unshift(card);
   }
 
   public getSessionCard(): card {
@@ -39,10 +48,6 @@ export class CartaoService {
   public deleteCard(pos: number) {
     this.data.splice(pos, 1);
     return this.data;
-  }
-
-  public addCard(card: card) {
-    this.data.push(card);
   }
 
   public getCards(idcliente: number) {
