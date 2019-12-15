@@ -3,6 +3,10 @@ import { CartaoService } from 'src/app/services/cartao/cartao.service';
 import { IonSlides, AlertController, ModalController } from '@ionic/angular';
 import { CadastroCartaoPage } from '../modals/cadastro-cartao/cadastro-cartao.page';
 
+import { card } from 'src/app/models/cartao.model';
+
+import { UserService } from 'src/app/services/user.service';
+
 @Component({
   selector: 'app-cartoes',
   templateUrl: './cartoes.page.html',
@@ -22,13 +26,20 @@ export class CartoesPage implements OnInit {
   constructor(
     private cardService: CartaoService,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private userService: UserService
   ) {
 
   }
 
   ngOnInit() {
-    this.cartoes = this.cardService.getCards();
+    // this.fetchCards();
+  }
+
+  public fetchCards() {
+    this.cardService.getCards(this.userService.user.idcliente).subscribe((cartoes: any) => {
+      this.cartoes = this.cardService.getBandeiras(cartoes.data.cartoesCliente);
+    });
   }
 
   public async addCartao() {
@@ -39,7 +50,7 @@ export class CartoesPage implements OnInit {
     });
   }
 
-  public getCartao(cartao) {
+  public getCartaoBrand(cartao: card) {
     if (cartao.category === "MasterCard") {
       return "assets/logoMastercard.svg";
     } else {

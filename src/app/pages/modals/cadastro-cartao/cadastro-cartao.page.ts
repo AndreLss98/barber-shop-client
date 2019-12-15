@@ -1,5 +1,5 @@
 import { ModalController, AlertController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 import creditCardType from 'credit-card-type';
@@ -14,15 +14,20 @@ import { CartaoService } from 'src/app/services/cartao/cartao.service';
 })
 export class CadastroCartaoPage implements OnInit {
 
+  @ViewChild('nomeInput', { static: false }) nome;
+  @ViewChild('numeroCartao', { static: false }) numeroCartao;
+  @ViewChild('dataValidade', { static: false }) dataValidade;
+  @ViewChild('cvv', { static: false }) cvv;
+
   public formGroup: any;
   public caminhoBandeiraCartao: string;
   private cartao: card = new Object() as card;
 
   constructor(
     private formBuilder: FormBuilder,
+    private alertCtrl: AlertController,
     private cardService: CartaoService,
     private modalCtrl: ModalController,
-    private alertCtrl: AlertController
   ) {
     this.formGroup = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.maxLength(26)]],
@@ -35,6 +40,22 @@ export class CadastroCartaoPage implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  public nomeToUppercase() {
+    this.nome.value = this.nome.value.toUpperCase().replace(/(\d)/g, '');
+  }
+
+  public formatCardNumber() {
+    this.numeroCartao.value = this.numeroCartao.value.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim();
+  }
+
+  public formatDataValidade() {
+    this.dataValidade.value = this.dataValidade.value.replace(/([0-9]{2})(\d)/, '$1/$2').trim();
+  }
+
+  public formatCVV() {
+    this.cvv.value = this.cvv.value.replace(/([^\dA-Z])/g, '');
   }
 
   public getBandeira(cardNumber: string) {
@@ -63,15 +84,17 @@ export class CadastroCartaoPage implements OnInit {
 
   public cadastrarCartao() {
     this.cartao.nome = this.formGroup.value.nome;
-    this.cartao.expDate = this.formGroup.value.data;
+    this.cartao.datavalidade = this.formGroup.value.data;
     this.cartao.numero = this.formGroup.value.numero;
     this.cartao.cvv = this.formGroup.value.cvv;
     
     if (this.formGroup.value.isForSave) {
-      this.cardService.addCard(this.cartao);
+      //TODO: Implementar serviço para enviar cartao para o banco
+    } else {
+      this.cardService.updateLocalCards(this.cartao);
     }
     this.cardService.setSelectedCard(this.cartao);
-    this.cartaoCadastrado(); 
+    this.cartaoCadastrado();
   }
 
   public closeModal(): void {

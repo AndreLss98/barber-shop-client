@@ -21,7 +21,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Nome</ion-label>
-              <ion-input formControlName="nome" type="text" clearInput></ion-input>
+              <ion-input #nomeInput formControlName="nome" type="text" (keyup)="nomeToUppercase()" clearInput></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -29,7 +29,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Número do cartão</ion-label>
-              <ion-input #numeroCartao formControlName="numero" type="text" maxlength="16" (keyup)="getBandeira(numeroCartao.value)"></ion-input>
+              <ion-input #numeroCartao formControlName="numero" type="text" maxlength="19" (keyup)="getBandeira(numeroCartao.value); formatCardNumber()"></ion-input>
               <img *ngIf="caminhoBandeiraCartao"  [src]="caminhoBandeiraCartao" />
             </ion-item>
           </ion-col>
@@ -38,7 +38,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">Data de validade</ion-label>
-              <ion-input formControlName="data" type="text" maxlength="5" clearInput></ion-input>
+              <ion-input #dataValidade formControlName="data" type="text" maxlength="5" (keyup)="formatDataValidade()" clearInput></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -46,7 +46,7 @@
           <ion-col>
             <ion-item>
               <ion-label position="floating">CVV</ion-label>
-              <ion-input formControlName="cvv" type="text" maxlength="4" clearInput></ion-input>
+              <ion-input #cvv formControlName="cvv" type="text" maxlength="4" (keyup)="formatCVV()"></ion-input>
               <ion-icon id="helpIcon" name="help-circle-outline"></ion-icon>
             </ion-item>
           </ion-col>

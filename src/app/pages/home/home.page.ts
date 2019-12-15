@@ -75,10 +75,7 @@ export class HomePage {
 
   public setMyPosition(): void {
     this.getAtualPosition().then(position => {
-      this.userService.updateUserPosition(position).subscribe((response) => {
-        console.log(response);
-        this.flyToPosition(position.longitude, position.latitude);
-      }, (error) => console.log(error));
+      this.flyToPosition(position.longitude, position.latitude);
     }).catch(() => {
       this.showAlert('Desculpe', 'Falha no gps', 'Não foi possível localiza-lo');
     });
