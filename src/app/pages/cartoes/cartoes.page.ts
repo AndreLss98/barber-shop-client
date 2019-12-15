@@ -6,6 +6,7 @@ import { CadastroCartaoPage } from '../modals/cadastro-cartao/cadastro-cartao.pa
 import { card } from 'src/app/models/cartao.model';
 
 import { UserService } from 'src/app/services/user.service';
+import { cartao } from 'src/app/models/cliente.model';
 
 @Component({
   selector: 'app-cartoes',
@@ -16,7 +17,7 @@ export class CartoesPage implements OnInit {
 
   @ViewChild(IonSlides, {static: false}) slides: IonSlides
 
-  public cartoes = [];
+  public cartoes: cartao[] = [];
   public sliderConfigs = {
     spaceBetween: 10,
     centeredSlides: true,
@@ -33,7 +34,7 @@ export class CartoesPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.fetchCards();
+    this.cartoes = this.cardService.localCards;
   }
 
   public fetchCards() {
@@ -59,11 +60,30 @@ export class CartoesPage implements OnInit {
   }
 
   public excluirCartao() {
-    this.slides.getActiveIndex().then((resp) => {
-      this.cartoes = this.cardService.deleteCard(resp);
-      this.slides.update();
+    this.slides.getActiveIndex().then((cardPosition) => {
+
+      if (this.cartoes[cardPosition].idcartao) {
+        this.cardService.deleteCard(cardPosition, this.userService.user, this.cartoes[cardPosition]).subscribe((response: any) => {
+          if (response.errors) {
+            console.log(response.errors);
+          } else {
+            if (response.data.deleteCard) {
+              this.removeByIndex(cardPosition);
+            } else {
+              //Tratar erro de cartao não encontrado aqui
+            }
+          }
+         });
+      } else {
+        this.removeByIndex(cardPosition);
+      }
+    });
+  }
+
+  private removeByIndex(pos: number) {
+    this.cartoes.splice(pos, 1);
+    this.slides.update();
       this.showInfoAlert("Cartão excluido com sucesso!");
-    })
   }
 
   public async showAlert(message: string) {

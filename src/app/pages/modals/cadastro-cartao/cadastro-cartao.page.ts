@@ -4,7 +4,8 @@ import { Validators, FormBuilder } from '@angular/forms';
 
 import creditCardType from 'credit-card-type';
 
-import { card } from 'src/app/models/cartao.model';
+import { cartao } from './../../../models/cliente.model';
+import { UserService } from 'src/app/services/user.service';
 import { CartaoService } from 'src/app/services/cartao/cartao.service';
 
 @Component({
@@ -21,9 +22,10 @@ export class CadastroCartaoPage implements OnInit {
 
   public formGroup: any;
   public caminhoBandeiraCartao: string;
-  private cartao: card = new Object() as card;
+  private cartao: cartao = new Object() as cartao;
 
   constructor(
+    private userService: UserService,
     private formBuilder: FormBuilder,
     private alertCtrl: AlertController,
     private cardService: CartaoService,
@@ -89,12 +91,19 @@ export class CadastroCartaoPage implements OnInit {
     this.cartao.cvv = this.formGroup.value.cvv;
     
     if (this.formGroup.value.isForSave) {
-      //TODO: Implementar serviço para enviar cartao para o banco
+      console.log(this.formGroup.value);
+      this.cardService.registerCard(this.userService.user, this.cartao).subscribe((cartao: any) => {
+        if (cartao.errors) {
+          console.log(cartao.errors);
+        } else {
+          this.cardService.updateLocalCards(cartao.data.registerCard);
+          this.cartaoCadastrado();
+        }
+      }, (error) => console.log('Erro ao cadastrar cartao: ', error));
     } else {
       this.cardService.updateLocalCards(this.cartao);
+      this.cartaoCadastrado();
     }
-    this.cardService.setSelectedCard(this.cartao);
-    this.cartaoCadastrado();
   }
 
   public closeModal(): void {
@@ -109,7 +118,7 @@ export class CadastroCartaoPage implements OnInit {
         {
           text: 'OK',
           handler: () => {
-            this.closeModal();
+
           }
         }
       ],

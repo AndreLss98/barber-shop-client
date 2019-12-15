@@ -2,7 +2,7 @@ import { timeout } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { card } from 'src/app/models/cartao.model';
+import { cartao } from './../../models/cliente.model';
 
 import creditCardType from 'credit-card-type';
 
@@ -14,10 +14,9 @@ import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
 })
 export class CartaoService {
 
-  private selectedSessionCard: card = new Object() as card;
-  
-  private data: card[] = [];
-  private _localCards: card[] = [];
+  private selectedSessionCard: cartao = new Object() as cartao;
+
+  private _localCards: cartao[] = [];
 
   constructor(
     private http: HttpClient
@@ -25,29 +24,35 @@ export class CartaoService {
 
   }
 
-  get localCards(): card[] {
+  get localCards(): cartao[] {
     return this._localCards;
   }
 
-  public updateLocalCards(card: card) {
-    this._localCards.unshift(card);
+  set localCards(userCards: cartao[]) {
+    this._localCards = this.getBandeiras(userCards);
+    this.selectedSessionCard = this._localCards[0];
   }
 
-  public getSessionCard(): card {
+  public updateLocalCards(card: cartao) {
+    const tempCard = this.getBandeiras([card]);
+    this._localCards.unshift(tempCard[0]);
+    this.setSelectedCard(this._localCards[0]);
+  }
+
+  public getSessionCard(): cartao {
     return this.selectedSessionCard;
   }
 
-  public setSelectedCard(card: card) {
+  public setSelectedCard(card: cartao) {
     this.selectedSessionCard = card;
   }
 
-  public getFakeCards(): card[] {
-    return this.data;
-  }
-
-  public deleteCard(pos: number) {
-    this.data.splice(pos, 1);
-    return this.data;
+  public deleteCard(pos: number, { idcliente }, { idcartao }) {
+    const body =
+      `mutation {
+        deleteCard(idcliente: ${idcliente}, idcartao: ${idcartao})
+      }`;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public getCards(idcliente: number) {
@@ -55,7 +60,18 @@ export class CartaoService {
     return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public getBandeiras(listaCartoes: card[]): card[] {
+  public registerCard({ idcliente }, newCard: cartao) {
+    newCard.numero = newCard.numero.replace(/[\s]/g, '');
+    const body =
+      `mutation {
+      registerCard(idcliente: ${idcliente}, numero: "${newCard.numero}", nome: "${newCard.nome}", cvv: ${newCard.cvv}, datavalidade: "${newCard.datavalidade}") {
+        idcartao numero nome datavalidade cvv
+      }
+    }`;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+  }
+
+  public getBandeiras(listaCartoes: cartao[]): cartao[] {
     listaCartoes.forEach(cartao => {
       let numeroBandeira;
       if (cartao.numero && cartao.numero.length >= 4) {
@@ -66,7 +82,7 @@ export class CartaoService {
     return listaCartoes;
   }
 
-  public showBandeira(dadosCartao, cartao: card) {
+  public showBandeira(dadosCartao, cartao: cartao) {
     if (dadosCartao && dadosCartao.length > 0) {
       if (dadosCartao[0].type === "visa") {
         cartao.category = "Visa";

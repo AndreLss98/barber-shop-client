@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { CartaoService } from './cartao/cartao.service';
+
 import { Client } from '../models/cliente.model';
 import { BASE_URL } from 'src/environments/environment';
 import { HTTP_OPTIONS } from '../constants/http-constants';
@@ -13,8 +15,9 @@ export class UserService {
   private _user: Client = null;
 
   constructor(
-    private http: HttpClient
-  ) { 
+    private http: HttpClient,
+    private cartoesService: CartaoService
+  ) {
 
   }
 
@@ -23,6 +26,7 @@ export class UserService {
   }
 
   set user(user: Client) {
+    this.cartoesService.localCards = user.cartoes;
     this._user = user;
   }
 
