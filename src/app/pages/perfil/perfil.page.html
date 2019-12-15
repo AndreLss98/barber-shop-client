@@ -17,7 +17,7 @@
     <ion-row>
       <ion-col>
         <ion-label class="subHeader">Nome</ion-label>
-        <ion-label>{{ userService.user.nome }}</ion-label>
+        <ion-label>{{ userService.user.nome }} {{ userService.user?.sobrenome }}</ion-label>
       </ion-col>
       <ion-col size="1" align-self-end (click)="extendColName()">
         <ion-icon name="{{ arrowName }}"></ion-icon>
@@ -45,7 +45,7 @@
     <ion-row class="endLine">
       <ion-col>
         <ion-label class="subHeader">Telefone</ion-label>
-        <ion-label>{{ userService.user.telefone }}</ion-label>
+        <ion-label>({{ userService.user?.telefones[0]?.ddd }}) {{ userService.user?.telefones[0]?.numero }}</ion-label>
       </ion-col>
       <!-- <ion-col size="1" align-self-end>
         <ion-icon name="ios-arrow-forward"></ion-icon>

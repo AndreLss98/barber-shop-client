@@ -2,8 +2,8 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-note>{{ userService.user?.nome }}<br></ion-note>
-        <ion-note>{{ userService.user?.telefone }}</ion-note>
+        <ion-note>{{ userService.user?.nome }} {{ userService.user?.sobrenome }}<br></ion-note>
+        <ion-note>({{ userService.user?.telefones[0]?.ddd }}) {{ userService.user?.telefones[0]?.numero }}</ion-note>
       </ion-col>
       <ion-col size="1" (click)="closeMenu()">
         <ion-icon name="close"></ion-icon>
