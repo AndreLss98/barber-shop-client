@@ -42,9 +42,9 @@ export class SelecaoServicoPage implements OnInit {
     private alertCtrl: AlertController,
     private agendaService: AgendaService,
   ) {
-    this.currentMoth = agendaService.getMonthName(this.agendaService.getMonth());
+    /* this.currentMoth = agendaService.getMonthName(this.agendaService.getMonth());
     this.month = agendaService.constructMonth(this.agendaService.getDate());
-    this.sessionCard = this.cardService.getSessionCard();
+    this.sessionCard = this.cardService.getSessionCard(); */
 
     if (!this.isEmpty(this.sessionCard)) {
       this.lastFourDigits = this.sessionCard.numero.substr(this.sessionCard.numero.length - 4);

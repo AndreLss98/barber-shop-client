@@ -19,9 +19,9 @@ export class FalhaPagamentoPage implements OnInit {
   }
 
   ngOnInit() {
-    this.currentDay = this.agendaService.getDay();
+    /* this.currentDay = this.agendaService.getDay();
     this.currentYear = this.agendaService.getYear();
-    this.currentMonth = this.agendaService.getMonthName(this.agendaService.getMonth());
+    this.currentMonth = this.agendaService.getMonthName(this.agendaService.getMonth()); */
   }
 
   public goHome() {

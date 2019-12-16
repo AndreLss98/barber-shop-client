@@ -33,14 +33,14 @@ export class CadastroPage implements OnInit {
   }
 
   public async registrarCadastro() {
-    this.cadastroService.cadastrar(this.cadastroForm.value).subscribe((cadastro: any) => {
+    /* this.cadastroService.cadastrar(this.cadastroForm.value).subscribe((cadastro: any) => {
       if (cadastro.errors) {
         this.router.navigateByUrl('erro-cadastro');
       } else {
         this.userService.user = cadastro.data.createCliente;
         this.router.navigateByUrl('cadastro-sucesso');
       }
-    });
+    }); */
   }
 
 }

@@ -16,7 +16,7 @@ export class CadastroService {
   }
 
   public cadastrar(cadastro: Client) {
-    const body = `mutation{createCliente(input: {nome: "${cadastro.nome}", email: "${cadastro.email}", telefone: "${cadastro.telefone}", senha: "${cadastro.senha}"}){nome telefone email}}`;
-    return this.http.post(BASE_URL, body,  HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    /* const body = `mutation{createCliente(input: {nome: "${cadastro.nome}", email: "${cadastro.email}", telefone: "${cadastro.telefone}", senha: "${cadastro.senha}"}){nome telefone email}}`;
+    return this.http.post(BASE_URL, body,  HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE)); */
   }
 }

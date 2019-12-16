@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { PopoverController, ActionSheetController } from '@ionic/angular';
+
+import { NOME_MESES } from './../../constants/constants';
+import { itemAgenda, itemDateAgenda } from 'src/app/models/itemAgenda';
 
 import { AgendaService } from 'src/app/services/agenda/agenda.service';
-import { itemAgenda, itemDateAgenda } from 'src/app/models/itemAgenda';
-import { PopoverController, ActionSheetController } from '@ionic/angular';
+import { CalendarioService } from 'src/app/services/calendario/calendario.service';
+
 import { MesAgendaComponent } from 'src/app/components/popovers/mes-agenda/mes-agenda.component';
 
 @Component({
@@ -11,7 +15,8 @@ import { MesAgendaComponent } from 'src/app/components/popovers/mes-agenda/mes-a
   styleUrls: ['./agenda.page.scss'],
 })
 export class AgendaPage implements OnInit {
-
+  
+  readonly NOME_MESES = NOME_MESES;
 
   public slidesConfig = {
     slidesPerView: 7
@@ -20,26 +25,26 @@ export class AgendaPage implements OnInit {
   public agenda: itemDateAgenda[] = [];
   public agendaFiltrada: itemAgenda[] = [];
 
-  public currentYear;
-  public nameCurrentMoth: string;
-  public month = [];
-
-  public selectedDay: number = null;
-
+  private dataAtual: Date = new Date();
+  public anoSelecionado: number;
+  public diasDoMes = [];
+  public mesSelecionado: number;
+  public nomeMesSelecionado: string;
+  public diaSelecionado: number = null;
 
   constructor(
     private agendaService: AgendaService,
-    private popoverCtrl: PopoverController
+    private popoverCtrl: PopoverController,
+    private calendarioService: CalendarioService,
   ) {
 
   }
 
   ngOnInit() {
-    this.currentYear = this.agendaService.getYear();
-    this.nameCurrentMoth = this.agendaService.getMonthName(this.agendaService.getMonth());
-    this.month = this.agendaService.constructMonth(this.agendaService.getDate());
-    this.agenda = this.agendaService.getAgenda(this.nameCurrentMoth, this.currentYear);
-    this.checkAgenda();
+    this.anoSelecionado = this.dataAtual.getFullYear();
+    this.mesSelecionado = this.dataAtual.getMonth();
+    this.nomeMesSelecionado = NOME_MESES[this.mesSelecionado];
+    this.diasDoMes = this.calendarioService.diasRestanteDoMesAtual(this.dataAtual);
   }
 
   public async presentPopOver(event: Event) {
@@ -51,23 +56,19 @@ export class AgendaPage implements OnInit {
       popover.present();
       popover.onDidDismiss().then((popoverdata: any) => {
         this.setMonth(popoverdata.data);
-      })
+      });
     });
   }
 
   private setMonth(month: number) {
-    let newDate = new Date(this.currentYear, month, 1);
-    if (month > this.agendaService.getMonth()) {
-      this.nameCurrentMoth = this.agendaService.getMonthName(month);
-      this.month = this.agendaService.constructMonth(newDate);
-    } else if (month === this.agendaService.getMonth()) {
-      this.nameCurrentMoth = this.agendaService.getMonthName(month);
-      this.month = this.agendaService.constructMonth(this.agendaService.getDate());
-    }
+    
+  }
+  public selectDay(day, pos) {
+    
   }
 
   public checkAgenda() {
-    this.month.forEach(element => {
+    this.diasDoMes.forEach(element => {
       this.agenda.forEach(agenda => {
         if (agenda.day === element.day) {
           element.hasService = true;
@@ -75,18 +76,5 @@ export class AgendaPage implements OnInit {
         }
       })
     });
-  }
-
-  public selectDay(day, pos) {
-    this.selectedDay = pos;
-    const tempSelectedDay = this.month[pos];
-    this.agenda.forEach(element => {
-      if (element.month === this.nameCurrentMoth.toLowerCase() && element.day === tempSelectedDay.day) {
-        this.agendaFiltrada = element.items;
-        return;
-      } else {
-        this.agendaFiltrada = [];
-      }
-    })
   }
 }
