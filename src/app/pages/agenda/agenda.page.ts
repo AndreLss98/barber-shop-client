@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, ActionSheetController } from '@ionic/angular';
 
@@ -36,11 +37,13 @@ export class AgendaPage implements OnInit {
     private agendaService: AgendaService,
     private popoverCtrl: PopoverController,
     private calendarioService: CalendarioService,
+    private route: ActivatedRoute
   ) {
 
   }
 
   ngOnInit() {
+    console.log(this.route.snapshot);
     this.anoSelecionado = this.dataAtual.getFullYear();
     this.mesSelecionado = this.dataAtual.getMonth();
     this.nomeMesSelecionado = NOME_MESES[this.mesSelecionado];

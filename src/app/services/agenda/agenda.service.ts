@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { CalendarioService } from '../calendario/calendario.service';
 import { BASE_URL } from 'src/environments/environment';
 import { HTTP_OPTIONS } from 'src/app/constants/http-constants';
 
@@ -11,13 +10,12 @@ import { HTTP_OPTIONS } from 'src/app/constants/http-constants';
 export class AgendaService {
 
   constructor(
-    private http: HttpClient,
-    private calendarioService: CalendarioService
+    private http: HttpClient
   ) {
 
   }
 
-  public getAgenda(idcliente: number) {
+  public getAgenda({ idcliente }) {
     const body = 
     `{
       agenda(idcliente: ${idcliente}) {
@@ -27,6 +25,6 @@ export class AgendaService {
         }
       }
     }`;
-    this.http.post(BASE_URL, body, HTTP_OPTIONS);
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS);
   }
 }

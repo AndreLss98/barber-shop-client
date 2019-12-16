@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { ChatResolveService } from './resolver/chat-resolve.service';
+import { ChatResolveService } from './resolvers/chat-resolve.service';
+import { AgendaResolverService } from './resolvers/agenda-resolver.service';
 
 const routes: Routes = [
   {
@@ -24,7 +25,13 @@ const routes: Routes = [
   { path: 'home/perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'home/cartoes', loadChildren: './pages/cartoes/cartoes.module#CartoesPageModule' },
   { path: 'home/historico', loadChildren: './pages/historico/historico.module#HistoricoPageModule' },
-  { path: 'home/agenda', loadChildren: './pages/agenda/agenda.module#AgendaPageModule' },
+  { 
+    path: 'home/agenda',
+    resolve: {
+      agenda: AgendaResolverService
+    },
+    loadChildren: './pages/agenda/agenda.module#AgendaPageModule'
+  },
   { path: 'home/home-chat', loadChildren: './pages/home-chat/home-chat.module#HomeChatPageModule' },
   {
     path: 'home/home-chat/:id',
