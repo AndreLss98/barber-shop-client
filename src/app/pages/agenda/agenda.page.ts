@@ -42,16 +42,16 @@ export class AgendaPage implements OnInit {
     this.checkAgenda();
   }
 
-  public async presentPopOver(ev: Event) {
-    let popover = await this.popoverCtrl.create({
+  public async presentPopOver(event: Event) {
+    await this.popoverCtrl.create({
       component: MesAgendaComponent,
-      event: ev
-    });
-
-    popover.present();
-
-    popover.onDidDismiss().then(popoverdata => {
-      this.setMonth(popoverdata.data);
+      event,
+      mode: 'ios'
+    }).then((popover) => {
+      popover.present();
+      popover.onDidDismiss().then((popoverdata: any) => {
+        this.setMonth(popoverdata.data);
+      })
     });
   }
 
