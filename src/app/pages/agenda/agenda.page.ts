@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController, ActionSheetController } from '@ionic/angular';
 
 import { NOME_MESES } from './../../constants/constants';
-import { itemAgenda, itemDateAgenda } from 'src/app/models/itemAgenda';
+import { servico } from 'src/app/models/servico.model';
 
 import { AgendaService } from 'src/app/services/agenda/agenda.service';
 import { CalendarioService } from 'src/app/services/calendario/calendario.service';
@@ -23,8 +23,8 @@ export class AgendaPage implements OnInit {
     slidesPerView: 7
   }
 
-  public agenda: itemDateAgenda[] = [];
-  public agendaFiltrada: itemAgenda[] = [];
+  public agenda: servico[] = [];
+  public agendaFiltrada: servico[] = [];
 
   private dataAtual: Date = new Date();
   public anoSelecionado: number;
@@ -43,11 +43,16 @@ export class AgendaPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.route.snapshot);
+    if (this.route.snapshot.data.agenda) {
+      this.agenda = this.route.snapshot.data.agenda.data.agenda;
+      console.log(this.agenda);
+    }
     this.anoSelecionado = this.dataAtual.getFullYear();
     this.mesSelecionado = this.dataAtual.getMonth();
+    this.selectDay({ numero: this.dataAtual.getDate() });
     this.nomeMesSelecionado = NOME_MESES[this.mesSelecionado];
     this.diasDoMes = this.calendarioService.diasRestanteDoMesAtual(this.dataAtual);
+    this.checkAgenda();
   }
 
   public async presentPopOver(event: Event) {
@@ -66,18 +71,25 @@ export class AgendaPage implements OnInit {
   private setMonth(month: number) {
     
   }
-  public selectDay(day, pos) {
-    
+
+  public selectDay({ numero }) {
+    this.diaSelecionado = numero;
+    this.agendaFiltrada = [];
+    this.agenda.forEach(item => {
+      if (item.dia === this.diaSelecionado) {
+        this.agendaFiltrada.push(item);
+      }
+    });
   }
 
   public checkAgenda() {
-    this.diasDoMes.forEach(element => {
+    this.diasDoMes.forEach(dia => {
       this.agenda.forEach(agenda => {
-        if (agenda.day === element.day) {
-          element.hasService = true;
+        if (agenda.dia === dia.numero) {
+          dia.hasService = true;
           return;
         }
-      })
+      });
     });
   }
 }

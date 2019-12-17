@@ -24,7 +24,7 @@
         <ion-slide *ngFor="let dia of diasDoMes; let i = index" (click)="selectDay(dia, i)">
           <div style="display: flex; flex-direction: column; align-items: center;">
             <div class="dayWeekend">{{ dia.nomeDiaSemana }}</div>
-            <div class="dayMonth" [class.selected]="diaSelecionado === i">{{ dia.numero }}</div>
+            <div class="dayMonth" [class.selected]="diaSelecionado === dia.numero">{{ dia.numero }}</div>
             <div class="hasService" *ngIf="dia.hasService"></div>
           </div>
         </ion-slide>
@@ -39,7 +39,7 @@
     </ion-row>
     <ion-row *ngFor="let item of agendaFiltrada">
       <ion-col>
-        <item-agenda [local]="item.local" [horario]="item.horario" [servico]="item.servico" [valor]="item.valor" [nome]="item.nome"></item-agenda>
+        <item-agenda [local]="item.endereco.endereco" [horario]="item.horario" [servicos]="item.servicos" [valor]="item.valortotal" [profissional]="item.profissional"></item-agenda>
       </ion-col>
     </ion-row>
   </ion-grid>

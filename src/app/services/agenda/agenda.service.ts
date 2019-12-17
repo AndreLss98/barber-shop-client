@@ -19,9 +19,15 @@ export class AgendaService {
     const body = 
     `{
       agenda(idcliente: ${idcliente}) {
-        dia mes ano
+        dia mes ano valortotal horario
         endereco {
           endereco numero complemento pto_referencia
+        }
+        servicos {
+          nome
+        }
+        profissional {
+          nome sobrenome
         }
       }
     }`;

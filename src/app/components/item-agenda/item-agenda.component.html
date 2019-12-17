@@ -2,14 +2,14 @@
   <ion-row>
     <ion-col size="2" id="colImg" *ngIf="!isInverted">
       <div class="circularImg">
-        <img src="./../../../assets/imgs/facePlaceholder.jpg">
+        <img src="assets/imgs/facePlaceholder.jpg">
       </div>
     </ion-col>
     <ion-col size="1" *ngIf="isInverted === true" (click)="isInverted = !isInverted">
       <ion-icon name="ios-arrow-back"></ion-icon>
     </ion-col>
     <ion-col *ngIf="!isInverted">
-      <div>{{ nome }}</div>
+      <div>{{ profissional.nome }} {{ profissional.sobrenome }}</div>
       <div>{{ horario }}</div>
     </ion-col>
     <ion-col id="gridDetails" *ngIf="isInverted">
@@ -44,7 +44,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <div>{{ servico }}</div>
+            <div *ngFor="let servico of servicos">{{ servico.nome }}</div>
           </ion-col>
         </ion-row>
         <ion-row>

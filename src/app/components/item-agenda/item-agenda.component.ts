@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { tipoServico } from 'src/app/models/servico.model';
+import { profissional } from 'src/app/models/profissional.model';
 
 @Component({
   selector: 'item-agenda',
@@ -10,9 +13,9 @@ export class ItemAgendaComponent implements OnInit {
 
   @Input() local: string;
   @Input() horario: string;
-  @Input() servico: string;
+  @Input() servicos: tipoServico[];
   @Input() valor: string;
-  @Input() nome: string;
+  @Input() profissional: profissional;
 
   public isInverted: boolean = false;
 
@@ -21,6 +24,7 @@ export class ItemAgendaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.horario = this.horario.substr(0, 5);
     this.valor = Number(this.valor).toFixed(2).replace('.', ',');
   }
 
