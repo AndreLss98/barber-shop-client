@@ -1,10 +1,14 @@
 import { Router } from '@angular/router';
-import { ModalController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { ModalController, AlertController } from '@ionic/angular';
 
-import { AgendaService } from 'src/app/services/agenda/agenda.service';
+import { UserService } from 'src/app/services/user.service';
 import { CartaoService } from 'src/app/services/cartao/cartao.service';
+import { CalendarioService } from 'src/app/services/calendario/calendario.service';
+
 import { card } from 'src/app/models/cartao.model';
+import { NOME_MESES } from './../../../constants/constants';
+
 import { CadastroCartaoPage } from '../cadastro-cartao/cadastro-cartao.page';
 
 @Component({
@@ -14,10 +18,18 @@ import { CadastroCartaoPage } from '../cadastro-cartao/cadastro-cartao.page';
 })
 export class SelecaoServicoPage implements OnInit {
 
+  readonly NOME_MESES = NOME_MESES;
+
   public slidesConfig = {
     slidesPerView: 4
   }
-  public diaSelecionado: number = null;
+  private dataAtual: Date = new Date();
+  public diaSelecionado: number;
+
+  public numeroMesSelecionado: number;
+  public nomeMesSelecionado: string;
+  public mesSelecionado = [];
+
   public horarioSelecionado: number = null;
   private total: number = 0;
   public totalFormatado: string;
@@ -27,8 +39,6 @@ export class SelecaoServicoPage implements OnInit {
   public pathBeardSvg: string = 'assets/beard.svg';
   public pathHairSvg: string = 'assets/hair.svg';
   public pathMustacheSvg: string = 'assets/mustache.svg';
-  public currentMoth;
-  public month = [];
   public horarios = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
   public isDesactiveBtn: boolean = true;
   public sessionCard: card;
@@ -36,22 +46,23 @@ export class SelecaoServicoPage implements OnInit {
 
   constructor(
     private route: Router,
-    private modaCtrl: ModalController,
+    public userService: UserService,
     private cardService: CartaoService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
-    private agendaService: AgendaService,
+    private calendarioService: CalendarioService
   ) {
-    /* this.currentMoth = agendaService.getMonthName(this.agendaService.getMonth());
-    this.month = agendaService.constructMonth(this.agendaService.getDate());
-    this.sessionCard = this.cardService.getSessionCard(); */
 
-    if (!this.isEmpty(this.sessionCard)) {
-      this.lastFourDigits = this.sessionCard.numero.substr(this.sessionCard.numero.length - 4);
-    }
   }
 
   ngOnInit() {
+    this.numeroMesSelecionado = this.dataAtual.getMonth();
+    this.mesSelecionado = this.calendarioService.diasRestanteDoMesAtual(this.dataAtual);
+    this.nomeMesSelecionado = NOME_MESES[this.numeroMesSelecionado];
+    this.sessionCard = this.cardService.getSessionCard();
+    if (!this.isEmpty(this.sessionCard)) {
+      this.lastFourDigits = this.sessionCard.numero.substr(this.sessionCard.numero.length - 4);
+    }
     this.formataValorTotal();
   }
 
@@ -64,7 +75,7 @@ export class SelecaoServicoPage implements OnInit {
   }
 
   public closeModal() {
-    this.modaCtrl.dismiss();
+    this.modalCtrl.dismiss();
   }
 
   public selectBeardService() {
@@ -121,7 +132,7 @@ export class SelecaoServicoPage implements OnInit {
       this.showCardAlert();
       return;
     }
-    this.modaCtrl.dismiss().then(() => {
+    this.modalCtrl.dismiss().then(() => {
       this.route.navigateByUrl('load-atendimento');
     });
   }

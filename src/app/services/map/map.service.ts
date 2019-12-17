@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { GeoJson, FeatureCollection } from 'src/app/classes/map';
 
-import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
+import { Geolocation, GeolocationOptions, Geoposition } from '@ionic-native/geolocation/ngx';
 
 import { MARKERS } from 'src/app/constants/mock-markers';
 import { MAPBOX_TOKEN } from '../../../environments/environment';
 
 import mapboxgl from 'mapbox-gl';
+import { UserService } from '../user.service';
 
 const SOURCE_MARKERS_NAME = 'markers';
 
@@ -23,7 +25,9 @@ export class MapService {
   private mapElement: HTMLElement = null;
 
   constructor(
-    private geolocation: Geolocation
+    private http: HttpClient,
+    private userService: UserService,
+    private geolocation: Geolocation,
   ) {
     mapboxgl.accessToken = MAPBOX_TOKEN;
     this.mapElement = document.createElement('div');
@@ -121,5 +125,20 @@ export class MapService {
 
   public myConsole() {
     console.log("Foi chamada a funcao");
+  }
+
+  public getAddress() {
+    const gpsOptions: GeolocationOptions = {
+      enableHighAccuracy: true,
+      maximumAge: 15000,
+      timeout: 10000
+    }
+    return this.geolocation.getCurrentPosition(gpsOptions).then((position: Geoposition) => {
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${position.coords.longitude},${position.coords.latitude}.json?access_token=${MAPBOX_TOKEN}`;
+      return this.http.get(url).subscribe((address: any) => {
+        console.log(address);
+        this.userService.user.endereco = address.features[0].place_name;
+      });
+    });
   }
 }

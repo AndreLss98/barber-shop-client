@@ -27,7 +27,7 @@ export class HomePage {
   constructor(
     private mapService: MapService,
     private geolocation: Geolocation,
-    private userService: UserService,
+    public userService: UserService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController
   ) {
@@ -40,6 +40,7 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.checkMap();
+    this.mapService.getAddress();
   }
 
   public checkMap(): void {

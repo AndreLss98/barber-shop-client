@@ -20,4 +20,5 @@ export interface Client {
     latitude: number;
     longitude: number;
     cartoes: cartao[];
+    endereco: string;
 }

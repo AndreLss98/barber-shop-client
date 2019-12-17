@@ -1,8 +1,14 @@
 <ion-header>
-  <div id="headerLabel">
-    <div id="yellowPoint"></div>
-    <span>Rua Recife - Urias Magalhães</span>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div id="headerLabel">
+          <div id="yellowPoint"></div>
+          <span>{{ userService.user?.endereco }}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 <ion-content>
   <div id="content">
@@ -21,11 +27,11 @@
       </ion-row>
       <ion-row id="slidesDay">
         <ion-slides [options]="slidesConfig">
-          <ion-slide *ngFor="let day of month; let i = index" (click)="diaSelecionado = i">
+          <ion-slide *ngFor="let day of mesSelecionado; let i = index" (click)="diaSelecionado = i">
             <div class="itemDay" [class.selecionado]="diaSelecionado === i">
               <div *ngIf="i === 0" id="currentDay">Hoje</div>
-              <div class="dia-mes">{{ day.day }} {{ currentMoth }}</div>
-              <div>{{ day.nameDay }}</div>
+              <div class="dia-mes">{{ day.numero }} {{ nomeMesSelecionado }}</div>
+              <div>{{ day.nomeDiaSemana }}</div>
             </div>
           </ion-slide>
         </ion-slides>
@@ -77,8 +83,10 @@
               <ion-col size="8" class="start">
                 <span>Formas de pagamento</span>
                 <div style="display: flex;">
-                  <div><ion-icon src="assets/mini_cartao.svg"></ion-icon></div>
-                  <div><span>{{ lastFourDigits }}</span></div>
+                  <div>
+                    <ion-icon src="assets/mini_cartao.svg"></ion-icon>
+                  </div>
+                  <div><span>{{ lastFourDigits !== ''? '... ': ''}} {{ lastFourDigits }}</span></div>
                 </div>
               </ion-col>
               <ion-col size="4" class="end">
