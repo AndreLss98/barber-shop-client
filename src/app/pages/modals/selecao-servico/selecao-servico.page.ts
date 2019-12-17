@@ -4,6 +4,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 
 import { UserService } from 'src/app/services/user.service';
 import { CartaoService } from 'src/app/services/cartao/cartao.service';
+import { AgendaService } from 'src/app/services/agenda/agenda.service';
 import { CalendarioService } from 'src/app/services/calendario/calendario.service';
 
 import { card } from 'src/app/models/cartao.model';
@@ -50,6 +51,7 @@ export class SelecaoServicoPage implements OnInit {
     private cardService: CartaoService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
+    private agendaService: AgendaService,
     private calendarioService: CalendarioService
   ) {
 
@@ -132,8 +134,25 @@ export class SelecaoServicoPage implements OnInit {
       this.showCardAlert();
       return;
     }
+    this.agendaService.newService.horario = this.horarios[this.horarioSelecionado];
+    this.agendaService.newService.dia = this.mesSelecionado[this.diaSelecionado].numero;
+    this.agendaService.newService.idcartao = this.cardService.selectedSessionCard.idcartao;
+    this.agendaService.newService.mes = this.nomeMesSelecionado.toLowerCase();
+    this.agendaService.newService.ano = this.dataAtual.getFullYear();
+    this.agendaService.newService.valortotal = this.total;
+    this.agendaService.newService.idprofissional = 1;
+    if (this.isHairSelecionado) {
+      this.agendaService.newService.servicos.push({ id: 1, nome: '' })
+    }
+    if (this.isBeardSelecionada) {
+      this.agendaService.newService.servicos.push({ id: 2, nome: '' })
+    }
+    if (this.isMustacheSelecionado) {
+      this.agendaService.newService.servicos.push({ id: 3, nome: '' })
+    }
     this.modalCtrl.dismiss().then(() => {
-      this.route.navigateByUrl('load-atendimento');
+      console.log(this.agendaService.newService);
+      this.route.navigateByUrl('endereco-servico');
     });
   }
 

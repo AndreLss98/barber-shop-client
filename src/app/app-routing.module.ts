@@ -44,8 +44,8 @@ const routes: Routes = [
   { path: 'load-atendimento', loadChildren: './pages/load-atendimento/load-atendimento.module#LoadAtendimentoPageModule' },
   { path: 'cadastro-sucesso', loadChildren: './pages/cadastro-sucesso/cadastro-sucesso.module#CadastroSucessoPageModule' },
   { path: 'confirmacao-agenda', loadChildren: './pages/confirmacao-agenda/confirmacao-agenda.module#ConfirmacaoAgendaPageModule' },
-  { path: 'falha-pagamento', loadChildren: './pages/falha-pagamento/falha-pagamento.module#FalhaPagamentoPageModule' }
-
+  { path: 'falha-pagamento', loadChildren: './pages/falha-pagamento/falha-pagamento.module#FalhaPagamentoPageModule' },
+  { path: 'endereco-servico', loadChildren: './pages/endereco-servico/endereco-servico.module#EnderecoServicoPageModule' }
 ];
 
 @NgModule({

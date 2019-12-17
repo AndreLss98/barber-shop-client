@@ -14,7 +14,7 @@ import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
 })
 export class CartaoService {
 
-  private selectedSessionCard: cartao = new Object() as cartao;
+  private _selectedSessionCard: cartao = new Object() as cartao;
 
   private _localCards: cartao[] = [];
 
@@ -30,7 +30,15 @@ export class CartaoService {
 
   set localCards(userCards: cartao[]) {
     this._localCards = this.getBandeiras(userCards);
-    this.selectedSessionCard = this._localCards[0];
+    this._selectedSessionCard = this._localCards[0];
+  }
+
+  get selectedSessionCard(): cartao {
+    return this._selectedSessionCard;
+  }
+
+  set selectedSessionCard(card: cartao) {
+    this._selectedSessionCard = card;
   }
 
   public updateLocalCards(card: cartao) {
@@ -40,11 +48,11 @@ export class CartaoService {
   }
 
   public getSessionCard(): cartao {
-    return this.selectedSessionCard;
+    return this._selectedSessionCard;
   }
 
   public setSelectedCard(card: cartao) {
-    this.selectedSessionCard = card;
+    this._selectedSessionCard = card;
   }
 
   public deleteCard(pos: number, { idcliente }, { idcartao }) {
