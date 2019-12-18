@@ -1,0 +1,31 @@
+ion-content {
+    --ion-background-color: #313131;
+    position: relative;
+    span {
+        color: white;
+    }
+    input {
+        outline: none;
+        border: none;
+        background-color: transparent;
+        height: 40px;
+        width: 100%;
+    }
+    .input {
+        background-color: white;
+        border-radius: 8px;
+    }
+    input.input {
+        padding: 0 5px;
+    }
+    ion-icon.yellowPin {
+        color: var(--ion-color-primary);
+    }
+}
+
+#address {
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 0 10px 1px black;
+    position: absolute;
+    bottom: 0;
+}

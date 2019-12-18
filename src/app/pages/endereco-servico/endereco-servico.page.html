@@ -1,9 +1,64 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>endereco-servico</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="1" (click)="closePage()">
+        <ion-icon name="md-close" color="light"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-text-center">
+        <img src="assets/addressPin.svg" />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid id="address">
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-text-center">
+        <span>Para continuar informe o endereço completo, <span style="color: var(--ion-color-primary)">número</span> e
+          o <span style="color: var(--ion-color-primary)">complemento</span></span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <span>Endereço</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="input">
+      <ion-col size="1" class="ion-align-self-center">
+        <ion-icon class="yellowPin" name="pin"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <input  [(ngModel)]="endereco" />
+      </ion-col>
+      <ion-col size="1" class="ion-text-end ion-align-self-center">
+        <ion-icon src="assets/edit.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-between ion-nowrap">
 
+      <ion-col size="4">
+        <div><span>Número</span></div>
+        <input [(ngModel)]="numero" class="input" placeholder="0" />
+      </ion-col>
+      <ion-col size="auto">
+        <div><span>Complemento</span></div>
+        <input [(ngModel)]="complemento" class="input" placeholder="Apto/Bloco/Casa" maxlength="40">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <span>Ponto de Referência</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="input">
+      <ion-col>
+        <input [(ngModel)]="pto_referencia" maxlength="50"/>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="auto" class="ion-text-center">
+        <ion-button shape="round" (click)="confirmarEndereco()">Confirmar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

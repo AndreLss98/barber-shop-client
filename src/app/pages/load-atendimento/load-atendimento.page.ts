@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AgendaService } from 'src/app/services/agenda/agenda.service';
 
 @Component({
   selector: 'app-load-atendimento',
@@ -8,14 +9,26 @@ import { Router } from '@angular/router';
 })
 export class LoadAtendimentoPage implements OnInit {
 
-  constructor(private route: Router) {
+  constructor(
+    private route: Router,
+    private agendaService: AgendaService
+  ) {
 
   }
 
   ngOnInit() {
-    setTimeout(() => {
+    this.agendaService.sendRequisitionOfService().subscribe((response: any) => {
+      if (response.error) {
+        console.log(response.error);
+        this.route.navigateByUrl('falha-pagamento');
+      } else {
+        console.log(response);
+        this.route.navigateByUrl('confirmacao-agenda');
+      }
+    }, (error: any) => {
+      console.log(error);
       this.route.navigateByUrl('falha-pagamento');
-    }, 1000);
+    });
   }
 
 }

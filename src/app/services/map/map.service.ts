@@ -136,7 +136,6 @@ export class MapService {
     return this.geolocation.getCurrentPosition(gpsOptions).then((position: Geoposition) => {
       const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${position.coords.longitude},${position.coords.latitude}.json?access_token=${MAPBOX_TOKEN}`;
       return this.http.get(url).subscribe((address: any) => {
-        console.log(address);
         this.userService.user.endereco = address.features[0].place_name;
       });
     });
