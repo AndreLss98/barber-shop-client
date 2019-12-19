@@ -87,7 +87,6 @@ export class CartoesPage implements OnInit {
   }
 
   public async showAlert(message: string) {
-    let alertElement: HTMLIonAlertElement
     await this.alertCtrl.create({
       message: message,
       buttons: [
@@ -106,11 +105,10 @@ export class CartoesPage implements OnInit {
       ],
       backdropDismiss: false
     }).then((alert) => {
-      alertElement = alert
-      alertElement.present();
-    });
-    alertElement.onDidDismiss().then(() => {
-      
+      alert.present();
+      alert.onDidDismiss().then(() => {
+
+      });
     });
   }
 
