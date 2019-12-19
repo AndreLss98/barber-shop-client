@@ -24,7 +24,7 @@ export class ConfirmacaoAgendaPage implements OnInit {
   constructor(
     private route: Router,
     private agendaService: AgendaService
-    ) {
+  ) {
 
   }
 
