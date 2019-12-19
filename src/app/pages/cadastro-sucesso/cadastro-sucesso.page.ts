@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cadastro-sucesso',
@@ -13,7 +13,7 @@ export class CadastroSucessoPage implements OnInit {
   }
 
   ngOnInit() {
-
+    
   }
 
   public goToHome() {
