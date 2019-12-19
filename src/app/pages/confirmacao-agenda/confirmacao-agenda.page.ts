@@ -1,7 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { AgendaService } from './../../services/agenda/agenda.service';
+import { NOME_MESES } from './../../constants/constants';
+
+import { AgendaService } from 'src/app/services/agenda/agenda.service';
 
 @Component({
   selector: 'app-confirmacao-agenda',
@@ -10,18 +12,28 @@ import { AgendaService } from './../../services/agenda/agenda.service';
 })
 export class ConfirmacaoAgendaPage implements OnInit {
 
-  public currentDay;
-  public currentMonth;
-  public currentYear;
+  readonly NOME_MESES = NOME_MESES;
+  private dataAtual: Date = new Date();
+  public diaAtual: number;
+  public anoAtual: number;
+  private numeroMesAtual: number;
+  public nomeMesAtual: string = '';
 
-  constructor(private route: Router, private agendaService: AgendaService) {
+  public valor: string;
+
+  constructor(
+    private route: Router,
+    private agendaService: AgendaService
+    ) {
 
   }
 
   ngOnInit() {
-    /* this.currentDay = this.agendaService.getDay();
-    this.currentYear = this.agendaService.getYear();
-    this.currentMonth = this.agendaService.getMonthName(this.agendaService.getMonth()); */
+    this.valor = Number(this.agendaService.newService.valortotal).toFixed(2).replace('.', ',');
+    this.diaAtual = this.dataAtual.getDate();
+    this.anoAtual = this.dataAtual.getFullYear();
+    this.numeroMesAtual = this.dataAtual.getMonth();
+    this.nomeMesAtual = NOME_MESES[this.numeroMesAtual];
   }
 
   public visualizeSchedule() {
