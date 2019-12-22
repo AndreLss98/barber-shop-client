@@ -73,7 +73,7 @@ export class AgendaPage implements OnInit {
   }
 
   private setMonth(month: number) {
-    if (month >= this.mesSelecionado) {
+    if (month >= this.mesSelecionado || !this.mesSelecionado) {
       this.mesSelecionado = month;
       this.nomeMesSelecionado = NOME_MESES[this.mesSelecionado];
     }
