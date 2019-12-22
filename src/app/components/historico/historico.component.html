@@ -29,12 +29,12 @@
           </ion-row>
           <ion-row id="linhaAvaliacao" *ngIf="valor">
             <ion-col id="avaliacao">
-              <div *ngFor="let star of stars; let i = index" (click)="toggleStars(i+1); qtdStar = i+1">
+              <div *ngFor="let star of stars; let i = index" (click)="toggleStars(i+1);">
                 <img src="{{ star.src }}">
               </div>
             </ion-col>
             <ion-col size="4">
-              <ion-button (click)="showAlert()" size="small" expand="block" [disabled]="qtdStar === 0">Avaliar</ion-button>
+              <ion-button (click)="sendRate()" size="small" expand="block" [disabled]="isRated || qtdStar === 0">Avaliar</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>

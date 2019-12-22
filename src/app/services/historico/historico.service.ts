@@ -68,8 +68,9 @@ export class HistoricoService {
     const body = 
     `{
       clienteServices(idcliente: ${idcliente}) {
+        idservico
         dia mes ano horario
-        valortotal
+        valortotal nota
         profissional {
           nome sobrenome
         }
@@ -83,6 +84,14 @@ export class HistoricoService {
 
   public getHistoricoCancelado() {
     
+  }
+
+  public rateServie(idservico: number, nota: number) {
+    const body = 
+    `mutation {
+      rateService(idservico: ${idservico}, nota: ${nota})
+    }`;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
 }

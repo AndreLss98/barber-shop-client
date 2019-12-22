@@ -22,8 +22,8 @@
       <div class="itemList" *ngFor="let hist of historicoRealizados">
         <div>
           <p>{{ hist.dia }} {{ hist.mes }} {{ hist.ano }}</p>
-          <historicoComponent [nome]="hist.profissional.nome" [local]="hist.endereco.endereco" [valor]="hist.valortotal"
-            [horario]="hist.horario"></historicoComponent>
+          <historicoComponent [idservico]="hist.idservico"  [nome]="hist.profissional.nome" [local]="hist.endereco.endereco" [valor]="hist.valortotal"
+            [horario]="hist.horario" [qtdStar]="hist.nota"></historicoComponent>
           <!-- <div *ngFor="let item of hist.data"></div>-->
         </div>
       </div>
@@ -44,7 +44,7 @@
       <ion-grid>
         <ion-row class="ion-justify-content-center">
           <ion-col text-center>
-            <img src="./../../../assets/NoHistory.svg" />
+            <img src="assets/NoHistory.svg" />
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
