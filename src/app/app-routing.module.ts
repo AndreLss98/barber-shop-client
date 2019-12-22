@@ -4,6 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ChatResolveService } from './resolvers/chat-resolve.service';
 import { AgendaResolverService } from './resolvers/agenda-resolver.service';
 import { HistoricoResolverService } from './resolvers/historico-resolver.service';
+import { HistoricoCanceladoResolverService } from './resolvers/historico-cancelado-resolver.service';
+
 
 const routes: Routes = [
   {
@@ -28,7 +30,8 @@ const routes: Routes = [
   { 
     path: 'home/historico',
     resolve: {
-      historico: HistoricoResolverService
+      historico: HistoricoResolverService,
+      cancelado: HistoricoCanceladoResolverService
     },
     loadChildren: './pages/historico/historico.module#HistoricoPageModule'
   },

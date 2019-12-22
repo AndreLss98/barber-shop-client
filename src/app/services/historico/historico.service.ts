@@ -12,37 +12,6 @@ import { Historico } from 'src/app/models/historico.model';
 })
 export class HistoricoService {
 
-  private data: Historico[] = [
-    /* {
-      dia: 'TER 28 JUL 2019',
-      data: [
-        {
-          barberName: 'Jean Cleber',
-          local: 'Rua Recife QD 05 lt 13',
-          horas: '08:00',
-          valor: 30.0,
-        },
-        {
-          barberName: 'Jean Cleber',
-          local: 'Rua Recife QD 05 lt 13',
-          horas: '10:00',
-          valor: 35.0,
-        }
-      ]
-    },
-    {
-      dia: 'SEG 28 AGO 2019',
-      data: [
-        {
-          barberName: 'Victor Luiz',
-          local: 'Rua São Paulo',
-          horas: '10:30',
-          valor: 30.0,
-        }
-      ]
-    } */
-  ];
-
   private dataCancelados: Historico[] = [
     {
       dia: 'TER 26 JUL 2019',
@@ -82,8 +51,20 @@ export class HistoricoService {
     return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public getHistoricoCancelado() {
-    
+  public getHistoricoCancelado({ idcliente }) {
+    const body = 
+    `{
+      clientCanceledService(idcliente: ${idcliente}) {
+        dia mes ano valortotal horario
+        profissional {
+          nome sobrenome
+        }
+        endereco {
+          endereco
+        }
+      }
+    }`;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public rateServie(idservico: number, nota: number) {

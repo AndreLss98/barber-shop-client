@@ -15,7 +15,7 @@ export class HistoricoPage implements OnInit {
 
   public abaSelecionada: string = 'realizado';
   public historicoRealizados: servico[] = [];
-  public historicoCancelados: Historico[] = [];
+  public historicoCancelados: servico[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,8 +26,10 @@ export class HistoricoPage implements OnInit {
 
   ngOnInit() {
     if (this.route.snapshot.data.historico) {
-      console.log(this.route.snapshot.data.historico.data.clienteServices);
       this.historicoRealizados = this.route.snapshot.data.historico.data.clienteServices;
+    }
+    if (this.route.snapshot.data.cancelado) {
+      this.historicoCancelados = this.route.snapshot.data.cancelado.data.clientCanceledService;
     }
   }
 

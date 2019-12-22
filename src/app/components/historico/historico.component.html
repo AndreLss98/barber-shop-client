@@ -22,7 +22,7 @@
               <div>{{ valor? 'R$'+valor: 'cancelado' }}</div>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="horario">
             <ion-col>
               <div>{{ horario }}</div>
             </ion-col>
