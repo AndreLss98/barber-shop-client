@@ -9,6 +9,7 @@ import { AgendaService } from 'src/app/services/agenda/agenda.service';
 import { CalendarioService } from 'src/app/services/calendario/calendario.service';
 
 import { MesAgendaComponent } from 'src/app/components/popovers/mes-agenda/mes-agenda.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-agenda',
@@ -34,10 +35,10 @@ export class AgendaPage implements OnInit {
   public diaSelecionado: number = null;
 
   constructor(
+    private route: ActivatedRoute,
     private agendaService: AgendaService,
     private popoverCtrl: PopoverController,
     private calendarioService: CalendarioService,
-    private route: ActivatedRoute
   ) {
 
   }
@@ -45,14 +46,16 @@ export class AgendaPage implements OnInit {
   ngOnInit() {
     if (this.route.snapshot.data.agenda) {
       this.agenda = this.route.snapshot.data.agenda.data.agenda;
-      console.log(this.agenda);
     }
-    this.anoSelecionado = this.dataAtual.getFullYear();
-    this.mesSelecionado = this.dataAtual.getMonth();
-    this.selectDay({ numero: this.dataAtual.getDate() });
-    this.nomeMesSelecionado = NOME_MESES[this.mesSelecionado];
-    this.diasDoMes = this.calendarioService.diasRestanteDoMesAtual(this.dataAtual);
+    this.configuraDataAtual();
     this.checkAgenda();
+  }
+
+  private configuraDataAtual() {
+    this.anoSelecionado = this.dataAtual.getFullYear();
+    this.setMonth(this.dataAtual.getMonth());
+    this.selectDay({ numero: this.dataAtual.getDate() });
+    this.diasDoMes = this.calendarioService.diasRestanteDoMesAtual(this.dataAtual);
   }
 
   public async presentPopOver(event: Event) {
@@ -63,13 +66,17 @@ export class AgendaPage implements OnInit {
     }).then((popover) => {
       popover.present();
       popover.onDidDismiss().then((popoverdata: any) => {
+        console.log(popoverdata);
         this.setMonth(popoverdata.data);
       });
     });
   }
 
   private setMonth(month: number) {
-    
+    if (month >= this.mesSelecionado) {
+      this.mesSelecionado = month;
+      this.nomeMesSelecionado = NOME_MESES[this.mesSelecionado];
+    }
   }
 
   public selectDay({ numero }) {
@@ -90,6 +97,29 @@ export class AgendaPage implements OnInit {
           return;
         }
       });
+    });
+  }
+
+  private checkDiaAtual() {
+    this.diasDoMes.forEach(dia => {
+      if (dia.numero === this.diaSelecionado && this.agendaFiltrada.length === 0) {
+        dia.hasService = false;
+      }
+    });
+  }
+
+  public onCancelService(event) {
+    this.agendaService.cancelService(event.idservico).subscribe((response: any) => {
+      if (response.error) {
+        console.error(response.error);
+      } else {
+        const itemPos = this.agenda.findIndex(servico => servico.idservico === event.idservico);
+        if (itemPos > -1) {
+          this.agenda.splice(itemPos, 1);
+          this.selectDay({ numero: this.diaSelecionado });
+          this.checkDiaAtual();
+        }
+      }
     });
   }
 }

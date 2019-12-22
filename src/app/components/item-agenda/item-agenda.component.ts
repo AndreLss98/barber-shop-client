@@ -1,8 +1,10 @@
 import { ActionSheetController } from '@ionic/angular';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { tipoServico } from 'src/app/models/servico.model';
 import { profissional } from 'src/app/models/profissional.model';
+
+import { AgendaService } from 'src/app/services/agenda/agenda.service';
 
 @Component({
   selector: 'item-agenda',
@@ -16,10 +18,16 @@ export class ItemAgendaComponent implements OnInit {
   @Input() servicos: tipoServico[];
   @Input() valor: string;
   @Input() profissional: profissional;
+  @Input() idServico: number;
+
+  @Output() cancelarServico = new EventEmitter();
 
   public isInverted: boolean = false;
 
-  constructor(private actionSheetCtrl: ActionSheetController) {
+  constructor(
+    private agendaService: AgendaService,
+    private actionSheetCtrl: ActionSheetController
+  ) {
 
   }
 
@@ -37,7 +45,10 @@ export class ItemAgendaComponent implements OnInit {
         },
         {
           text: 'Sim',
-          role: 'destructive'
+          role: 'destructive',
+          handler: () => {
+            this.cancelarServico.emit({ idservico: this.idServico });
+          }
         },
         {
           text: 'Cancelar',

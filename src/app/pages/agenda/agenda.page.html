@@ -39,7 +39,7 @@
     </ion-row>
     <ion-row *ngFor="let item of agendaFiltrada">
       <ion-col>
-        <item-agenda [local]="item.endereco.endereco" [horario]="item.horario" [servicos]="item.servicos" [valor]="item.valortotal" [profissional]="item.profissional"></item-agenda>
+        <item-agenda [idServico]="item.idservico" [local]="item.endereco.endereco" [horario]="item.horario" [servicos]="item.servicos" [valor]="item.valortotal" [profissional]="item.profissional" (cancelarServico)="onCancelService($event)"></item-agenda>
       </ion-col>
     </ion-row>
   </ion-grid>

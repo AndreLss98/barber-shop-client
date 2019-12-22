@@ -17,16 +17,25 @@ import { UserService } from '../user.service';
 export class AgendaService {
 
   private _newService: servico = new Object() as servico;
+  private _agendaCompleta: servico[] = [];
 
   constructor(
     private http: HttpClient,
     private userService: UserService
   ) {
+    this.initializeNewService();
+  }
+
+  private initializeNewService() {
     this._newService.servicos = [];
     this._newService.endereco = new Object() as endereco;
     this._newService.endereco.complemento = '';
     this._newService.endereco.pto_referencia = '';
     this._newService.endereco.numero = null;
+  }
+
+  get agendaCompleta(): servico[] {
+    return this._agendaCompleta;
   }
 
   get newService(): servico {
@@ -42,6 +51,7 @@ export class AgendaService {
     `{
       agenda(idcliente: ${idcliente}) {
         dia mes ano valortotal horario
+        idservico
         endereco {
           endereco numero complemento pto_referencia
         }
@@ -53,7 +63,7 @@ export class AgendaService {
         }
       }
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS);
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public sendRequisitionOfService() {
@@ -107,7 +117,16 @@ export class AgendaService {
           }
         }
     }`;
-    console.log(body);
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS);
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+  }
+
+  public cancelService(idservico) {
+    const body = 
+    `
+      mutation {
+        cancelService(idservico: ${idservico})
+      }
+    `;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 }
