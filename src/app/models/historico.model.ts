@@ -5,5 +5,5 @@ export class Historico {
         local: string;
         horas: string;
         valor: number;
-    }[];
+    }[]; 
 }

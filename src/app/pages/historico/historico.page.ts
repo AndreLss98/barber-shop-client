@@ -1,7 +1,10 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { HistoricoService } from 'src/app/services/historico/historico.service';
 import { Historico } from 'src/app/models/historico.model';
+
+import { HistoricoService } from 'src/app/services/historico/historico.service';
+import { servico } from 'src/app/models/servico.model';
 
 @Component({
   selector: 'app-historico',
@@ -11,20 +14,21 @@ import { Historico } from 'src/app/models/historico.model';
 export class HistoricoPage implements OnInit {
 
   public abaSelecionada: string = 'realizado';
-  public historicoRealizados: Historico[] = [];
+  public historicoRealizados: servico[] = [];
   public historicoCancelados: Historico[] = [];
 
   constructor(
+    private route: ActivatedRoute,
     private historicoService: HistoricoService
   ) {
 
   }
 
   ngOnInit() {
-    this.historicoRealizados = this.historicoService.getHistorico();
-    /* this.historicoService.getHistoricoCancelado().subscribe((data) => {
-      this.historicoCancelados = data;
-    }); */
+    if (this.route.snapshot.data.historico) {
+      console.log(this.route.snapshot.data.historico.data.clienteServices);
+      this.historicoRealizados = this.route.snapshot.data.historico.data.clienteServices;
+    }
   }
 
 }

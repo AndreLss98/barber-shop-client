@@ -41,6 +41,7 @@ export class HistoricoComponent implements OnInit {
     if (this.valor) {
       this.valor = Number(this.valor).toFixed(2).replace('.', ',');
     }
+    this.horario = this.horario.substr(0, 5);
   }
 
   public toggleStars(pos: number) {

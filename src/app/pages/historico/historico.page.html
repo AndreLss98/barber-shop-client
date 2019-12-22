@@ -21,11 +21,10 @@
     <div *ngIf="historicoCancelados && historicoRealizados.length > 0">
       <div class="itemList" *ngFor="let hist of historicoRealizados">
         <div>
-          <p>{{ hist.dia }}</p>
-          <div *ngFor="let item of hist.data">
-            <historicoComponent [nome]="item.barberName" [local]="item.local" [valor]="item.valor"
-              [horario]="item.horas"></historicoComponent>
-          </div>
+          <p>{{ hist.dia }} {{ hist.mes }} {{ hist.ano }}</p>
+          <historicoComponent [nome]="hist.profissional.nome" [local]="hist.endereco.endereco" [valor]="hist.valortotal"
+            [horario]="hist.horario"></historicoComponent>
+          <!-- <div *ngFor="let item of hist.data"></div>-->
         </div>
       </div>
     </div>
@@ -33,7 +32,7 @@
   <div id="historicoCancelado" *ngIf="abaSelecionada === 'cancelado'">
     <div class="itemList" *ngFor="let hist of historicoCancelados">
       <div>
-        <p>{{ hist.dia }}</p>
+        <p>{{ hist.dia }} {{ hist.mes }} {{ hist.ano }}</p>
         <div *ngFor="let item of hist.data">
           <historicoComponent [nome]="item.barberName" [local]="item.local" [valor]="item.valor" [horario]="item.horas">
           </historicoComponent>

@@ -1,6 +1,11 @@
+import { timeout } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { BASE_URL } from 'src/environments/environment';
+import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
+
 import { Historico } from 'src/app/models/historico.model';
-import { of, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +13,7 @@ import { of, Observable } from 'rxjs';
 export class HistoricoService {
 
   private data: Historico[] = [
-    {
+    /* {
       dia: 'TER 28 JUL 2019',
       data: [
         {
@@ -35,7 +40,7 @@ export class HistoricoService {
           valor: 30.0,
         }
       ]
-    }
+    } */
   ];
 
   private dataCancelados: Historico[] = [
@@ -53,16 +58,31 @@ export class HistoricoService {
   ];
 
 
-  constructor() {
+  constructor(
+    private http: HttpClient
+  ) {
 
   }
 
-  public getHistorico(): Historico[] {
-    return this.data;
+  public getHistorico({ idcliente }) {
+    const body = 
+    `{
+      clienteServices(idcliente: ${idcliente}) {
+        dia mes ano horario
+        valortotal
+        profissional {
+          nome sobrenome
+        }
+        endereco {
+          endereco
+        }
+      }
+    }`;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public getHistoricoCancelado(): Observable<Historico[]> {
-    return of(this.dataCancelados);
+  public getHistoricoCancelado() {
+    
   }
 
 }

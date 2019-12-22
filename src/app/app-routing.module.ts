@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { ChatResolveService } from './resolvers/chat-resolve.service';
 import { AgendaResolverService } from './resolvers/agenda-resolver.service';
+import { HistoricoResolverService } from './resolvers/historico-resolver.service';
 
 const routes: Routes = [
   {
@@ -24,7 +25,13 @@ const routes: Routes = [
   { path: 'login/intro', loadChildren: './pages/modals/intro-modal/intro-modal.module#IntroModalPageModule' },
   { path: 'home/perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'home/cartoes', loadChildren: './pages/cartoes/cartoes.module#CartoesPageModule' },
-  { path: 'home/historico', loadChildren: './pages/historico/historico.module#HistoricoPageModule' },
+  { 
+    path: 'home/historico',
+    resolve: {
+      historico: HistoricoResolverService
+    },
+    loadChildren: './pages/historico/historico.module#HistoricoPageModule'
+  },
   { 
     path: 'home/agenda',
     resolve: {
