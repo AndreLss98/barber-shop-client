@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
-import { RecuperarSenhaPage } from '../modals/recuperar-senha/recuperar-senha.page';
-import { LoginService } from 'src/app/services/login/login.service';
 import { UserService } from 'src/app/services/user.service';
+import { ChatService } from 'src/app/services/chat/chat.service';
+import { LoginService } from 'src/app/services/login/login.service';
+
+import { RecuperarSenhaPage } from '../modals/recuperar-senha/recuperar-senha.page';
 import { ConectionStatusPage } from '../modals/conection-status/conection-status.page';
 
 @Component({
@@ -20,6 +22,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private route: Router,
+    private chatService: ChatService,
     private userService: UserService,
     private loginService: LoginService,
     private modalCtrl: ModalController,
@@ -39,7 +42,9 @@ export class LoginPage implements OnInit {
         console.log(error);
       } else {
         this.userService.user = cliente.data.loginCliente;
-        this.route.navigate(['login/intro']);
+        this.route.navigate(['login/intro']).then(() => {
+          this.chatService.afterLogin();
+        });
       }
     }, (errors) => {
       console.log(errors);

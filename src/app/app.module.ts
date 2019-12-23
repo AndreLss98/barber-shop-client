@@ -11,19 +11,21 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 import { AppComponent } from './app.component';
+import { CustomMenuComponent } from './pages/modals/custom-menu/custom-menu.component';
 
-import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.module';
 import { RecuperarSenhaPageModule } from './pages/modals/recuperar-senha/recuperar-senha.module';
 import { CadastroCartaoPageModule } from './pages/modals/cadastro-cartao/cadastro-cartao.module';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { CadastroCartaoPage } from './pages/modals/cadastro-cartao/cadastro-cartao.page';
 import { SelecaoServicoPage } from './pages/modals/selecao-servico/selecao-servico.page';
 import { ConectionStatusPage } from './pages/modals/conection-status/conection-status.page';
 import { NotificaoSolicitacaoPage } from './pages/modals/notificao-solicitacao/notificao-solicitacao.page';
 import { NotificacaoSolicitacaoNegadaPage } from './pages/modals/notificacao-solicitacao-negada/notificacao-solicitacao-negada.page';
-import { CustomMenuComponent } from './pages/modals/custom-menu/custom-menu.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { CustomMenuComponent } from './pages/modals/custom-menu/custom-menu.comp
     IonicModule.forRoot(),
     RecuperarSenhaPageModule,
     CadastroCartaoPageModule,
+    SocketIoModule.forRoot(environment.socketIoConfig)
   ],
   providers: [
     Network,
