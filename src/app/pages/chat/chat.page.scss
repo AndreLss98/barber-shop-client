@@ -20,6 +20,9 @@ ion-header {
 ion-content {
     --ion-background-color: #313131;
     --color: white;
+    ion-row.text-row {
+        margin: 0 0 1em 0;
+    }
 }
 
 div.barbeiro {

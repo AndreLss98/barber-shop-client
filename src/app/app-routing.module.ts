@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { ChatResolveService } from './resolvers/chat-resolve.service';
+import { ChatResolverService } from './resolvers/chat-resolver.service';
 import { AgendaResolverService } from './resolvers/agenda-resolver.service';
 import { HistoricoResolverService } from './resolvers/historico-resolver.service';
 import { HistoricoCanceladoResolverService } from './resolvers/historico-cancelado-resolver.service';
+import { ConversasResolverService } from './resolvers/conversas-resolver.service';
 
 
 const routes: Routes = [
@@ -27,7 +28,7 @@ const routes: Routes = [
   { path: 'login/intro', loadChildren: './pages/modals/intro-modal/intro-modal.module#IntroModalPageModule' },
   { path: 'home/perfil', loadChildren: './pages/perfil/perfil.module#PerfilPageModule' },
   { path: 'home/cartoes', loadChildren: './pages/cartoes/cartoes.module#CartoesPageModule' },
-  { 
+  {
     path: 'home/historico',
     resolve: {
       historico: HistoricoResolverService,
@@ -35,18 +36,24 @@ const routes: Routes = [
     },
     loadChildren: './pages/historico/historico.module#HistoricoPageModule'
   },
-  { 
+  {
     path: 'home/agenda',
     resolve: {
       agenda: AgendaResolverService
     },
     loadChildren: './pages/agenda/agenda.module#AgendaPageModule'
   },
-  { path: 'home/home-chat', loadChildren: './pages/home-chat/home-chat.module#HomeChatPageModule' },
+  {
+    path: 'home/home-chat',
+    resolve: {
+      chats: ChatResolverService
+    },
+    loadChildren: './pages/home-chat/home-chat.module#HomeChatPageModule'
+  },
   {
     path: 'home/home-chat/:id',
     resolve: {
-      conversas: ChatResolveService
+      conversas: ConversasResolverService
     },
     loadChildren: './pages/chat/chat.module#ChatPageModule'
   },
@@ -64,4 +71,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

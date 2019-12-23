@@ -140,7 +140,7 @@ export class SelecaoServicoPage implements OnInit {
     this.agendaService.newService.mes = this.nomeMesSelecionado.toLowerCase();
     this.agendaService.newService.ano = this.dataAtual.getFullYear();
     this.agendaService.newService.valortotal = this.total;
-    this.agendaService.newService.idprofissional = 1;
+    this.agendaService.newService.idprofissional = 2; //ID do profissional sendo adicionando hard code
     if (this.isHairSelecionado) {
       this.agendaService.newService.servicos.push({ id: 1, nome: '' })
     }

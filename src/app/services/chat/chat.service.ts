@@ -1,8 +1,13 @@
+import { timeout } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-
-import { chat } from 'src/app/models/chat.model';
+import { HttpClient } from '@angular/common/http';
 
 import { Socket } from 'ngx-socket-io';
+
+import { chat } from 'src/app/models/chat.model';
+import { BASE_URL } from 'src/environments/environment';
+import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
+
 import { UserService } from '../user.service';
 
 @Injectable({
@@ -49,7 +54,8 @@ export class ChatService {
 
   constructor(
     private socket: Socket,
-    private userService: UserService
+    private http: HttpClient,
+    private userService: UserService,
   ) {
 
   }
@@ -62,12 +68,33 @@ export class ChatService {
     this.socket.emit('login-cliente', { idcliente: this.userService.user.idcliente });
   }
 
-  public getConversas() {
-    return this.data;
+  public getChats({ idcliente }) {
+    const body = 
+    `{
+      clientChats(idcliente: ${idcliente}) {
+        profissional {
+          idprofissional nome sobrenome idsocket
+        }
+      }
+    }`;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public getConvera(pos: number) {
-    return this.data[pos];
+  public getConversas({ idcliente }, idprofissional: number) {
+    const body = 
+    `{
+      conversas(idcliente: ${idcliente}, idprofissional: ${idprofissional}) {
+        iscliente texto
+      }
+    }`;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
+  public sendMessage({ idcliente }, idprofissional: number, texto: string) {
+    const body = 
+    `mutation {
+      sendMessage(idcliente: ${idcliente}, idprofissional: ${idprofissional}, iscliente: true, texto: "${texto}")
+    }`;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+  }
 }
