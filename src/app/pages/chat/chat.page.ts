@@ -1,9 +1,13 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActionSheetController, IonContent } from '@ionic/angular';
+
+import { chat } from 'src/app/models/chat.model';
 
 import { UserService } from 'src/app/services/user.service';
 import { ChatService } from 'src/app/services/chat/chat.service';
+
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-chat',
@@ -12,13 +16,16 @@ import { ChatService } from 'src/app/services/chat/chat.service';
 })
 export class ChatPage implements OnInit {
 
-  public conversas: any[] = [];
+  @ViewChild(IonContent, { static: false }) content: IonContent;
+
+  public currentChat: chat;
   public message: string = '';
-  public idprofissional: number;
+  private idprofissional: number;
 
   constructor(
+    private socket: Socket,
     private route: ActivatedRoute,
-    private chatService: ChatService,
+    public chatService: ChatService,
     private userService: UserService,
     private actionSheetCtrl: ActionSheetController
   ) {
@@ -27,9 +34,12 @@ export class ChatPage implements OnInit {
 
   ngOnInit() {
     this.idprofissional = +this.route.snapshot.params.id;
-    if (this.route.snapshot.data.conversas) {
-      this.conversas = this.route.snapshot.data.conversas.data.conversas;
+    this.chatService.getCurrentChat(this.idprofissional);
+    if (this.route.snapshot.data['conversas']) {
+      this.chatService.setConversas(this.route.snapshot.data['conversas'].data.conversas, this.idprofissional);
     }
+    this.updateScreen();
+    this.socket.fromEvent('private-message').subscribe(() => { this.updateScreen() })
   }
 
   public deleteChat(): void {
@@ -52,19 +62,24 @@ export class ChatPage implements OnInit {
   }
 
   public sendMessage() {
-    console.log('A funcao foi chamada');
     if (this.message) {
       const tempMessage = this.message;
       this.message = '';
-      this.chatService.sendMessage(this.userService.user, this.idprofissional, tempMessage).subscribe((response: any) => {
+      this.chatService.sendMessage(this.userService.user, this.chatService.currentChat.profissional.idsocket, this.idprofissional, tempMessage).subscribe((response: any) => {
         if (response.error) {
           console.error(response.error);
         } else {
-          console.log(response.data);
-          this.conversas.push({ idcliente: this.userService.user.idcliente, idprofissional: this.idprofissional, iscliente: true, texto: tempMessage });
+          this.chatService.currentChat.conversas.push({ idcliente: this.userService.user.idcliente, idprofissional: this.idprofissional, iscliente: true, texto: tempMessage });
+          this.updateScreen();
         }
       });
     }
+  }
+
+  private updateScreen() {
+    setTimeout(() => {
+      this.content.scrollToBottom(200);
+    });
   }
 
 }

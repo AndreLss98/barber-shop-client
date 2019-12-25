@@ -1,15 +1,13 @@
-interface conversa {
-    minhasMensagens: {
-        mensagen: string,
-        hora: string
-    }[],
-    barbeiroMensagens: {
-        mensagen: string,
-        hora: string
-    }[]
+import { profissional } from './profissional.model';
+
+export interface conversa {
+    idcliente: number;
+    idprofissional: number;
+    iscliente: boolean;
+    texto: string;
 }
 
 export interface chat {
-    nome: string,
-    conversas: conversa
+    profissional: profissional;
+    conversas: conversa[];
 }

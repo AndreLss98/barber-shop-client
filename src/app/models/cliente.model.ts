@@ -16,7 +16,6 @@ export interface Client {
     sobrenome: string;
     email: string;
     telefones: telefone[];
-    senha: string;
     latitude: number;
     longitude: number;
     cartoes: cartao[];
