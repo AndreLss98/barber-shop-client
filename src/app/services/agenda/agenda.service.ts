@@ -49,7 +49,7 @@ export class AgendaService {
   public getAgenda({ idcliente }) {
     const body = 
     `{
-      agenda(idcliente: ${idcliente}) {
+      agendaCliente(idcliente: ${idcliente}) {
         dia mes ano valortotal horario
         idservico
         endereco {

@@ -21,7 +21,8 @@ export class AgendaPage implements OnInit {
   readonly NOME_MESES = NOME_MESES;
 
   public slidesConfig = {
-    slidesPerView: 7
+    slidesPerView: 7,
+    spaceBetween: 20
   }
 
   public agenda: servico[] = [];
@@ -45,7 +46,7 @@ export class AgendaPage implements OnInit {
 
   ngOnInit() {
     if (this.route.snapshot.data.agenda) {
-      this.agenda = this.route.snapshot.data.agenda.data.agenda;
+      this.agenda = this.route.snapshot.data.agenda.data.agendaCliente;
     }
     this.configuraDataAtual();
     this.checkAgenda();
