@@ -16,7 +16,7 @@ export class HomeChatPage implements OnInit {
 
   constructor(
     private route: Router,
-    private chatService: ChatService,
+    public chatService: ChatService,
     private activatedRoute: ActivatedRoute,
   ) {
 
@@ -25,6 +25,7 @@ export class HomeChatPage implements OnInit {
   ngOnInit() {
     if (this.activatedRoute.snapshot.data.chats) {
       this.chats = this.activatedRoute.snapshot.data.chats.data.clientChats;
+      this.chatService.chats = this.chats;
     }
   }
 

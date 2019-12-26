@@ -1,5 +1,6 @@
 export interface profissional {
     idprofissional: number;
+    idsocket: string;
     nome: string;
     sobrenome: string;
     email: string;

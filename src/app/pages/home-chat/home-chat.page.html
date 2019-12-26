@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="chats && chats.length > 0; else chatVazio">
-    <chat-item *ngFor="let chat of chats; let i = index" [nome]="chat.profissional.nome"
+  <div *ngIf="chatService.chats && chatService.chats.length > 0; else chatVazio">
+    <chat-item *ngFor="let chat of chatService.chats; let i = index" [nome]="chat.profissional.nome"
       [ulitmaMensagem]="'Olá tudo bem'"
       [hora]="'14:30'" (click)="viewChat(i)"></chat-item>
   </div>
