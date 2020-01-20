@@ -7,8 +7,6 @@ import { NOME_DIAS_SEMANAS } from './../../constants/constants';
 })
 export class CalendarioService {
 
-  readonly NOME_DIAS_SEMANAS = NOME_DIAS_SEMANAS;
-
   constructor() {
 
   }

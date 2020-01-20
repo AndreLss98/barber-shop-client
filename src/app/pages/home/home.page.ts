@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController, AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 
 import mapboxgl from 'mapbox-gl';
 import { UserService } from 'src/app/services/user.service';
@@ -20,14 +20,13 @@ import { CustomMenuComponent } from '../modals/custom-menu/custom-menu.component
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  private mapObj: any = {};
-  private content: HTMLElement;
-  private myPositionMarker: any;
+
+  private map: HTMLElement;
 
   constructor(
     private mapService: MapService,
-    private geolocation: Geolocation,
     public userService: UserService,
+    private geolocation: Geolocation,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController
   ) {
@@ -35,31 +34,24 @@ export class HomePage {
   }
 
   ngOnInit() {
-
+    this.configMap();
   }
 
   ionViewDidEnter() {
-    this.checkMap();
     this.mapService.getAddress();
   }
 
-  public checkMap(): void {
-    this.mapObj = this.mapService.getMap();
-    if (this.mapObj) {
-      this.content = document.querySelector('#content');
-      this.content.appendChild(this.mapObj.mapElement);
-      this.mapObj.map.resize();
-      this.setMyPosition();
-    } else {
-      this.mapService.initializeMap().then((response) => {
-        this.mapObj = this.mapService.getMap();
-        this.content = document.querySelector('#content');
-        this.content.appendChild(this.mapObj.mapElement);
-        this.mapObj.map.resize();
-        this.setMyPosition();
+  private configMap() {
+    this.map = document.getElementById('map');
+    if (this.map) {
+      this.mapService.initializeMap(this.map).then(() => {
+        this.mapService.map.on('load', () => {
+          this.mapService.map.resize();
+        })
       });
     }
   }
+
 
   public async getAtualPosition() {
 
@@ -83,15 +75,15 @@ export class HomePage {
   }
 
   private flyToPosition(longitude: any, latitude: any): void {
-    this.mapObj.map.flyTo({ center: [longitude, latitude] });
-    this.markerCurrentPosition(longitude, latitude);
+    /* this.mapObj.map.flyTo({ center: [longitude, latitude] });
+    this.markerCurrentPosition(longitude, latitude); */
   }
 
   private async markerCurrentPosition(longitude: any, latitude: any) {
-    if (this.myPositionMarker) {
+    /* if (this.myPositionMarker) {
       this.myPositionMarker.remove();
     }
-    this.myPositionMarker = await new mapboxgl.Marker({ color: '#D6A763' }).setLngLat([longitude, latitude]).addTo(this.mapObj.map);
+    this.myPositionMarker = await new mapboxgl.Marker({ color: '#D6A763' }).setLngLat([longitude, latitude]).addTo(this.mapObj.map); */
   }
 
   private async showAlert(header: string, subHeader: string, message: string) {

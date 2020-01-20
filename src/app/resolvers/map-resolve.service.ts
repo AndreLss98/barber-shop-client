@@ -28,27 +28,6 @@ export class MapResolveService implements Resolve<any> {
   }
 
   resolve() {
-    return this.geolocation.getCurrentPosition(gpsOptions).then((resp) => {
-      let mapElement = this.createElement();
-      mapboxgl.accessToken = MAPBOX_TOKEN;
-      let map = new mapboxgl.Map({
-        container: mapElement,
-        style: 'mapbox://styles/mapbox/dark-v9',
-        center: [resp.coords.longitude, resp.coords.latitude],
-        zoom: 13
-      });
-      this.mapService.setMap({ mapElement: mapElement, map: map });
-      return { mapElement: mapElement, map: map };
-    }).catch((error) => {
-      return error;
-    });
-  }
-
-  private createElement(): HTMLElement {
-    let element = document.createElement('div');
-    element.id = 'map';
-    element.style.height = "100%";
-    element.style.width = this.platform.width().toString();
-    return element;
+    
   }
 }
