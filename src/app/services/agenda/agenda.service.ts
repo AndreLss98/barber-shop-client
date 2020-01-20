@@ -113,7 +113,7 @@ export class AgendaService {
            nome
           }
           profissional {
-            nome sobrenome
+            nome
           }
         }
     }`;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NavController } from '@ionic/angular';
-import { MapService } from 'src/app/services/map/map.service';
 
 @Component({
   selector: 'app-intro-modal',
@@ -11,7 +10,6 @@ import { MapService } from 'src/app/services/map/map.service';
 export class IntroModalPage implements OnInit {
 
   public btnDesactive: boolean;
-  private mapObj: any;
 
   constructor(
     private navCtrl: NavController
