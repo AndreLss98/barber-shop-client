@@ -1,7 +1,9 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 
 import mapboxgl from 'mapbox-gl';
+
 import { UserService } from 'src/app/services/user.service';
 import { MapService } from 'src/app/services/map/map.service';
 import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
@@ -24,6 +26,7 @@ export class HomePage {
   private map: HTMLElement;
 
   constructor(
+    private route: ActivatedRoute,
     private mapService: MapService,
     public userService: UserService,
     private geolocation: Geolocation,
@@ -47,6 +50,7 @@ export class HomePage {
       this.mapService.initializeMap(this.map).then(() => {
         this.mapService.map.on('load', () => {
           this.mapService.map.resize();
+          this.mapService.markePointers(this.route.snapshot.data.profissionais.data.profissionais);
         })
       });
     }

@@ -46,6 +46,7 @@ export class AgendaPage implements OnInit {
 
   ngOnInit() {
     if (this.route.snapshot.data.agenda) {
+      console.log(this.route.snapshot);
       this.agenda = this.route.snapshot.data.agenda.data.agendaCliente;
     }
     this.configuraDataAtual();

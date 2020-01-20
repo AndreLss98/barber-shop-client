@@ -2,6 +2,8 @@ import { timeout } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { Socket } from 'ngx-socket-io';
+
 import { servico } from 'src/app/models/servico.model';
 import { endereco } from './../../models/servico.model';
 
@@ -20,6 +22,7 @@ export class AgendaService {
   private _agendaCompleta: servico[] = [];
 
   constructor(
+    private socket: Socket,
     private http: HttpClient,
     private userService: UserService
   ) {
@@ -59,7 +62,7 @@ export class AgendaService {
           nome
         }
         profissional {
-          nome sobrenome
+          nome
         }
       }
     }`;
@@ -105,7 +108,7 @@ export class AgendaService {
         ${pto_referenciaField}
         servicos: [${strServicos}])
         {
-          dia mes ano valortotal horario
+          dia mes ano valortotal horario idservico
           endereco {
             endereco numero complemento pto_referencia
           }
@@ -118,6 +121,11 @@ export class AgendaService {
         }
     }`;
     return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+  }
+
+  public notifyProfissional(idservico: number) {
+    const { dia, mes, horario, endereco: {endereco} } = this._newService
+    this.socket.emit('send-request', {nome: this.userService.user.nome, dia, mes, horario, endereco, idservico});
   }
 
   public cancelService(idservico) {

@@ -4,8 +4,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ChatResolverService } from './resolvers/chat-resolver.service';
 import { AgendaResolverService } from './resolvers/agenda-resolver.service';
 import { HistoricoResolverService } from './resolvers/historico-resolver.service';
-import { HistoricoCanceladoResolverService } from './resolvers/historico-cancelado-resolver.service';
 import { ConversasResolverService } from './resolvers/conversas-resolver.service';
+import { ProfissionaisResolverService } from './resolvers/profissionais-resolver.service';
+import { HistoricoCanceladoResolverService } from './resolvers/historico-cancelado-resolver.service';
 
 
 const routes: Routes = [
@@ -16,6 +17,9 @@ const routes: Routes = [
   },
   {
     path: 'login/home',
+    resolve: {
+      profissionais: ProfissionaisResolverService
+    },
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {

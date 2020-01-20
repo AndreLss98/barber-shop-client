@@ -23,6 +23,7 @@ export class LoadAtendimentoPage implements OnInit {
         this.route.navigateByUrl('falha-pagamento');
       } else {
         console.log(response);
+        this.agendaService.notifyProfissional(response.data.registerService.idservico);
         this.route.navigateByUrl('confirmacao-agenda');
       }
     }, (error: any) => {
