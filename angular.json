@@ -66,6 +66,14 @@
                 }
               ]
             },
+            "mobile": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mobile.ts"
+                }
+              ]
+            },
             "ci": {
               "progress": false
             }
@@ -79,6 +87,9 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
+            },
+            "mobile": {
+              "browserTarget": "app:build:mobile"
             },
             "ci": {
               "progress": false
@@ -141,6 +152,9 @@
             "production": {
               "devServerTarget": "app:serve:production"
             },
+            "mobile": {
+              "devServerTarget": "app:serve:mobile"
+            },
             "ci": {
               "devServerTarget": "app:serve:ci"
             }
@@ -154,6 +168,9 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
+            },
+            "mobile": {
+              "browserTarget": "app:build:mobile"
             }
           }
         },
@@ -167,6 +184,10 @@
             "production": {
               "cordovaBuildTarget": "app:ionic-cordova-build:production",
               "devServerTarget": "app:serve:production"
+            },
+            "mobile": {
+              "cordovaBuildTarget": "app:ionic-cordova-build:mobile",
+              "devServerTarget": "app:serve:mobile"
             }
           }
         }

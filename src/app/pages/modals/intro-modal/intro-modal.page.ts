@@ -14,33 +14,8 @@ export class IntroModalPage implements OnInit {
   private mapObj: any;
 
   constructor(
-    private navCtrl: NavController,
-    private mapService: MapService
-  ) { 
-    this.btnDesactive = true;
-  }
-
-  ionViewWillEnter() {
-    this.mapObj = this.mapService.getMap();
-  }
-  
-  ionViewDidEnter() {
-
-    setTimeout(() => {
-      /* if (this.mapObj.map && this.mapObj.map.loaded()) {
-        this.navCtrl.navigateBack('login/home');
-      } else if (this.mapObj.map) {
-        this.mapObj.map.on('load', () => {
-          this.navCtrl.navigateBack('login/home');
-        });
-        this.mapObj.map.on('error', () => {
-          console.log("Error");
-        });
-      } else {
-        console.log(this.mapObj.error);
-      } */
-      this.navCtrl.navigateBack('login/home');
-    }, 1500);
+    private navCtrl: NavController
+  ) {
 
   }
 
@@ -48,18 +23,15 @@ export class IntroModalPage implements OnInit {
     
   }
 
-  public closeModal(): void {
-    if (this.mapObj.map && this.mapObj.map.loaded()) {
-      
-      console.log("Carregou");
-    } else {
-      console.log("Nao Carregou");
-    }
-  }
+  ionViewWillEnter() {
 
-  private toggleBtn() {
-    this.btnDesactive = !this.btnDesactive;
-    console.log("Valor atual: ", this.btnDesactive);
+  }
+  
+  ionViewDidEnter() {
+    setTimeout(() => {
+      this.navCtrl.navigateBack('login/home');
+    }, 1000);
+
   }
 
 }
