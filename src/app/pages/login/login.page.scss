@@ -1,11 +1,11 @@
 ion-content {
-    --ion-background-color: #313131;
-    #detalhe-rodape {
+    --background: url('./../../../assets/background.svg') center center / cover !important;
+    /* #detalhe-rodape {
         position: absolute;
         bottom: 0;
         width: 100%;
         z-index: 0;
-    }
+    } */
 
     #content {
         height: 100%;
