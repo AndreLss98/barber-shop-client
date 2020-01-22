@@ -28,7 +28,7 @@ export class IntroModalPage implements OnInit {
   ionViewDidEnter() {
     setTimeout(() => {
       this.navCtrl.navigateBack('login/home');
-    }, 1000);
+    }, 500);
 
   }
 

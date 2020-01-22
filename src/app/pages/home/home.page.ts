@@ -1,12 +1,14 @@
+import { fromEvent } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AlertController, ModalController } from '@ionic/angular';
 
-import mapboxgl from 'mapbox-gl';
+import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
 
 import { UserService } from 'src/app/services/user.service';
 import { MapService } from 'src/app/services/map/map.service';
-import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
+import { ProfissionaisService } from 'src/app/services/profissionais/profissionais.service';
 
 import { topDownAnimation } from 'src/app/animations/top-down-animation';
 import { downTopAnimation } from 'src/app/animations/down-top-animation';
@@ -23,7 +25,10 @@ import { CustomMenuComponent } from '../modals/custom-menu/custom-menu.component
 })
 export class HomePage {
 
+  @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
   private map: HTMLElement;
+
+  public profissionaisOfSearch: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -31,12 +36,14 @@ export class HomePage {
     public userService: UserService,
     private geolocation: Geolocation,
     private modalCtrl: ModalController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private profissionalService: ProfissionaisService
   ) {
 
   }
 
   ngOnInit() {
+    setTimeout(() => this.configSearchInput(), 1000);
     this.configMap();
   }
 
@@ -56,6 +63,32 @@ export class HomePage {
     }
   }
 
+  private configSearchInput() {
+    fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+      map((event: any) => event.target.value),
+      debounceTime(1000),
+      distinctUntilChanged()
+    ).subscribe((nome: string) => {
+      if (nome === '' || nome.length === 1) {
+        this.profissionaisOfSearch = []
+      } else {
+        this.profissionalService.getAllByName(nome).subscribe((response: any) => {
+          if (response.errors) {
+            console.error(response.errors);
+          } else {
+            this.profissionaisOfSearch = response.data.profissionaisByName;
+          }
+        }, (error) => console.error(error));
+      }
+    });
+  }
+
+  public setFocusOnProfissional(latitude: number, longitude: number) {
+    this.mapService.map.flyTo({
+      center: [longitude, latitude],
+      zoom: 16
+    });
+  }
 
   public async getAtualPosition() {
 

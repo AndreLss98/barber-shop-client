@@ -3,11 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
+import { ChatComponent } from './chat/chat.component';
+import { MapItemComponent } from './map-item/map-item.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { ItemAgendaComponent } from './item-agenda/item-agenda.component';
-import { ChatComponent } from './chat/chat.component';
 import { MesAgendaComponent } from './popovers/mes-agenda/mes-agenda.component';
-import { MapItemComponent } from './map-item/map-item.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { MapItemComponent } from './map-item/map-item.component';
     MapItemComponent,
     MesAgendaComponent,
     HistoricoComponent,
-    ItemAgendaComponent,
+    ItemAgendaComponent
   ],
   imports: [
     CommonModule,
@@ -23,10 +23,10 @@ import { MapItemComponent } from './map-item/map-item.component';
     IonicModule,
   ],
   exports: [
-    HistoricoComponent,
-    ItemAgendaComponent,
     ChatComponent,
-    MesAgendaComponent
+    MesAgendaComponent,
+    HistoricoComponent,
+    ItemAgendaComponent
   ]
 })
 export class ComponentsModule { }

@@ -34,7 +34,16 @@
           <ion-icon name="pin"></ion-icon>
         </ion-col>
         <ion-col>
-          <input type="text" placeholder="Localize o seu barbeiro..." />
+          <input #searchInput type="text" placeholder="Localize o seu barbeiro..." />
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="profissionaisOfSearch && profissionaisOfSearch.length > 0">
+        <ion-col>
+          <ion-list>
+            <ion-item *ngFor="let profissional of profissionaisOfSearch" (click)="setFocusOnProfissional(profissional.latitude, profissional.longitude)">
+              <ion-label>{{ profissional.nome }}</ion-label>
+            </ion-item>
+          </ion-list>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -25,4 +25,14 @@ export class ProfissionaisService {
     }`;
     return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
+
+  public getAllByName(nome: string) {
+    const body =
+    `{
+      profissionaisByName(nome: "${nome}") {
+        nome latitude longitude
+      }
+    }`;
+    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+  }
 }
