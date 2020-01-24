@@ -30,15 +30,11 @@ export class AppComponent {
   ];
 
   constructor(
-    private router: Router,
     private platform: Platform,
-    private statusBar: StatusBar,
     private gpsService: GpsService,
-    private mapService: MapService,
     private network: NetworkService,
     public userService: UserService,
-    private menuCtrl: MenuController,
-    private splashScreen: SplashScreen,
+    private splashScreen: SplashScreen
   ) {
     this.initializeApp();
   }
@@ -46,7 +42,6 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.splashScreen.hide();
-      this.statusBar.hide();
       this.network.initializeNetworkEvents();
       
       this.gpsService.ativarGps().then((response) => {
