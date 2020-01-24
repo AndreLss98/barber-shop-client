@@ -20,7 +20,7 @@ export class ProfissionaisService {
     const body =
     `{
       profissionais: acceptedProfissionais {
-        nome latitude longitude
+        nome latitude longitude idsocket
       }
     }`;
     return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
@@ -30,7 +30,10 @@ export class ProfissionaisService {
     const body =
     `{
       profissionaisByName(nome: "${nome}") {
-        nome latitude longitude
+        idprofissional nome latitude longitude idsocket
+        valores {
+          valor idtiposervico
+        }
       }
     }`;
     return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));

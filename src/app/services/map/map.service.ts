@@ -1,3 +1,4 @@
+import { fromEvent } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -14,6 +15,7 @@ import { UserService } from '../user.service';
 export class MapService {
 
   private _mapInstance;
+  private _profissionais: any[] = [];
   public profissionaisPointer: any[];
 
   private style = 'mapbox://styles/dionim/cjzwtgft014k41csdy9xmjcyq';
@@ -47,14 +49,20 @@ export class MapService {
     });
   }
 
-  public markePointers(pointers: any[]) {
-    this.profissionaisPointer = pointers;
-    this.profissionaisPointer.forEach(point => {
-      new mapboxgl.Marker().setLngLat([point.longitude, point.latitude])
-      .setPopup(new mapboxgl.Popup({ offset: 25,  closeButton: false})
-      .setHTML(`<ion-grid><ion-row><ion-col class="ion-align-self-end" style="display: flex"><img src="/assets/imgs/man_model.jpg"></ion-col><ion-col class="ion-align-self-center"><ion-row><ion-col text-center><span>${point.nome}</span></ion-col></ion-row><ion-row><ion-col text-center><ion-button shape="round" size="small" class="map-item">Agendar</ion-button></ion-col></ion-row><ion-row><ion-col><ion-icon src="assets/custom_star.svg"></ion-icon><ion-icon src="assets/custom_star.svg"></ion-icon><ion-icon src="assets/custom_star.svg"></ion-icon></ion-col></ion-row></ion-col></ion-row></ion-grid>`))
-      .addTo(this._mapInstance);
-    })
+  public async markePointers(pointers: any[]) {
+    pointers.forEach(async (point) => {
+      const popup = new mapboxgl.Popup({ offset: 25,  closeButton: false}).setHTML('<div>Oi</div>');
+      /* .setHTML(`<ion-grid><ion-row><ion-col class="ion-align-self-end" style="display: flex"><img src="/assets/imgs/man_model.jpg"></ion-col><ion-col class="ion-align-self-center"><ion-row><ion-col text-center><span>${point.nome}</span></ion-col></ion-row><ion-row><ion-col text-center><ion-button shape="round" size="small" class="map-item">Agendar</ion-button></ion-col></ion-row><ion-row><ion-col><ion-icon src="assets/custom_star.svg"></ion-icon><ion-icon src="assets/custom_star.svg"></ion-icon><ion-icon src="assets/custom_star.svg"></ion-icon></ion-col></ion-row></ion-col></ion-row></ion-grid>`) */
+      console.log(popup);
+      this._profissionais.push(popup);
+      await new mapboxgl.Marker().setLngLat([point.longitude, point.latitude]).setPopup(popup).addTo(this._mapInstance);
+    });
+    console.log(this._profissionais)
+    this._profissionais.forEach((profissional) => {
+      fromEvent(profissional._content, 'click').subscribe(() => {
+        console.log('Fois');
+      })
+    });
   }
 
   public getAddress() {
