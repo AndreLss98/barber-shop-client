@@ -8,6 +8,8 @@ import { Geolocation, GeolocationOptions, Geoposition } from '@ionic-native/geol
 import { MAPBOX_TOKEN } from '../../../environments/environment';
 
 import { UserService } from '../user.service';
+import { ModalController } from '@ionic/angular';
+import { SelecaoServicoPage } from 'src/app/pages/modals/selecao-servico/selecao-servico.page';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,7 @@ export class MapService {
     private http: HttpClient,
     private userService: UserService,
     private geolocation: Geolocation,
+    private modalCtrl: ModalController,
   ) {
     mapboxgl.accessToken = MAPBOX_TOKEN;
   }
@@ -51,16 +54,50 @@ export class MapService {
 
   public async markePointers(pointers: any[]) {
     pointers.forEach(async (point) => {
-      const popup = new mapboxgl.Popup({ offset: 25,  closeButton: false}).setHTML('<div>Oi</div>');
-      /* .setHTML(`<ion-grid><ion-row><ion-col class="ion-align-self-end" style="display: flex"><img src="/assets/imgs/man_model.jpg"></ion-col><ion-col class="ion-align-self-center"><ion-row><ion-col text-center><span>${point.nome}</span></ion-col></ion-row><ion-row><ion-col text-center><ion-button shape="round" size="small" class="map-item">Agendar</ion-button></ion-col></ion-row><ion-row><ion-col><ion-icon src="assets/custom_star.svg"></ion-icon><ion-icon src="assets/custom_star.svg"></ion-icon><ion-icon src="assets/custom_star.svg"></ion-icon></ion-col></ion-row></ion-col></ion-row></ion-grid>`) */
-      console.log(popup);
-      this._profissionais.push(popup);
+      const popup = new mapboxgl.Popup({ offset: 25,  closeButton: false})
+      .setHTML(`<ion-grid>
+                  <ion-row>
+                    <ion-col class="ion-align-self-end" style="display: flex">
+                      <img src="/assets/imgs/man_model.jpg">
+                    </ion-col>
+                    <ion-col class="ion-align-self-center">
+                      <ion-row>
+                        <ion-col text-center>
+                          <span>${point.nome}</span>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col text-center>
+                          <ion-button shape="round" size="small" class="map-item">Agendar</ion-button>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col>
+                          <ion-icon src="assets/custom_star.svg"></ion-icon>
+                          <ion-icon src="assets/custom_star.svg"></ion-icon>
+                          <ion-icon src="assets/custom_star.svg"></ion-icon>
+                        </ion-col>
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>`);
+      const itemButton = popup._content.childNodes[0].childNodes[1].childNodes[3].childNodes[3].childNodes[1].childNodes[1];
+      this._profissionais.push({
+        button: itemButton,
+        id: point.idprofissional,
+        valores: point.valores,
+        socket: point.idsocket
+      });
       await new mapboxgl.Marker().setLngLat([point.longitude, point.latitude]).setPopup(popup).addTo(this._mapInstance);
     });
-    console.log(this._profissionais)
     this._profissionais.forEach((profissional) => {
-      fromEvent(profissional._content, 'click').subscribe(() => {
-        console.log('Fois');
+      fromEvent(profissional.button, 'click').subscribe(() => {
+        console.log(profissional);
+        this.modalCtrl.create({ component: SelecaoServicoPage, mode: 'ios', componentProps: { 
+          profissionalValues: profissional.valores,
+          idProfissional: profissional.id,
+          idSocket: profissional.socket 
+        }}).then((modal) => modal.present());
       })
     });
   }

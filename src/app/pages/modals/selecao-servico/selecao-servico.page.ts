@@ -8,7 +8,7 @@ import { AgendaService } from 'src/app/services/agenda/agenda.service';
 import { CalendarioService } from 'src/app/services/calendario/calendario.service';
 
 import { card } from 'src/app/models/cartao.model';
-import { NOME_MESES } from './../../../constants/constants';
+import { NOME_MESES, HORARIOS, TIPOS_SERVICOS } from './../../../constants/constants';
 
 import { CadastroCartaoPage } from '../cadastro-cartao/cadastro-cartao.page';
 
@@ -19,31 +19,44 @@ import { CadastroCartaoPage } from '../cadastro-cartao/cadastro-cartao.page';
 })
 export class SelecaoServicoPage implements OnInit {
 
+  readonly HORARIOS = HORARIOS;
   readonly NOME_MESES = NOME_MESES;
 
   public slidesConfig = {
     slidesPerView: 4
   }
-  private dataAtual: Date = new Date();
-  public diaSelecionado: number;
 
-  public numeroMesSelecionado: number;
-  public nomeMesSelecionado: string;
+  public diaSelecionado: number;
+  private dataAtual: Date = new Date();
+
   public mesSelecionado = [];
+  public nomeMesSelecionado: string;
+  public numeroMesSelecionado: number;
 
   public horarioSelecionado: number = null;
+  
   private total: number = 0;
   public totalFormatado: string;
-  public isBeardSelecionada: boolean = false;
+  
   public isHairSelecionado: boolean = false;
+  public isBeardSelecionada: boolean = false;
   public isMustacheSelecionado: boolean = false;
-  public pathBeardSvg: string = 'assets/beard.svg';
+  
   public pathHairSvg: string = 'assets/hair.svg';
+  public pathBeardSvg: string = 'assets/beard.svg';
   public pathMustacheSvg: string = 'assets/mustache.svg';
-  public horarios = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
-  public isDesactiveBtn: boolean = true;
+
+  public profissionalValues: any[] = [];
+  public valorServicoBarba: number = 0.0;
+  public valorServicoCabelo: number = 0.0;
+  public valorServicoBigode: number = 0.0;
+  
+  public idSocket: string;
+  public idProfissional: number;
   public sessionCard: card;
   public lastFourDigits: string;
+  
+  public isDesactiveBtn: boolean = true;
 
   constructor(
     private route: Router,
@@ -58,6 +71,7 @@ export class SelecaoServicoPage implements OnInit {
   }
 
   ngOnInit() {
+    this.configValues();
     this.numeroMesSelecionado = this.dataAtual.getMonth();
     this.mesSelecionado = this.calendarioService.diasRestanteDoMesAtual(this.dataAtual);
     this.nomeMesSelecionado = NOME_MESES[this.numeroMesSelecionado];
@@ -76,18 +90,20 @@ export class SelecaoServicoPage implements OnInit {
     }
   }
 
-  public closeModal() {
-    this.modalCtrl.dismiss();
+  private configValues() {
+    this.valorServicoCabelo = this.profissionalValues.find(servico => servico.idtiposervico === TIPOS_SERVICOS.CABELO).valor;
+    this.valorServicoBarba = this.profissionalValues.find(servico => servico.idtiposervico === TIPOS_SERVICOS.BARBA).valor;
+    this.valorServicoBigode = this.profissionalValues.find(servico => servico.idtiposervico === TIPOS_SERVICOS.BIGODE).valor;
   }
 
   public selectBeardService() {
     this.isBeardSelecionada = !this.isBeardSelecionada;
     if (this.isBeardSelecionada) {
       this.pathBeardSvg = 'assets/beard_black.svg';
-      this.total += 20;
+      this.total += this.valorServicoBarba;
     } else {
       this.pathBeardSvg = 'assets/beard.svg';
-      this.total -= 20;
+      this.total -= this.valorServicoBarba;
     }
     this.formataValorTotal();
   }
@@ -96,10 +112,10 @@ export class SelecaoServicoPage implements OnInit {
     this.isHairSelecionado = !this.isHairSelecionado;
     if (this.isHairSelecionado) {
       this.pathHairSvg = 'assets/hair_black.svg';
-      this.total += 30;
+      this.total += this.valorServicoCabelo;
     } else {
       this.pathHairSvg = 'assets/hair.svg';
-      this.total -= 30;
+      this.total -= this.valorServicoCabelo;
     }
     this.formataValorTotal();
   }
@@ -108,10 +124,10 @@ export class SelecaoServicoPage implements OnInit {
     this.isMustacheSelecionado = !this.isMustacheSelecionado;
     if (this.isMustacheSelecionado) {
       this.pathMustacheSvg = 'assets/mustache_black.svg';
-      this.total += 15;
+      this.total += this.valorServicoBigode;
     } else {
       this.pathMustacheSvg = 'assets/mustache.svg';
-      this.total -= 15;
+      this.total -= this.valorServicoBigode;
     }
     this.formataValorTotal();
   }
@@ -134,13 +150,14 @@ export class SelecaoServicoPage implements OnInit {
       this.showCardAlert();
       return;
     }
-    this.agendaService.newService.horario = this.horarios[this.horarioSelecionado];
+    this.agendaService.newService.horario = HORARIOS[this.horarioSelecionado];
     this.agendaService.newService.dia = this.mesSelecionado[this.diaSelecionado].numero;
     this.agendaService.newService.idcartao = this.cardService.selectedSessionCard.idcartao;
     this.agendaService.newService.mes = this.nomeMesSelecionado.toLowerCase();
     this.agendaService.newService.ano = this.dataAtual.getFullYear();
     this.agendaService.newService.valortotal = this.total;
-    this.agendaService.newService.idprofissional = 2; //ID do profissional sendo adicionando hard code
+    this.agendaService.newService.idprofissional = this.idProfissional;
+    this.agendaService.newService.idsocket = this.idSocket;
     if (this.isHairSelecionado) {
       this.agendaService.newService.servicos.push({ id: 1, nome: '' })
     }
@@ -210,6 +227,10 @@ export class SelecaoServicoPage implements OnInit {
       backdropDismiss: false,
       mode: 'ios'
     }).then((alert) => alert.present());
+  }
+
+  public closeModal() {
+    this.modalCtrl.dismiss();
   }
 
 }

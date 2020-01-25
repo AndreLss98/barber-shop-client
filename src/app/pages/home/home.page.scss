@@ -50,6 +50,9 @@ ion-footer {
     margin-top: 15px;
     width: 60%;
   }
+  input {
+    outline: none;
+  }
 }
 
 ion-footer::before {

@@ -123,11 +123,6 @@ export class AgendaService {
     return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public notifyProfissional(idservico: number) {
-    const { dia, mes, horario, endereco: {endereco} } = this._newService
-    this.socket.emit('send-request', {nome: this.userService.user.nome, dia, mes, horario, endereco, idservico});
-  }
-
   public cancelService(idservico) {
     const body = 
     `

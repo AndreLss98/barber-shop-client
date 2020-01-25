@@ -143,14 +143,14 @@ export class HomePage {
   }
 
   public clickEvent(event) {
-    if ((event.target.attributes.length !== 0) && (event.target.attributes[0].value === 'round')) {
+    /* if ((event.target.attributes.length !== 0) && (event.target.attributes[0].value === 'round')) {
       this.modalCtrl.create({
         component: SelecaoServicoPage,
         mode: 'ios'
       }).then((modal) => {
         modal.present();
       });
-    }
+    } */
   }
 
   public openMenu(): void {

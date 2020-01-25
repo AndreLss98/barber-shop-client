@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
 import { AgendaService } from 'src/app/services/agenda/agenda.service';
+import { ProfissionaisService } from 'src/app/services/profissionais/profissionais.service';
 
 @Component({
   selector: 'app-load-atendimento',
@@ -11,7 +13,8 @@ export class LoadAtendimentoPage implements OnInit {
 
   constructor(
     private route: Router,
-    private agendaService: AgendaService
+    private agendaService: AgendaService,
+    private profissionalService: ProfissionaisService
   ) {
 
   }
@@ -22,8 +25,7 @@ export class LoadAtendimentoPage implements OnInit {
         console.log(response.error);
         this.route.navigateByUrl('falha-pagamento');
       } else {
-        console.log(response);
-        this.agendaService.notifyProfissional(response.data.registerService.idservico);
+        this.profissionalService.sendRequestViaSocket();
         this.route.navigateByUrl('confirmacao-agenda');
       }
     }, (error: any) => {
