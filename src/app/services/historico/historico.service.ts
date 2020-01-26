@@ -2,7 +2,7 @@ import { timeout } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { BASE_URL } from 'src/environments/environment';
+import { BASE_URL_GRAPHQL } from 'src/environments/environment';
 import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
 
 import { Historico } from 'src/app/models/historico.model';
@@ -11,21 +11,6 @@ import { Historico } from 'src/app/models/historico.model';
   providedIn: 'root'
 })
 export class HistoricoService {
-
-  private dataCancelados: Historico[] = [
-    {
-      dia: 'TER 26 JUL 2019',
-      data: [
-        {
-          barberName: 'Jean Cleber',
-          local: 'Rua Recife QD 05 lt 13',
-          horas: '',
-          valor: null,
-        }
-      ]
-    }
-  ];
-
 
   constructor(
     private http: HttpClient
@@ -48,7 +33,7 @@ export class HistoricoService {
         }
       }
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public getHistoricoCancelado({ idcliente }) {
@@ -64,7 +49,7 @@ export class HistoricoService {
         }
       }
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public rateServie(idservico: number, nota: number) {
@@ -72,7 +57,7 @@ export class HistoricoService {
     `mutation {
       rateService(idservico: ${idservico}, nota: ${nota})
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
 }

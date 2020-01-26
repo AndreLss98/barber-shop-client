@@ -17,15 +17,7 @@ export class GpsService {
 
   public async ativarGps() {
     if (this.platform.is('android') || this.platform.is('ios') && document.URL.startsWith('http://localhost:81')) {
-
-      const canRequest = await this.locationAccuracy.canRequest();
-      console.log(canRequest);
-
-      if (canRequest) {
-        const resRequest = await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
-        console.log(resRequest);
-        return true;
-      }
+      this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
     }
   }
 }

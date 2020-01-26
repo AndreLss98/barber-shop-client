@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Socket } from 'ngx-socket-io';
 
 import { chat, conversa } from 'src/app/models/chat.model';
-import { BASE_URL } from 'src/environments/environment';
+import { BASE_URL_GRAPHQL } from 'src/environments/environment';
 import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
 
 import { UserService } from '../user.service';
@@ -85,7 +85,7 @@ export class ChatService {
         }
       }
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public getConversas({ idcliente }, idprofissional: number) {
@@ -95,7 +95,7 @@ export class ChatService {
         iscliente texto
       }
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public sendMessage({ idcliente }, socketProfissional: string, idprofissional: number, texto: string) {
@@ -106,6 +106,6 @@ export class ChatService {
     `mutation {
       sendMessage(idcliente: ${idcliente}, idprofissional: ${idprofissional}, iscliente: true, texto: "${texto}")
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 }

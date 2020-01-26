@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 import { Network } from '@ionic-native/network/ngx';
-import { ModalController } from '@ionic/angular';
+
 import { ConectionStatusPage } from 'src/app/pages/modals/conection-status/conection-status.page';
 
 import { topDownAnimation } from '../../animations/top-down-animation';

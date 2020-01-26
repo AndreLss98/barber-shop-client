@@ -6,7 +6,7 @@ import { Socket } from 'ngx-socket-io';
 
 import { AgendaService } from '../agenda/agenda.service';
 
-import { BASE_URL } from './../../../environments/environment';
+import { BASE_URL_GRAPHQL } from './../../../environments/environment';
 import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
 
 @Injectable({
@@ -26,13 +26,13 @@ export class ProfissionaisService {
     const body =
     `{
       profissionais: acceptedProfissionais {
-        nome latitude longitude idsocket idprofissional
+        nome latitude longitude idsocket idprofissional imgperfil
         valores {
           valor idtiposervico
         }
       }
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public getAllByName(nome: string) {
@@ -42,7 +42,7 @@ export class ProfissionaisService {
         nome latitude longitude
       }
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public sendRequestViaSocket() {

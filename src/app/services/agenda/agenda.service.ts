@@ -7,7 +7,7 @@ import { Socket } from 'ngx-socket-io';
 import { servico } from 'src/app/models/servico.model';
 import { endereco } from './../../models/servico.model';
 
-import { BASE_URL } from 'src/environments/environment';
+import { BASE_URL_GRAPHQL } from 'src/environments/environment';
 import { TIMEOUT_SIZE } from './../../constants/http-constants';
 import { HTTP_OPTIONS } from 'src/app/constants/http-constants';
 
@@ -66,7 +66,7 @@ export class AgendaService {
         }
       }
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public sendRequisitionOfService() {
@@ -120,7 +120,7 @@ export class AgendaService {
           }
         }
     }`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
   public cancelService(idservico) {
@@ -130,6 +130,6 @@ export class AgendaService {
         cancelService(idservico: ${idservico})
       }
     `;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 }

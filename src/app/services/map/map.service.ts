@@ -1,14 +1,15 @@
 import { fromEvent } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 
 import mapboxgl from 'mapbox-gl';
 import { Geolocation, GeolocationOptions, Geoposition } from '@ionic-native/geolocation/ngx';
 
-import { MAPBOX_TOKEN } from '../../../environments/environment';
+import { MAPBOX_TOKEN, BASE_URL } from '../../../environments/environment';
 
 import { UserService } from '../user.service';
-import { ModalController } from '@ionic/angular';
+
 import { SelecaoServicoPage } from 'src/app/pages/modals/selecao-servico/selecao-servico.page';
 
 @Injectable({
@@ -18,7 +19,6 @@ export class MapService {
 
   private _mapInstance;
   private _profissionais: any[] = [];
-  public profissionaisPointer: any[];
 
   private style = 'mapbox://styles/dionim/cjzwtgft014k41csdy9xmjcyq';
 
@@ -58,7 +58,7 @@ export class MapService {
       .setHTML(`<ion-grid>
                   <ion-row>
                     <ion-col class="ion-align-self-end" style="display: flex">
-                      <img src="/assets/imgs/man_model.jpg">
+                      <img src="${BASE_URL}/uploads/${point.imgperfil}">
                     </ion-col>
                     <ion-col class="ion-align-self-center">
                       <ion-row>

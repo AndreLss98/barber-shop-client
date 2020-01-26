@@ -1,11 +1,12 @@
+import { timeout } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { CartaoService } from './cartao/cartao.service';
 
 import { Client } from '../models/cliente.model';
-import { BASE_URL } from 'src/environments/environment';
-import { HTTP_OPTIONS } from '../constants/http-constants';
+import { BASE_URL_GRAPHQL } from 'src/environments/environment';
+import { HTTP_OPTIONS, TIMEOUT_SIZE } from '../constants/http-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class UserService {
     this._user.latitude = latitude;
     this._user.longitude = longitude;
     const body = `mutation{setLocation(input: {idcliente: ${this._user.idcliente}, latitude: ${latitude}, longitude: ${longitude}})}`;
-    return this.http.post(BASE_URL, body, HTTP_OPTIONS);
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
 }
