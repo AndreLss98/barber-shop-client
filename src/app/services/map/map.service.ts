@@ -86,17 +86,15 @@ export class MapService {
         button: itemButton,
         id: point.idprofissional,
         valores: point.valores,
-        socket: point.idsocket
+        nome: point.nome
       });
       await new mapboxgl.Marker().setLngLat([point.longitude, point.latitude]).setPopup(popup).addTo(this._mapInstance);
     });
     this._profissionais.forEach((profissional) => {
       fromEvent(profissional.button, 'click').subscribe(() => {
-        console.log(profissional);
         this.modalCtrl.create({ component: SelecaoServicoPage, mode: 'ios', componentProps: { 
           profissionalValues: profissional.valores,
-          idProfissional: profissional.id,
-          idSocket: profissional.socket 
+          idProfissional: profissional.id
         }}).then((modal) => modal.present());
       })
     });

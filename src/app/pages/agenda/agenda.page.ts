@@ -1,6 +1,6 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, ActionSheetController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
 
 import { NOME_MESES } from './../../constants/constants';
 import { servico } from 'src/app/models/servico.model';
@@ -9,7 +9,6 @@ import { AgendaService } from 'src/app/services/agenda/agenda.service';
 import { CalendarioService } from 'src/app/services/calendario/calendario.service';
 
 import { MesAgendaComponent } from 'src/app/components/popovers/mes-agenda/mes-agenda.component';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-agenda',
@@ -60,7 +59,7 @@ export class AgendaPage implements OnInit {
     this.diasDoMes = this.calendarioService.diasRestanteDoMesAtual(this.dataAtual);
   }
 
-  public async presentPopOver(event: Event) {
+  public async presentPopOver(event) {
     await this.popoverCtrl.create({
       component: MesAgendaComponent,
       event,
@@ -68,7 +67,6 @@ export class AgendaPage implements OnInit {
     }).then((popover) => {
       popover.present();
       popover.onDidDismiss().then((popoverdata: any) => {
-        console.log(popoverdata);
         this.setMonth(popoverdata.data);
       });
     });

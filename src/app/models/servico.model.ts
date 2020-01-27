@@ -11,7 +11,6 @@ export interface tipoServico {
     nome: string;
 }
 export interface servico {
-    idsocket?: string;
     idservico: number;
     idcartao: number;
     idprofissional: number;

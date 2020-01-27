@@ -43,6 +43,24 @@ ion-content {
             color: #f24822;
             font-weight: bolder;
         }
+        #imgContainer {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: white;
+            div {
+                width: 90%;
+                height: 90%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+        }
     }
 }
 

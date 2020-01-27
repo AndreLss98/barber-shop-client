@@ -25,7 +25,8 @@ export class LoadAtendimentoPage implements OnInit {
         console.log(response.error);
         this.route.navigateByUrl('falha-pagamento');
       } else {
-        this.profissionalService.sendRequestViaSocket();
+        console.log(response);
+        this.profissionalService.sendRequestViaSocket(response.data.registerService.idservico);
         this.route.navigateByUrl('confirmacao-agenda');
       }
     }, (error: any) => {

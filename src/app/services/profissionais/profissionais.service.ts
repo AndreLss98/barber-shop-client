@@ -8,6 +8,7 @@ import { AgendaService } from '../agenda/agenda.service';
 
 import { BASE_URL_GRAPHQL } from './../../../environments/environment';
 import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
+import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class ProfissionaisService {
   constructor(
     private socket: Socket,
     private http: HttpClient,
-    private agendaService: AgendaService
+    private userService: UserService,
+    private agendaService: AgendaService,
   ) {
 
   }
@@ -26,7 +28,7 @@ export class ProfissionaisService {
     const body =
     `{
       profissionais: acceptedProfissionais {
-        nome latitude longitude idsocket idprofissional imgperfil
+        nome latitude longitude idprofissional imgperfil
         valores {
           valor idtiposervico
         }
@@ -45,7 +47,9 @@ export class ProfissionaisService {
     return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public sendRequestViaSocket() {
-    this.socket.emit('send-request', this.agendaService.newService);
+  public sendRequestViaSocket(idservico: number) {
+    const request = {...this.agendaService.newService, nome: this.userService.user.nome, imgperfil: this.userService.user.imgperfil, idservico};
+    console.log(request);
+    this.socket.emit('send-request', request);
   }
 }

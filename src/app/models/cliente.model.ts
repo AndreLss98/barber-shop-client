@@ -20,4 +20,5 @@ export interface Client {
     longitude: number;
     cartoes: cartao[];
     endereco: string;
+    imgperfil: string;
 }

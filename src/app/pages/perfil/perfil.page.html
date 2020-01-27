@@ -25,7 +25,12 @@
     </ion-row>
     <ion-row *ngIf="isExpendedName" class="ion-justify-content-center">
       <ion-col id="extendedName">
-        <ion-icon src="assets/addImage.svg"></ion-icon>
+        <ion-icon *ngIf="!userService.user.imgperfil" src="assets/addImage.svg" (click)="selectPerfilImg()"></ion-icon>
+        <div *ngIf="userService.user.imgperfil" id="imgContainer">
+          <div (click)="selectPerfilImg()">
+            <img *ngIf="userService.user.imgperfil" [src]="BASE_URL + '/uploads/' + userService.user.imgperfil" />
+          </div>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="isExpendedName" class="ion-justify-content-center">

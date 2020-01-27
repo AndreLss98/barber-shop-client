@@ -157,7 +157,6 @@ export class SelecaoServicoPage implements OnInit {
     this.agendaService.newService.ano = this.dataAtual.getFullYear();
     this.agendaService.newService.valortotal = this.total;
     this.agendaService.newService.idprofissional = this.idProfissional;
-    this.agendaService.newService.idsocket = this.idSocket;
     if (this.isHairSelecionado) {
       this.agendaService.newService.servicos.push({ id: 1, nome: '' })
     }

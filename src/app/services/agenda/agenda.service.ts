@@ -18,8 +18,8 @@ import { UserService } from '../user.service';
 })
 export class AgendaService {
 
-  private _newService: servico = new Object() as servico;
   private _agendaCompleta: servico[] = [];
+  private _newService: servico = new Object() as servico;
 
   constructor(
     private socket: Socket,
