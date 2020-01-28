@@ -11,12 +11,17 @@ export class ChatComponent implements OnInit {
   @Input() ulitmaMensagem: string;
   @Input() hora: string;
 
+  public horarioFormatado: string;
+
   constructor() {
 
   }
 
   ngOnInit() {
-
+    if (this.hora) {
+      const date = new Date(Number(this.hora));
+      this.horarioFormatado = (date.getHours()) + ':' +  ("0" + date.getMinutes()).substr(-2);
+    }
   }
 
 }

@@ -5,6 +5,7 @@ export interface conversa {
     idprofissional: number;
     iscliente: boolean;
     texto: string;
+    dthorario?: string;
 }
 
 export interface chat {

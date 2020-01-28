@@ -16,7 +16,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row class="text-row" [ngClass]="{ 'ion-justify-content-end': conversa.iscliente, 'ion-justify-content-start': !conversa.iscliente }" *ngFor="let conversa of chatService.currentChat.conversas">
+    <ion-row class="text-row" [ngClass]="{ 'ion-justify-content-end': conversa.iscliente, 'ion-justify-content-start': !conversa.iscliente }" *ngFor="let conversa of currentChat.conversas">
       <ion-col size="10">
         <div [ngClass]="{ 'cliente': conversa.iscliente, 'barbeiro': !conversa.iscliente }">{{ conversa.texto }}</div>
       </ion-col>

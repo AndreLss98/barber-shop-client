@@ -27,7 +27,7 @@ export class ChatService {
     private http: HttpClient,
     private userService: UserService,
   ) {
-
+    
   }
 
   get chats(): chat[] {
@@ -36,9 +36,6 @@ export class ChatService {
 
   set chats(chats: chat[]) {
     this._chats = chats;
-    this._chats.forEach(chat => {
-      chat.conversas = [];
-    });
   }
 
   get currentChat(): chat {
@@ -58,8 +55,9 @@ export class ChatService {
     });
   }
 
-  public getCurrentChat(idprofissional: number) {
+  public getCurrentChat(idprofissional: number): chat {
     this.currentChat = this._chats.find(chat => chat.profissional.idprofissional === idprofissional);
+    return this.currentChat;
   }
 
   public startConnection() {
@@ -69,10 +67,7 @@ export class ChatService {
   public afterLogin() {
     this.socket.emit('login-cliente', { idcliente: this.userService.user.idcliente });
     this.messageListener = this.socket.fromEvent('private-message').subscribe((message: any) => {
-      this._chats.find(chat => chat.profissional.idprofissional === message.idprofissional).conversas.push({ idprofissional: message.idprofissional, idcliente: this.userService.user.idcliente, iscliente: false, texto: message.texto });
-    });
-    this.connectionListener = this.socket.fromEvent('new-socket').subscribe((client: any) => {
-      this._chats.find(user => user.profissional.idprofissional === client.idprofissional).profissional.idsocket = client.idsocket;
+      this._chats.find(chat => chat.profissional.idprofissional === message.idprofissional).conversas.push({ idprofissional: message.idprofissional, idcliente: this.userService.user.idcliente, iscliente: false, texto: message.texto, dthorario: message.dthorario });
     });
   }
 
@@ -81,7 +76,10 @@ export class ChatService {
     `{
       clientChats(idcliente: ${idcliente}) {
         profissional {
-          idprofissional nome sobrenome idsocket
+          idprofissional nome
+        }
+        conversas {
+          iscliente texto dthorario
         }
       }
     }`;
@@ -92,20 +90,23 @@ export class ChatService {
     const body = 
     `{
       conversas(idcliente: ${idcliente}, idprofissional: ${idprofissional}) {
-        iscliente texto
+        iscliente texto dthorario
       }
     }`;
     return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public sendMessage({ idcliente }, socketProfissional: string, idprofissional: number, texto: string) {
-    if (socketProfissional) {
-      this.socket.emit('client-send-private-message', { idsocket: socketProfissional, idcliente, texto });
-    }
+  public sendMessage({ idcliente }, idprofissional: number, texto: string) {
     const body = 
     `mutation {
-      sendMessage(idcliente: ${idcliente}, idprofissional: ${idprofissional}, iscliente: true, texto: "${texto}")
+      sendMessage(idcliente: ${idcliente}, idprofissional: ${idprofissional}, iscliente: true, texto: "${texto}") {
+        idprofissional idcliente iscliente dthorario texto
+      }
     }`;
     return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+  }
+
+  public sendMessageViaSocket(message: any) {
+    this.socket.emit('client-send-private-message', message);
   }
 }
