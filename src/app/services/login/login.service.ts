@@ -20,7 +20,7 @@ export class LoginService {
     const body =
     `{
       loginCliente(email: "${email}", senha: "${senha}") {
-        idcliente nome sobrenome email imgperfil
+        idcliente nome email imgperfil
         telefones {
           ddd numero
         }

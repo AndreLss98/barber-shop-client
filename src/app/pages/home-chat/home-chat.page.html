@@ -10,8 +10,8 @@
 <ion-content>
   <div *ngIf="chatService.chats && chatService.chats.length > 0; else chatVazio">
     <chat-item *ngFor="let chat of chatService.chats; let i = index" [nome]="chat.profissional.nome"
-      [ulitmaMensagem]="chat.conversas[chat.conversas.length - 1].texto"
-      [hora]="chat.conversas[chat.conversas.length - 1].dthorario" (click)="viewChat(i)"></chat-item>
+      [ulitmaMensagem]="chat.conversas[chat.conversas.length - 1]?.texto"
+      [hora]="chat.conversas[chat.conversas.length - 1]?.dthorario" (click)="viewChat(i)"></chat-item>
   </div>
   <ng-template #chatVazio>
     <ion-grid id="chatVazio">

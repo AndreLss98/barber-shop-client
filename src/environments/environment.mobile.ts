@@ -1,4 +1,4 @@
-export const SERVER_URL = 'http://192.168.0.20';
+export const SERVER_URL = 'http://localhost';
 
 export const environment = {
   production: false,
