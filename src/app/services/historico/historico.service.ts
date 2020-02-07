@@ -5,8 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { BASE_URL_GRAPHQL } from 'src/environments/environment';
 import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
 
-import { Historico } from 'src/app/models/historico.model';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +24,7 @@ export class HistoricoService {
         dia mes ano horario
         valortotal nota
         profissional {
-          nome sobrenome
+          nome
         }
         endereco {
           endereco
@@ -42,7 +40,7 @@ export class HistoricoService {
       clientCanceledService(idcliente: ${idcliente}) {
         dia mes ano valortotal horario
         profissional {
-          nome sobrenome
+          nome
         }
         endereco {
           endereco
