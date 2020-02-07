@@ -1,4 +1,5 @@
 import { RouteReuseStrategy } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -6,6 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { environment } from 'src/environments/environment';
 
+import { SocketIoModule } from 'ngx-socket-io';
 import { Camera } from '@ionic-native/camera/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -17,8 +19,6 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { AppComponent } from './app.component';
 import { CustomMenuComponent } from './pages/modals/custom-menu/custom-menu.component';
 
-import { SocketIoModule } from 'ngx-socket-io';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { IntroModalPageModule } from './pages/modals/intro-modal/intro-modal.module';
 import { RecuperarSenhaPageModule } from './pages/modals/recuperar-senha/recuperar-senha.module';
