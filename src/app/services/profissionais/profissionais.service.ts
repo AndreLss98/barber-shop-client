@@ -28,7 +28,7 @@ export class ProfissionaisService {
     const body =
     `{
       profissionais: acceptedProfissionais {
-        nome latitude longitude idprofissional imgperfil
+        nome latitude longitude idprofissional imgperfil accesstoken
         valores {
           valor idtiposervico
         }

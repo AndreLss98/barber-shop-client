@@ -18,6 +18,7 @@ import { UserService } from '../user.service';
 })
 export class AgendaService {
 
+  public profissionalValues: any[] = [];
   private _agendaCompleta: servico[] = [];
   private _newService: servico = new Object() as servico;
 

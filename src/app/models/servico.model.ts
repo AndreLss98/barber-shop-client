@@ -26,4 +26,5 @@ export interface servico {
     endereco: endereco;
     servicos: tipoServico[];
     profissional: profissional;
+    accesstoken?: string;
 }

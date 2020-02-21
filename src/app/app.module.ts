@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 import { AppComponent } from './app.component';
@@ -65,6 +66,7 @@ import { NotificacaoSolicitacaoNegadaPage } from './pages/modals/notificacao-sol
     Geolocation,
     FileTransfer,
     SplashScreen,
+    InAppBrowser,
     LocationAccuracy,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

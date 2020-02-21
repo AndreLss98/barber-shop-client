@@ -53,6 +53,7 @@ export class SelecaoServicoPage implements OnInit {
   
   public idSocket: string;
   public idProfissional: number;
+  public profissionalAccessToken: string;
   public sessionCard: card;
   public lastFourDigits: string;
   
@@ -157,6 +158,7 @@ export class SelecaoServicoPage implements OnInit {
     this.agendaService.newService.ano = this.dataAtual.getFullYear();
     this.agendaService.newService.valortotal = this.total;
     this.agendaService.newService.idprofissional = this.idProfissional;
+    this.agendaService.newService.accesstoken = this.profissionalAccessToken;
     if (this.isHairSelecionado) {
       this.agendaService.newService.servicos.push({ id: 1, nome: '' })
     }
@@ -166,6 +168,7 @@ export class SelecaoServicoPage implements OnInit {
     if (this.isMustacheSelecionado) {
       this.agendaService.newService.servicos.push({ id: 3, nome: '' })
     }
+    this.agendaService.profissionalValues = this.profissionalValues;
     this.modalCtrl.dismiss().then(() => {
       console.log(this.agendaService.newService);
       this.route.navigateByUrl('endereco-servico');

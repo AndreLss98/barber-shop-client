@@ -55,6 +55,7 @@ export class MapService {
   }
 
   public async markePointers(pointers: any[]) {
+    console.log(pointers);
     pointers.forEach(async (point) => {
       const popup = new mapboxgl.Popup({ offset: 25,  closeButton: false})
       .setHTML(`<ion-grid>
@@ -88,7 +89,8 @@ export class MapService {
         button: itemButton,
         id: point.idprofissional,
         valores: point.valores,
-        nome: point.nome
+        nome: point.nome,
+        accesstoken: point.accesstoken
       });
       await new mapboxgl.Marker().setLngLat([point.longitude, point.latitude]).setPopup(popup).addTo(this._mapInstance);
     });
@@ -96,7 +98,8 @@ export class MapService {
       fromEvent(profissional.button, 'click').subscribe(() => {
         this.modalCtrl.create({ component: SelecaoServicoPage, mode: 'ios', componentProps: { 
           profissionalValues: profissional.valores,
-          idProfissional: profissional.id
+          idProfissional: profissional.id,
+          profissionalAccessToken: profissional.accesstoken
         }}).then((modal) => modal.present());
       })
     });
