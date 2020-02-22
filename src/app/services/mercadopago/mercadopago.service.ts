@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { TIPOS_SERVICOS } from 'src/app/constants/constants';
+import { TIPOS_SERVICOS, MP_SUCCESS_URL, MP_ERROR_URL } from 'src/app/constants/constants';
 
 import { AgendaService } from '../agenda/agenda.service';
 
@@ -34,8 +34,8 @@ export class MercadopagoService {
       items: [],
       marketplace_fee: this.agendaService.newService.valortotal * 0.2,
       back_urls: {
-      success: "https://www.google.com.br/",
-      failure: "https://www.google.com.br/"
+      success: MP_SUCCESS_URL,
+      failure: MP_ERROR_URL
     },
       auto_return: 'approved',
       binary_mode: true

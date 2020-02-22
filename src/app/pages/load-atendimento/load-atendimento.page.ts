@@ -6,6 +6,7 @@ import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/
 import { AgendaService } from 'src/app/services/agenda/agenda.service';
 import { ProfissionaisService } from 'src/app/services/profissionais/profissionais.service';
 import { MercadopagoService } from 'src/app/services/mercadopago/mercadopago.service';
+import { MP_SUCCESS_URL, MP_ERROR_URL } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-load-atendimento',
@@ -27,34 +28,49 @@ export class LoadAtendimentoPage implements OnInit {
   ngOnInit() {
     this.mercadopagoService.createPayment().subscribe((response: any) => {
       const options: InAppBrowserOptions = {
-        /* location: 'no',
+        location: 'no',
         clearcache: 'yes',
-        clearsessioncache: 'yes', */
+        clearsessioncache: 'yes',
         hardwareback: 'no',
         hidenavigationbuttons: 'yes',
-        // hideurlbar: 'yes'
+        hideurlbar: 'yes'
       }
       const browser = this.iab.create(response.init_point, '_self', options);
       browser.on('loadstop').subscribe(() => {
-        console.log('Parou de carregar');
-        browser.executeScript({ code: 'let oldLocation = window.location.href; console.log("OldLocation: ", oldLocation)'});
+        let currentUrl: string = '';
+        let myInterval = setInterval(() => {
+          browser.executeScript({code: 'window.location.href'}).then((location) => {
+            currentUrl = location[0];
+            if (currentUrl.startsWith(MP_SUCCESS_URL) || currentUrl.startsWith(MP_ERROR_URL)) {
+              clearInterval(myInterval);
+              browser.close();
+             this.sendRequest(currentUrl); 
+            }
+          });
+        }, 3000);
       });
     }, (error) => {
       console.error(error);
     });
-    /* this.agendaService.sendRequisitionOfService().subscribe((response: any) => {
-      if (response.error) {
-        console.log(response.error);
+  }
+
+  private sendRequest(backUrl: string) {
+    if (backUrl.startsWith(MP_SUCCESS_URL)) {
+      this.agendaService.sendRequisitionOfService().subscribe((response: any) => {
+        if (response.error) {
+          console.log(response);
+          this.route.navigateByUrl('falha-pagamento');    
+        } else {
+          this.profissionalService.sendRequestViaSocket(response.data.registerService.idservico);
+          this.route.navigateByUrl('confirmacao-agenda');
+        }
+      }, (error) => {
+        console.log(error);
         this.route.navigateByUrl('falha-pagamento');
-      } else {
-        console.log(response);
-        this.profissionalService.sendRequestViaSocket(response.data.registerService.idservico);
-        this.route.navigateByUrl('confirmacao-agenda');
-      }
-    }, (error: any) => {
-      console.log(error);
+      });
+    } else {
       this.route.navigateByUrl('falha-pagamento');
-    }); */
+    }
   }
 
 }
