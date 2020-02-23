@@ -3,10 +3,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 
-import { AgendaService } from 'src/app/services/agenda/agenda.service';
-import { ProfissionaisService } from 'src/app/services/profissionais/profissionais.service';
-import { MercadopagoService } from 'src/app/services/mercadopago/mercadopago.service';
+import { servico } from 'src/app/models/servico.model';
+import { BASE_URL } from 'src/environments/environment';
 import { MP_SUCCESS_URL, MP_ERROR_URL } from 'src/app/constants/constants';
+
+import { AgendaService } from 'src/app/services/agenda/agenda.service';
+import { MercadopagoService } from 'src/app/services/mercadopago/mercadopago.service';
+import { ProfissionaisService } from 'src/app/services/profissionais/profissionais.service';
 
 @Component({
   selector: 'app-load-atendimento',
@@ -14,6 +17,9 @@ import { MP_SUCCESS_URL, MP_ERROR_URL } from 'src/app/constants/constants';
   styleUrls: ['./load-atendimento.page.scss'],
 })
 export class LoadAtendimentoPage implements OnInit {
+
+  private myInterval;
+  private browser;
 
   constructor(
     private route: Router,
@@ -35,15 +41,15 @@ export class LoadAtendimentoPage implements OnInit {
         hidenavigationbuttons: 'yes',
         hideurlbar: 'yes'
       }
-      const browser = this.iab.create(response.init_point, '_self', options);
-      browser.on('loadstop').subscribe(() => {
+      this.browser = this.iab.create(response.init_point, '_self', options);
+      this.browser.on('loadstop').subscribe(() => {
         let currentUrl: string = '';
-        let myInterval = setInterval(() => {
-          browser.executeScript({code: 'window.location.href'}).then((location) => {
+        this.myInterval = setInterval(() => {
+          this.browser.executeScript({code: 'window.location.href'}).then((location) => {
             currentUrl = location[0];
-            if (currentUrl.startsWith(MP_SUCCESS_URL) || currentUrl.startsWith(MP_ERROR_URL)) {
-              clearInterval(myInterval);
-              browser.close();
+            if (currentUrl.startsWith(BASE_URL + MP_SUCCESS_URL) || currentUrl.startsWith(BASE_URL + MP_ERROR_URL)) {
+              clearInterval(this.myInterval);
+              this.browser.close();
              this.sendRequest(currentUrl); 
             }
           });
@@ -54,8 +60,14 @@ export class LoadAtendimentoPage implements OnInit {
     });
   }
 
+  ionViewWillLeave() {
+    this.agendaService.newService.servicos = [];
+    clearInterval(this.myInterval);
+  }
+
   private sendRequest(backUrl: string) {
-    if (backUrl.startsWith(MP_SUCCESS_URL)) {
+    console.log('Browser: ', this.browser);
+    if (backUrl.startsWith(BASE_URL + MP_SUCCESS_URL)) {
       this.agendaService.sendRequisitionOfService().subscribe((response: any) => {
         if (response.error) {
           console.log(response);

@@ -3,8 +3,8 @@ export enum TIPOS_SERVICOS {
     BARBA = 2,
     BIGODE = 3
 }
-export const MP_ERROR_URL = 'https://www.google.com.br/';
-export const MP_SUCCESS_URL = 'https://www.google.com.br/';
+export const MP_ERROR_URL = '/mp-error-callback';
+export const MP_SUCCESS_URL = '/mp-success-callback';
 export const NOME_DIAS_SEMANAS = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
 export const MP_ACCESS_TOKEN = 'TEST-8196626039225273-020222-e9a798f52b2eff502272780386b456ac-513932787';
 export const NOME_MESES = ["Janeiro", "Fevereiro", "Março", "Abril",  "Maio","Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];

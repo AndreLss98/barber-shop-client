@@ -44,11 +44,11 @@ export class HomePage {
 
   ngOnInit() {
     setTimeout(() => this.configSearchInput(), 1000);
-    this.configMap();
   }
 
   ionViewDidEnter() {
     this.mapService.getAddress();
+    this.configMap();
   }
 
   private configMap() {
