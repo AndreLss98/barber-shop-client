@@ -49,7 +49,6 @@ export class ProfissionaisService {
 
   public sendRequestViaSocket(idservico: number) {
     const request = {...this.agendaService.newService, nome: this.userService.user.nome, imgperfil: this.userService.user.imgperfil, idservico};
-    console.log(request);
     this.socket.emit('send-request', request);
   }
 }

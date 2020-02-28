@@ -41,7 +41,8 @@ export class LoadAtendimentoPage implements OnInit {
         hidenavigationbuttons: 'yes',
         hideurlbar: 'yes'
       }
-      this.browser = this.iab.create(response.init_point, '_self', options);
+      // this.browser = this.iab.create(response.init_point, '_self', options);
+      this.browser = this.iab.create(response.sandbox_init_point, '_self', options);
       this.browser.on('loadstop').subscribe(() => {
         let currentUrl: string = '';
         this.myInterval = setInterval(() => {
@@ -50,7 +51,7 @@ export class LoadAtendimentoPage implements OnInit {
             if (currentUrl.startsWith(BASE_URL + MP_SUCCESS_URL) || currentUrl.startsWith(BASE_URL + MP_ERROR_URL)) {
               clearInterval(this.myInterval);
               this.browser.close();
-             this.sendRequest(currentUrl); 
+             this.sendRequest(currentUrl, response.id); 
             }
           });
         }, 3000);
@@ -65,10 +66,9 @@ export class LoadAtendimentoPage implements OnInit {
     clearInterval(this.myInterval);
   }
 
-  private sendRequest(backUrl: string) {
-    console.log('Browser: ', this.browser);
+  private sendRequest(backUrl: string, paymentid: string) {
     if (backUrl.startsWith(BASE_URL + MP_SUCCESS_URL)) {
-      this.agendaService.sendRequisitionOfService().subscribe((response: any) => {
+      this.agendaService.sendRequisitionOfService(paymentid).subscribe((response: any) => {
         if (response.error) {
           console.log(response);
           this.route.navigateByUrl('falha-pagamento');    

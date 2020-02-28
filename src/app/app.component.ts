@@ -45,7 +45,6 @@ export class AppComponent {
       this.network.initializeNetworkEvents();
       
       this.gpsService.ativarGps().then((response) => {
-        console.log(response);
       }, (error) => console.error(error));
     });
   }

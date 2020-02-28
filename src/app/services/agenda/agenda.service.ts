@@ -54,7 +54,7 @@ export class AgendaService {
     const body = 
     `{
       agendaCliente(idcliente: ${idcliente}) {
-        dia mes ano valortotal horario
+        dia mes ano valortotal horario paymentid
         idservico
         endereco {
           endereco numero complemento pto_referencia
@@ -70,7 +70,7 @@ export class AgendaService {
     return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public sendRequisitionOfService() {
+  public sendRequisitionOfService(paymentid: string) {
     let strServicos: string = '';
     let numeroField = 'numero: null';
     let complementoField = 'complemento: ""';
@@ -103,7 +103,8 @@ export class AgendaService {
         ano: ${this._newService.ano}
         horario: "${this._newService.horario}"
         valortotal: ${this._newService.valortotal}
-        endereco: "${this._newService.endereco.endereco}"
+        endereco: "${this._newService.endereco.endereco}",
+        paymentid: "${paymentid}",
         ${numeroField}
         ${complementoField}
         ${pto_referenciaField}

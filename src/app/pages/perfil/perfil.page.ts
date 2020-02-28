@@ -16,8 +16,10 @@ export class PerfilPage implements OnInit {
 
   readonly BASE_URL = BASE_URL;
 
-  public isExpendedName: boolean = false;
-  public arrowName: string = 'ios-arrow-forward';
+  public isExpandedName: boolean = false;
+  public isExpandedSenha: boolean = false;
+  public arrowImgName: string = 'ios-arrow-forward';
+  public arrowImgSenha: string = 'ios-arrow-forward';
 
   constructor(
     private camera: Camera,
@@ -40,8 +42,13 @@ export class PerfilPage implements OnInit {
   }
 
   public extendColName() {
-    this.isExpendedName = !this.isExpendedName;
-    this.isExpendedName? this.arrowName = 'ios-arrow-down' : this.arrowName = 'ios-arrow-forward';
+    this.isExpandedName = !this.isExpandedName;
+    this.isExpandedName? this.arrowImgName = 'ios-arrow-down' : this.arrowImgName = 'ios-arrow-forward';
+  }
+
+  public extendColSenha() {
+    this.isExpandedSenha = !this.isExpandedSenha;
+    this.isExpandedSenha? this.arrowImgSenha = 'ios-arrow-down' : this.arrowImgSenha = 'ios-arrow-forward';
   }
 
   public selectPerfilImg() {

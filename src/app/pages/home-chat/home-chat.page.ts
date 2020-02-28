@@ -21,7 +21,6 @@ export class HomeChatPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot);
     if (this.activatedRoute.snapshot.data.chats) {
       this.chats = this.activatedRoute.snapshot.data.chats.data.clientChats;
       this.chatService.chats = this.chats;
