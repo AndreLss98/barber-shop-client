@@ -68,3 +68,28 @@ ion-content {
     align-items: center;
     font-size: 4.5em;
 }
+
+#sendNewPassword {
+    display: inline-flex;
+    align-items: center;
+    ion-icon {
+        font-size: 2em;
+    }
+}
+
+#sendNewPassword.valid {
+    ion-icon {
+        color: var(--ion-color-primary);
+    }
+}
+
+ion-item {
+    --color: #666666;
+    --border-color: #666666;
+    --padding-start: 0;
+    --padding-end: 0;
+}
+
+ion-input {
+    color: white;
+}

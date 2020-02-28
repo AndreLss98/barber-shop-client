@@ -6,6 +6,7 @@ import { BASE_URL } from '../../../environments/environment.mobile';
 import { Camera, PictureSourceType, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { UserService } from 'src/app/services/user.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-perfil',
@@ -21,10 +22,15 @@ export class PerfilPage implements OnInit {
   public arrowImgName: string = 'ios-arrow-forward';
   public arrowImgSenha: string = 'ios-arrow-forward';
 
+  public newPassword: string = '';
+  public confirmNewPassword: string = '';
+  public validPassword: boolean = false;
+
   constructor(
     private camera: Camera,
     private navCtrl: NavController,
     public userService: UserService,
+    private loginService: LoginService,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private actionSheetCtrl: ActionSheetController,
@@ -43,13 +49,54 @@ export class PerfilPage implements OnInit {
 
   public extendColName() {
     this.isExpandedName = !this.isExpandedName;
-    this.isExpandedName? this.arrowImgName = 'ios-arrow-down' : this.arrowImgName = 'ios-arrow-forward';
+    this.isExpandedName ? this.arrowImgName = 'ios-arrow-down' : this.arrowImgName = 'ios-arrow-forward';
   }
 
   public extendColSenha() {
     this.isExpandedSenha = !this.isExpandedSenha;
-    this.isExpandedSenha? this.arrowImgSenha = 'ios-arrow-down' : this.arrowImgSenha = 'ios-arrow-forward';
+    this.isExpandedSenha ? this.arrowImgSenha = 'ios-arrow-down' : this.arrowImgSenha = 'ios-arrow-forward';
   }
+
+  public checkPassword() {
+    if (/.{6,}/.test(this.newPassword)) {
+      this.validPassword = true;
+    } else {
+      this.validPassword = false;
+    }
+    return this.validPassword;
+  }
+
+  public updatePassword() {
+    if ((this.newPassword && this.confirmNewPassword) && (this.newPassword === this.confirmNewPassword)) {
+      this.loginService.changePassword(this.newPassword).subscribe((response: any) => {
+        if (response.errors) {
+          console.log(response.errors);
+          this.showAlert('Algo deu errado!');
+        } else {
+          this.newPassword = this.confirmNewPassword = '';
+          this.isExpandedSenha = false;
+          this.showAlert('Senha atualizada com sucesso!');
+        }
+      });
+    } else if ((this.newPassword && this.confirmNewPassword) && (this.newPassword !== this.confirmNewPassword)) {
+      this.showAlert('As senhas não coincidem!');
+    }
+  }
+
+  public showAlert(message: string) {
+    this.alertCtrl.create({
+      message,
+      mode: 'ios',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'Cancel'
+        }
+      ]
+    }).then((alert) => alert.present());
+  }
+
 
   public selectPerfilImg() {
     this.actionSheetCtrl.create({

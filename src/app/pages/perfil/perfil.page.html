@@ -70,6 +70,22 @@
         <ion-icon [name]="arrowImgSenha"></ion-icon>
       </ion-col>
     </ion-row>
+    <ion-row [class.endLine]="isExpandedSenha" class="ion-justify-content-center" *ngIf="isExpandedSenha">
+      <ion-col class="ion-align-self-center" size="10">
+        <ion-item>
+          <ion-label position="floating">Nova Senha</ion-label>
+          <ion-input [(ngModel)]="newPassword" type="password" (keyup)="checkPassword()" pattern="^.{6,}$"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Cofirme a nova senha</ion-label>
+          <ion-input [(ngModel)]="confirmNewPassword" type="password" pattern="^.{6,}$"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col id="sendNewPassword" size="2" class="ion-align-self-end ion-text-end" [class.valid]="validPassword && newPassword === confirmNewPassword" (click)="updatePassword()">
+        <ion-icon src="assets/send.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+
     <ion-row>
       <ion-col>
         <ion-label class="header">IDIOMA</ion-label>

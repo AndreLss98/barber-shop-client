@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { BASE_URL_GRAPHQL } from '../../../environments/environment'
 import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
+import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
 export class LoginService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private userService: UserService,
   ) {
 
   }
@@ -29,6 +31,13 @@ export class LoginService {
         }
       }
     }`
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+  }
+
+  public changePassword(password: string) {
+    const body = `mutation {
+      updateClientPassword(idcliente: ${this.userService.user.idcliente}, senha: "${password}")
+    }`;
     return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 }

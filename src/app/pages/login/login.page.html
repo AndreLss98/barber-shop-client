@@ -12,8 +12,8 @@
         </div>
         <div class="item">
           <img class="iconLeft II" src="assets/icon_senha.svg">
-          <input [(ngModel)]="senha" class="inputSenha" placeholder="Senha" type="password" />
-          <img class="iconRight" src="assets/icon_hide_senha.svg">
+          <input [(ngModel)]="senha" class="inputSenha" placeholder="Senha" [type]="tipoCampoSenha" />
+          <img class="iconRight" [src]="iconSenha" (click)="toogleFieldType()">
         </div>
         <ion-note class="noteForm" (click)="recuperarSenha()">Esqueceu a senha?</ion-note>
       </ion-row>

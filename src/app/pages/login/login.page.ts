@@ -20,6 +20,9 @@ export class LoginPage implements OnInit {
   public email: string = '';
   public senha: string = '';
 
+  public tipoCampoSenha: string = 'password';
+  public iconSenha: string = 'assets/icon_hide_senha.svg';
+
   constructor(
     private route: Router,
     private chatService: ChatService,
@@ -52,6 +55,11 @@ export class LoginPage implements OnInit {
         this.connectionError();
       }
     });
+  }
+
+  public toogleFieldType() {
+    this.tipoCampoSenha === 'password'? this.tipoCampoSenha = 'text' : this.tipoCampoSenha = 'password';
+    this.iconSenha === 'assets/icon_hide_senha.svg'? this.iconSenha = 'assets/icon_show_senha.svg' : this.iconSenha = 'assets/icon_hide_senha.svg';
   }
 
   public recuperarSenha() {
