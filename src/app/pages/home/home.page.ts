@@ -57,6 +57,7 @@ export class HomePage {
       this.mapService.initializeMap(this.map).then(() => {
         this.mapService.map.on('load', () => {
           this.mapService.map.resize();
+          this.mapService.markUserPosition();
           this.mapService.markePointers(this.route.snapshot.data.profissionais.data.profissionais);
         })
       });
@@ -103,17 +104,18 @@ export class HomePage {
     });
   }
 
-  public setMyPosition(): void {
-    this.getAtualPosition().then(position => {
-      this.flyToPosition(position.longitude, position.latitude);
-    }).catch(() => {
-      this.showAlert('Desculpe', 'Falha no gps', 'Não foi possível localiza-lo');
-    });
-  }
+  public flyToPosition(): void {
+    this.mapService.removeMyMarker();
+    const gpsOptions: GeolocationOptions = {
+      enableHighAccuracy: true,
+      maximumAge: 15000,
+      timeout: 10000
+    }
 
-  private flyToPosition(longitude: any, latitude: any): void {
-    /* this.mapObj.map.flyTo({ center: [longitude, latitude] });
-    this.markerCurrentPosition(longitude, latitude); */
+    this.geolocation.getCurrentPosition(gpsOptions).then(({ coords }) => {
+      this.mapService.map.flyTo({ center: [coords.longitude, coords.latitude] });
+      this.mapService.markUserPosition();
+    })
   }
 
   private async markerCurrentPosition(longitude: any, latitude: any) {

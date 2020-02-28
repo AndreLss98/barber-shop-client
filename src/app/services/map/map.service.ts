@@ -18,6 +18,7 @@ import { SelecaoServicoPage } from 'src/app/pages/modals/selecao-servico/selecao
 })
 export class MapService {
 
+  private myMarker: mapboxgl.Marker;
   private _mapInstance;
   private _profissionais: any[] = [];
 
@@ -117,5 +118,22 @@ export class MapService {
         this.userService.user.endereco = address.features[0].place_name;
       });
     });
+  }
+
+  public markUserPosition() {
+    const gpsOptions: GeolocationOptions = {
+      enableHighAccuracy: true,
+      maximumAge: 15000,
+      timeout: 10000
+    }
+    this.geolocation.getCurrentPosition(gpsOptions).then(({ coords }) => {
+      this.myMarker = new mapboxgl.Marker({ color: '#fbd072' }).setLngLat([coords.longitude, coords.latitude]).addTo(this._mapInstance);
+    })
+  }
+
+  public removeMyMarker() {
+    if (this.myMarker) {
+      this.myMarker.remove();
+    }
   }
 }
