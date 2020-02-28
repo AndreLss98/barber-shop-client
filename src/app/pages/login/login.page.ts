@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController, AlertController } from '@ionic/angular';
 
 import { UserService } from 'src/app/services/user.service';
 import { ChatService } from 'src/app/services/chat/chat.service';
@@ -23,12 +23,16 @@ export class LoginPage implements OnInit {
   public tipoCampoSenha: string = 'password';
   public iconSenha: string = 'assets/icon_hide_senha.svg';
 
+  private loader;
+
   constructor(
     private route: Router,
     private chatService: ChatService,
     private userService: UserService,
     private loginService: LoginService,
     private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
   ) {
 
   }
@@ -37,9 +41,11 @@ export class LoginPage implements OnInit {
 
   }
 
-  public login() {
-    this.loginService.login(this.email, this.senha).subscribe((cliente: any) => {
+  public async login() {
+    await this.showLoading();
+    this.loginService.login(this.email, this.senha).subscribe(async (cliente: any) => {
       //TODO: pesquisar uma forma de retornar o status do erro
+      await this.cloaseLoading();
       if (cliente.errors) {
         const error = JSON.parse(cliente.errors[0].message);
         console.log(error);
@@ -49,8 +55,9 @@ export class LoginPage implements OnInit {
           this.chatService.afterLogin();
         });
       }
-    }, (errors) => {
+    }, async (errors) => {
       console.log(errors);
+      await this.cloaseLoading();
       if (errors.name === 'TimeoutError') {
         this.connectionError();
       }
@@ -68,6 +75,33 @@ export class LoginPage implements OnInit {
 
   private connectionError(): void {
     this.modalCtrl.create({ component: ConectionStatusPage }).then((modal) => modal.present());
+  }
+
+  public async showLoading() {
+    this.loader = await this.loadingCtrl.create({
+      message: 'Logando',
+      mode: 'md'
+    });
+    this.loader.present();
+  }
+
+  public async cloaseLoading() {
+    await this.loader.dismiss();
+  }
+
+  public showAlert(message: string) {
+    this.alertCtrl.create({
+      mode: 'ios',
+      message,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {}
+        }
+      ]
+    }).then((alert) => {
+      alert.present();
+    })
   }
 
 }
