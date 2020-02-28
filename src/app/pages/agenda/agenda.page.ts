@@ -108,10 +108,12 @@ export class AgendaPage implements OnInit {
   }
 
   public onCancelService(event) {
-    this.agendaService.cancelService(event.idservico).subscribe((response: any) => {
+    console.log('Event: ', event);
+    this.agendaService.cancelService(event.idservico, event.idpagamento, event.idprofissional).subscribe((response: any) => {
       if (response.error) {
-        console.error(response.error);
+        console.error("Error: ", response.error);
       } else {
+        console.log('Reponse at: ', response);
         const itemPos = this.agenda.findIndex(servico => servico.idservico === event.idservico);
         if (itemPos > -1) {
           this.agenda.splice(itemPos, 1);

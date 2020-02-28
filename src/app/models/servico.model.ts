@@ -14,6 +14,7 @@ export interface servico {
     idservico: number;
     idcartao: number;
     idprofissional: number;
+    paymentid: string;
     nota: number;
     dia: number;
     mes: string;

@@ -1,13 +1,13 @@
 import { timeout } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Socket } from 'ngx-socket-io';
 
 import { servico } from 'src/app/models/servico.model';
 import { endereco } from './../../models/servico.model';
 
-import { BASE_URL_GRAPHQL } from 'src/environments/environment';
+import { BASE_URL_GRAPHQL, BASE_URL } from 'src/environments/environment';
 import { TIMEOUT_SIZE } from './../../constants/http-constants';
 import { HTTP_OPTIONS } from 'src/app/constants/http-constants';
 
@@ -51,8 +51,8 @@ export class AgendaService {
   }
 
   public getAgenda({ idcliente }) {
-    const body = 
-    `{
+    const body =
+      `{
       agendaCliente(idcliente: ${idcliente}) {
         dia mes ano valortotal horario paymentid
         idservico
@@ -63,7 +63,7 @@ export class AgendaService {
           nome
         }
         profissional {
-          nome
+          nome idprofissional
         }
       }
     }`;
@@ -79,11 +79,11 @@ export class AgendaService {
       strServicos += `${servico.id},`;
     });
     strServicos = strServicos.slice(0, -1);
-    
+
     if (this._newService.endereco.numero) {
       numeroField = `numero: ${this._newService.endereco.numero},`
     }
-    
+
     if (this._newService.endereco.complemento) {
       complementoField = `complemento: "${this._newService.endereco.complemento}",`
     }
@@ -92,8 +92,8 @@ export class AgendaService {
       pto_referenciaField = `pto_referencia: "${this._newService.endereco.pto_referencia}",`
     }
 
-    const body = 
-    `mutation {
+    const body =
+      `mutation {
       registerService(
         idcliente: ${this.userService.user.idcliente}
         idcartao: ${this._newService.idcartao}
@@ -125,13 +125,12 @@ export class AgendaService {
     return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public cancelService(idservico) {
-    const body = 
-    `
-      mutation {
-        cancelService(idservico: ${idservico})
-      }
-    `;
-    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
+  public cancelService(idservico, idpagamento, idprofissional) {
+    const params = new HttpParams()
+    .set('idpagamento', idpagamento)
+    .set('idservico', idservico.toString())
+    .set('idprofissional', idprofissional.toString());
+
+    return this.http.post(BASE_URL + '/cancel-service', null, {params}).pipe(timeout(TIMEOUT_SIZE));
   }
 }
