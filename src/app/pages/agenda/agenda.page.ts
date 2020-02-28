@@ -64,15 +64,22 @@ export class AgendaPage implements OnInit {
       event,
       mode: 'ios'
     }).then((popover) => {
-      popover.present();
-      popover.onDidDismiss().then((popoverdata: any) => {
-        this.setMonth(popoverdata.data);
+      popover.present().then(() => {
+        popover.onDidDismiss().then((popoverdata: any) => {
+          this.setMonth(popoverdata.data);
+        });
       });
     });
   }
 
   private setMonth(month: number) {
-    if (month >= this.mesSelecionado || !this.mesSelecionado) {
+    if (month !== undefined) {
+      if (month === this.dataAtual.getMonth()) {
+        this.diasDoMes = this.calendarioService.diasRestanteDoMesAtual(this.dataAtual);
+      } else {
+        const newDate = new Date(this.anoSelecionado, month, 1);
+        this.diasDoMes = this.calendarioService.diasRestanteDoMesAtual(newDate);
+      }
       this.mesSelecionado = month;
       this.nomeMesSelecionado = NOME_MESES[this.mesSelecionado];
     }
