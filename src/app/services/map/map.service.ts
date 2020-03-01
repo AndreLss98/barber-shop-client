@@ -1,9 +1,10 @@
 import { fromEvent } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { ModalController, Platform } from '@ionic/angular';
 
 import mapboxgl from 'mapbox-gl';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { Geolocation, GeolocationOptions, Geoposition } from '@ionic-native/geolocation/ngx';
 
 import { MAPBOX_TOKEN, BASE_URL } from '../../../environments/environment';
@@ -26,16 +27,34 @@ export class MapService {
 
   constructor(
     private http: HttpClient,
+    private platform: Platform,
     private userService: UserService,
     private geolocation: Geolocation,
     private modalCtrl: ModalController,
     private mpService: MercadopagoService,
+    private locationAccuracy: LocationAccuracy,
   ) {
     mapboxgl.accessToken = MAPBOX_TOKEN;
   }
 
   get map(): any {
     return this._mapInstance;
+  }
+
+  public async requestFullPermission(map: HTMLElement) {
+    if (this.platform.is('android') || this.platform.is('ios') && !document.URL.startsWith('http://localhost:81')) {
+      await this.locationAccuracy.canRequest().then(async () => {
+        await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(async () => {
+          await this.initializeMap(map).then(() => {
+            this._mapInstance.on('load', () => {
+              this._mapInstance.resize();
+              this.markUserPosition();
+              console.log('Caiu load service');
+            })
+          });
+        })
+      })
+    }
   }
 
   public async initializeMap(map: HTMLElement) {
@@ -52,7 +71,7 @@ export class MapService {
         zoom: 14,
         center: [coords.longitude, coords.latitude]
       });
-    });
+    }).catch((error) => console.log(error));
   }
 
   public async markePointers(pointers: any[]) {

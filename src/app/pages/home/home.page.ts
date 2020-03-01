@@ -54,13 +54,15 @@ export class HomePage {
   private configMap() {
     this.map = document.getElementById('map');
     if (this.map) {
-      this.mapService.initializeMap(this.map).then(() => {
+      this.mapService.requestFullPermission(this.map).then(() => {
         this.mapService.map.on('load', () => {
-          this.mapService.map.resize();
-          this.mapService.markUserPosition();
+          console.log('Caiu load home');
           this.mapService.markePointers(this.route.snapshot.data.profissionais.data.profissionais);
         })
-      });
+      })
+      /* this.mapService.initializeMap(this.map).then(() => {
+        
+      }); */
     }
   }
 

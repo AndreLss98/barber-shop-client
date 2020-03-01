@@ -44,6 +44,7 @@ export class PerfilPage implements OnInit {
 
   public logout() {
     this.navCtrl.navigateBack('login');
+    localStorage.removeItem('user');
     this.userService.user = null;
   }
 
