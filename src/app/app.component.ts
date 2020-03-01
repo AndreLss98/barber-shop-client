@@ -1,11 +1,10 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
-import { MapService } from './services/map/map.service';
 import { GpsService } from './services/gps/gps.service';
 import { UserService } from './services/user.service';
 import { NetworkService } from './services/network/network.service';
@@ -30,20 +29,34 @@ export class AppComponent {
   ];
 
   constructor(
+    private router: Router,
     private platform: Platform,
+    private statusbar: StatusBar,
     private gpsService: GpsService,
     private network: NetworkService,
     public userService: UserService,
-    private splashScreen: SplashScreen
+    private splashScreen: SplashScreen,
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      if (this.platform.is('android')) {
+        this.statusbar.backgroundColorByHexString('#313131');
+      }
+
+      try {
+        this.userService.user = JSON.parse(localStorage.getItem('user'));
+        if (this.userService.user) {
+          this.router.navigateByUrl('/login/home');
+        }
+      } catch (error) {
+        console.log('Error: ', error);
+      }
+      
       this.splashScreen.hide();
       this.network.initializeNetworkEvents();
-      
       this.gpsService.ativarGps().then((response) => {
       }, (error) => console.error(error));
     });

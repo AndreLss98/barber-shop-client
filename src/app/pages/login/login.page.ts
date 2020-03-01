@@ -48,9 +48,12 @@ export class LoginPage implements OnInit {
       await this.cloaseLoading();
       if (cliente.errors) {
         const error = JSON.parse(cliente.errors[0].message);
-        console.log(error);
+        console.log('Error: ', error);
+        this.showAlert(error.message);
       } else {
+        console.log('Cliente: ', cliente);
         this.userService.user = cliente.data.loginCliente;
+        localStorage.setItem('user', JSON.stringify(cliente.data.loginCliente));
         this.route.navigate(['login/intro']).then(() => {
           this.chatService.afterLogin();
         });
@@ -93,6 +96,7 @@ export class LoginPage implements OnInit {
     this.alertCtrl.create({
       mode: 'ios',
       message,
+      backdropDismiss: false,
       buttons: [
         {
           text: 'Ok',
