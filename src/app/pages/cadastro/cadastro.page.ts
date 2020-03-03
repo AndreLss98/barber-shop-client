@@ -49,6 +49,7 @@ export class CadastroPage implements OnInit {
         this.router.navigateByUrl('erro-cadastro');
       } else {
         this.userService.user = cadastro.data.registerCliente;
+        localStorage.setItem('user', JSON.stringify(cadastro.data.registerCliente));
         this.router.navigateByUrl('cadastro-sucesso');
       }
     }, (error) => {
