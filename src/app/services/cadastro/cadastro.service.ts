@@ -15,8 +15,15 @@ export class CadastroService {
 
   }
 
-  public cadastrar(cadastro: Client) {
-    /* const body = `mutation{createCliente(input: {nome: "${cadastro.nome}", email: "${cadastro.email}", telefone: "${cadastro.telefones[0].numero}", senha: "${cadastro.}"}){nome telefone email}}`;
-    return this.http.post(BASE_URL_GRAPHQL, body,  HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE)); */
+  public cadastrar(cadastro: any) {
+    console.log(cadastro);
+    let body =
+    `mutation {
+      registerCliente(nome: "${cadastro.nome}", email: "${cadastro.email}", senha: "${cadastro.senha}", ddd: ${cadastro.telefone.substr(1, 2)}, numero: "${cadastro.telefone.substr(5)}") {
+        nome
+      }
+    }`
+    console.log('Body: ', body);
+    return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 }

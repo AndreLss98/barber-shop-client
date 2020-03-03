@@ -73,7 +73,7 @@ export class LoadAtendimentoPage implements OnInit {
           console.log(response);
           this.route.navigateByUrl('falha-pagamento');    
         } else {
-          this.profissionalService.sendRequestViaSocket(response.data.registerService.idservico);
+          this.profissionalService.sendRequestViaSocket(response.data.registerService.idservico, paymentid);
           this.route.navigateByUrl('confirmacao-agenda');
         }
       }, (error) => {
