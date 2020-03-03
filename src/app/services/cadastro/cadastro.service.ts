@@ -4,7 +4,6 @@ import { timeout } from 'rxjs/operators';
 
 import { BASE_URL_GRAPHQL } from './../../../environments/environment';
 import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
-import { Client } from 'src/app/models/cliente.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,10 @@ export class CadastroService {
     let body =
     `mutation {
       registerCliente(nome: "${cadastro.nome}", email: "${cadastro.email}", senha: "${cadastro.senha}", ddd: ${cadastro.telefone.substr(1, 2)}, numero: "${cadastro.telefone.substr(5)}") {
-        nome
+        nome email
+        telefones {
+          ddd numero
+        }
       }
     }`
     console.log('Body: ', body);
