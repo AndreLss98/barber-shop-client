@@ -24,7 +24,7 @@
       <div class="itemList" *ngFor="let hist of historicoRealizados">
         <div>
           <p>{{ hist.dia }} {{ hist.mes }} {{ hist.ano }}</p>
-          <historicoComponent [idservico]="hist.idservico"  [nome]="hist.profissional.nome" [local]="hist.endereco.endereco" [valor]="hist.valortotal"
+          <historicoComponent [imgPerfil]="hist.profissional.imgperfil" [idservico]="hist.idservico"  [nome]="hist.profissional.nome" [local]="hist.endereco.endereco" [valor]="hist.valortotal"
             [horario]="hist.horario" [qtdStar]="hist.nota"></historicoComponent>
         </div>
       </div>
@@ -34,7 +34,7 @@
     <div class="itemList" *ngFor="let hist of historicoCancelados">
       <div>
         <p>{{ hist.dia }} {{ hist.mes }} {{ hist.ano }}</p>
-        <historicoComponent [nome]="hist.profissional.nome" [local]="hist.endereco.endereco" [valor]="null" [horario]="''">
+        <historicoComponent [imgPerfil]="hist.profissional.imgperfil" [nome]="hist.profissional.nome" [local]="hist.endereco.endereco" [valor]="null" [horario]="''">
         </historicoComponent>
       </div>
     </div>

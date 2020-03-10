@@ -1,9 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { Historico } from 'src/app/models/historico.model';
-
-import { HistoricoService } from 'src/app/services/historico/historico.service';
 import { servico } from 'src/app/models/servico.model';
 
 @Component({
@@ -18,8 +15,7 @@ export class HistoricoPage implements OnInit {
   public historicoCancelados: servico[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-    private historicoService: HistoricoService
+    private route: ActivatedRoute
   ) {
 
   }
