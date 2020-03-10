@@ -13,17 +13,18 @@ ion-grid {
     padding: 0 1em .5em;
     ion-icon {
         color: white;
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
     ion-col.iconCol {
-        margin-right: .5em;
+        margin-right: .6em;
+        display: flex;
     }
     span {
         color: white;
     }
     ion-note {
         color: white;
-        font-size: .9em;
+        font-size: .8em;
     }
 }
 
