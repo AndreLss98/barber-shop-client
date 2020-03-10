@@ -1,20 +1,17 @@
 import { fromEvent } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AlertController, ModalController } from '@ionic/angular';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
+import { topDownAnimation } from 'src/app/animations/top-down-animation';
+import { downTopAnimation } from 'src/app/animations/down-top-animation';
 
 import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
 
 import { UserService } from 'src/app/services/user.service';
 import { MapService } from 'src/app/services/map/map.service';
 import { ProfissionaisService } from 'src/app/services/profissionais/profissionais.service';
-
-import { topDownAnimation } from 'src/app/animations/top-down-animation';
-import { downTopAnimation } from 'src/app/animations/down-top-animation';
-
-import { SelecaoServicoPage } from '../modals/selecao-servico/selecao-servico.page';
-import { NotificacaoSolicitacaoNegadaPage } from '../modals/notificacao-solicitacao-negada/notificacao-solicitacao-negada.page';
 
 import { CustomMenuComponent } from '../modals/custom-menu/custom-menu.component';
 
@@ -56,13 +53,9 @@ export class HomePage {
     if (this.map) {
       this.mapService.requestFullPermission(this.map).then(() => {
         this.mapService.map.on('load', () => {
-          console.log('Caiu load home');
           this.mapService.markePointers(this.route.snapshot.data.profissionais.data.profissionais);
         })
-      })
-      /* this.mapService.initializeMap(this.map).then(() => {
-        
-      }); */
+      });
     }
   }
 
@@ -75,15 +68,21 @@ export class HomePage {
       if (nome === '' || nome.length === 1) {
         this.profissionaisOfSearch = []
       } else {
-        this.profissionalService.getAllByName(nome).subscribe((response: any) => {
-          if (response.errors) {
-            console.error(response.errors);
-          } else {
-            this.profissionaisOfSearch = response.data.profissionaisByName;
-          }
-        }, (error) => console.error(error));
+        this.fetchProfissionais(nome);
       }
     });
+  }
+
+  public fetchProfissionais(nome: string) {
+    this.profissionalService.getAllByName(nome).subscribe((response: any) => {
+      if (response.errors) {
+        console.error(response.errors);
+      } else {
+        this.profissionaisOfSearch = response.data.profissionaisByName;
+        if (this.profissionaisOfSearch.length === 1) this.setFocusOnProfissional(this.profissionaisOfSearch[0].latitude, this.profissionaisOfSearch[0].longitude);
+        if (this.profissionaisOfSearch.length === 0) this.showAlert('Aviso', '', 'Barbeiro não encontrado.');
+      }
+    }, (error) => console.error(error));
   }
 
   public setFocusOnProfissional(latitude: number, longitude: number) {
@@ -120,18 +119,12 @@ export class HomePage {
     })
   }
 
-  private async markerCurrentPosition(longitude: any, latitude: any) {
-    /* if (this.myPositionMarker) {
-      this.myPositionMarker.remove();
-    }
-    this.myPositionMarker = await new mapboxgl.Marker({ color: '#D6A763' }).setLngLat([longitude, latitude]).addTo(this.mapObj.map); */
-  }
-
   private async showAlert(header: string, subHeader: string, message: string) {
     this.alertCtrl.create({
       header: header,
       subHeader: subHeader,
       message: message,
+      mode: 'ios',
       buttons: [
         {
           text: "Ok",
@@ -144,17 +137,6 @@ export class HomePage {
     }).then((res) => {
       res.present();
     });
-  }
-
-  public clickEvent(event) {
-    /* if ((event.target.attributes.length !== 0) && (event.target.attributes[0].value === 'round')) {
-      this.modalCtrl.create({
-        component: SelecaoServicoPage,
-        mode: 'ios'
-      }).then((modal) => {
-        modal.present();
-      });
-    } */
   }
 
   public openMenu(): void {

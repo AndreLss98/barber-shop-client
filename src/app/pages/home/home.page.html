@@ -8,7 +8,7 @@
   </ion-grid>
 </ion-header>
 
-<ion-content id="content" (click)="clickEvent($event)">
+<ion-content id="content">
   <div #map id="map"></div>
 </ion-content>
 
@@ -49,6 +49,6 @@
     </ion-grid>
   </div>
   <div align="center">
-    <ion-button shape="round">Localizar</ion-button>
+    <ion-button shape="round" (click)="fetchProfissionais(searchInput.value)">Localizar</ion-button>
   </div>
 </ion-footer>
