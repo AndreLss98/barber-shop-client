@@ -10,7 +10,6 @@ import { Geolocation, GeolocationOptions, Geoposition } from '@ionic-native/geol
 import { MAPBOX_TOKEN, BASE_URL } from '../../../environments/environment';
 
 import { UserService } from '../user.service';
-import { MercadopagoService } from '../mercadopago/mercadopago.service';
 
 import { SelecaoServicoPage } from 'src/app/pages/modals/selecao-servico/selecao-servico.page';
 
@@ -31,7 +30,6 @@ export class MapService {
     private userService: UserService,
     private geolocation: Geolocation,
     private modalCtrl: ModalController,
-    private mpService: MercadopagoService,
     private locationAccuracy: LocationAccuracy,
   ) {
     mapboxgl.accessToken = MAPBOX_TOKEN;

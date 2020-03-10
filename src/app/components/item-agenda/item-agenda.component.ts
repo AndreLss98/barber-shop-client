@@ -1,10 +1,9 @@
 import { ActionSheetController } from '@ionic/angular';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
-import { tipoServico, servico } from 'src/app/models/servico.model';
+import { BASE_URL } from '../../../environments/environment';
 import { profissional } from 'src/app/models/profissional.model';
-
-import { AgendaService } from 'src/app/services/agenda/agenda.service';
+import { tipoServico, servico } from 'src/app/models/servico.model';
 
 @Component({
   selector: 'item-agenda',
@@ -12,6 +11,8 @@ import { AgendaService } from 'src/app/services/agenda/agenda.service';
   styleUrls: ['./item-agenda.component.scss'],
 })
 export class ItemAgendaComponent implements OnInit {
+
+  readonly BASE_URL= BASE_URL;
 
   @Input() local: string;
   @Input() horario: string;
@@ -25,7 +26,6 @@ export class ItemAgendaComponent implements OnInit {
   public isInverted: boolean = false;
 
   constructor(
-    private agendaService: AgendaService,
     private actionSheetCtrl: ActionSheetController
   ) {
 
