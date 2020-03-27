@@ -40,7 +40,7 @@ export class MapService {
   }
 
   public async requestFullPermission(map: HTMLElement) {
-    if ((this.platform.is('android') || this.platform.is('ios')) && !document.URL.startsWith('http://localhost:81')) {
+    if ((this.platform.is('android') || this.platform.is('ios')) || document.URL.startsWith('http://localhost:81')) {
       await this.locationAccuracy.canRequest().then(async () => {
         await this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(async () => {
           await this.initializeMap(map).then(() => {

@@ -48,11 +48,12 @@ export class HomePage {
     this.configMap();
   }
 
-  private configMap() {
+  private async configMap() {
     this.map = document.getElementById('map');
     if (this.map) {
-      this.mapService.requestFullPermission(this.map).then(() => {
-        this.mapService.map.on('load', () => {
+      await this.mapService.requestFullPermission(this.map).then(async () => {
+        await this.mapService.map.on('load', () => {
+          console.log('Profissionais: ', this.route.snapshot);
           this.mapService.markePointers(this.route.snapshot.data.profissionais.data.profissionais);
         })
       });
