@@ -3,7 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="login/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Chat</ion-title>
+    <div align="center">
+      <ion-title>Chat</ion-title>
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -17,15 +19,15 @@
     <ion-grid id="chatVazio">
       <ion-row>
         <ion-col>
-          <img src="assets/NoMessages.svg" />
+          <img style="height: 75%;" src="assets/NoMessages.svg" />
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row class="alert-message">
         <ion-col>
           <span class="title">Sem mensagens</span>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row class="alert-message">
         <ion-col>
           <span class="message">Você não tem chat ativo</span>
         </ion-col>

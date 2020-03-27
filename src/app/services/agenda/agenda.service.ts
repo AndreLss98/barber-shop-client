@@ -63,7 +63,7 @@ export class AgendaService {
           nome
         }
         profissional {
-          nome idprofissional
+          nome idprofissional imgperfil
         }
       }
     }`;

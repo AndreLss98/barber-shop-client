@@ -47,8 +47,8 @@ export class ProfissionaisService {
     return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
-  public sendRequestViaSocket(idservico: number) {
-    const request = {...this.agendaService.newService, nome: this.userService.user.nome, imgperfil: this.userService.user.imgperfil, idservico};
+  public sendRequestViaSocket(idservico: number, paymentid) {
+    const request = {...this.agendaService.newService, nome: this.userService.user.nome, imgperfil: this.userService.user.imgperfil, idservico, paymentid};
     this.socket.emit('send-request', request);
   }
 }

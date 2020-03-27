@@ -8,7 +8,7 @@
   </ion-grid>
 </ion-header>
 
-<ion-content id="content" (click)="clickEvent($event)">
+<ion-content id="content">
   <div #map id="map"></div>
 </ion-content>
 
@@ -20,24 +20,24 @@
       </div>
     </div>
     <ion-grid>
-      <ion-row id="myPos">
-        <ion-col size="2" align="center">
+      <ion-row id="myPos" class="endereco">
+        <ion-col size="1" class="ion-align-self-center">
           <ion-icon name="pin"></ion-icon>
         </ion-col>
-        <ion-col>
+        <ion-col class="ion-align-self-center">
           <input type="text" placeholder="{{ userService.user?.endereco }}" readonly />
         </ion-col>
       </ion-row>
 
-      <ion-row>
-        <ion-col size="2" align="center">
+      <ion-row class="endereco">
+        <ion-col size="1" class="ion-align-self-center">
           <ion-icon name="pin"></ion-icon>
         </ion-col>
         <ion-col>
           <input #searchInput type="text" placeholder="Localize o seu barbeiro..." />
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="profissionaisOfSearch && profissionaisOfSearch.length > 0">
+      <ion-row id="usersList" *ngIf="profissionaisOfSearch && profissionaisOfSearch.length > 0">
         <ion-col>
           <ion-list>
             <ion-item *ngFor="let profissional of profissionaisOfSearch" (click)="setFocusOnProfissional(profissional.latitude, profissional.longitude)">
@@ -49,6 +49,6 @@
     </ion-grid>
   </div>
   <div align="center">
-    <ion-button shape="round">Localizar</ion-button>
+    <ion-button shape="round" (click)="fetchProfissionais(searchInput.value)">Localizar</ion-button>
   </div>
 </ion-footer>

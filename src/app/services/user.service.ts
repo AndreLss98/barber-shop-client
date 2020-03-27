@@ -33,7 +33,7 @@ export class UserService {
   }
 
   set user(user: Client) {
-    this.cartoesService.localCards = user.cartoes;
+    if (user.cartoes) this.cartoesService.localCards = user.cartoes;
     this._user = user;
   }
 

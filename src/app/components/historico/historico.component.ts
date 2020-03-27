@@ -2,6 +2,8 @@ import { AlertController } from '@ionic/angular';
 import { Component, OnInit, Input } from '@angular/core';
 import { HistoricoService } from 'src/app/services/historico/historico.service';
 
+import { BASE_URL } from '../../../environments/environment';
+
 @Component({
   selector: 'historicoComponent',
   templateUrl: './historico.component.html',
@@ -9,12 +11,15 @@ import { HistoricoService } from 'src/app/services/historico/historico.service';
 })
 export class HistoricoComponent implements OnInit {
 
+  readonly BASE_URL = BASE_URL;
+
   @Input() idservico: number;
   @Input() nome: string;
   @Input() local: string;
   @Input() valor: any;
   @Input() horario: string;
   @Input() qtdStar: number = 0;
+  @Input() imgPerfil: string;
 
   public isRated = false;
 

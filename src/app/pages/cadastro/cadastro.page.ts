@@ -21,10 +21,10 @@ export class CadastroPage implements OnInit {
     private cadastroService: CadastroService,
   ) {
     this.cadastroForm = this.formBuilder.group({
-      nome: [null, [Validators.minLength(3), Validators.required]],
-      email: [null, [Validators.email, Validators.required]],
-      senha: [null, [Validators.minLength(6), Validators.required]],
-      telefone: [null, [Validators.required]]
+      nome: ["", [Validators.minLength(3), Validators.pattern('^[a-zA-Z]{3,}( [a-zA-Z]{2,})+$'), Validators.required]],
+      email: ["", [Validators.email, Validators.required]],
+      senha: ["", [Validators.minLength(6), Validators.required]],
+      telefone: ["", [Validators.required]]
     });
   }
 
@@ -32,15 +32,29 @@ export class CadastroPage implements OnInit {
 
   }
 
+  public formatTelefone() {
+    if (this.cadastroForm.value.telefone) {
+      let tempTel: string = this.cadastroForm.value.telefone;
+      tempTel = tempTel.replace(/[^0-9]/g, '').replace(/([0-9]{2})([0-9]{1})/, "($1) $2").replace(/(\([0-9]{2}\) [0-9]{5})([0-9]{1})/, "$1-$2");
+      this.cadastroForm.patchValue({
+        telefone: tempTel
+      });
+    }
+  }
+
   public async registrarCadastro() {
-    /* this.cadastroService.cadastrar(this.cadastroForm.value).subscribe((cadastro: any) => {
+    this.cadastroService.cadastrar(this.cadastroForm.value).subscribe((cadastro: any) => {
+      console.log('Cadastro: ', cadastro);
       if (cadastro.errors) {
         this.router.navigateByUrl('erro-cadastro');
       } else {
-        this.userService.user = cadastro.data.createCliente;
+        this.userService.user = cadastro.data.registerCliente;
+        localStorage.setItem('user', JSON.stringify(cadastro.data.registerCliente));
         this.router.navigateByUrl('cadastro-sucesso');
       }
-    }); */
+    }, (error) => {
+      console.log(error)
+    });
   }
 
 }

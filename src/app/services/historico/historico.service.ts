@@ -24,7 +24,7 @@ export class HistoricoService {
         dia mes ano horario
         valortotal nota
         profissional {
-          nome
+          nome imgperfil
         }
         endereco {
           endereco
@@ -40,7 +40,7 @@ export class HistoricoService {
       clientCanceledService(idcliente: ${idcliente}) {
         dia mes ano valortotal horario
         profissional {
-          nome
+          nome imgperfil
         }
         endereco {
           endereco

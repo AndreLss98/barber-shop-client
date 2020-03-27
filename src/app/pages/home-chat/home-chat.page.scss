@@ -28,11 +28,17 @@ ion-content {
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    span {
+        font-size: .8em;
+    }
     span.title {
         color: white;
         font-weight: 800;
     }
     span.message {
         color: #dedede;
+    }
+    ion-col {
+        padding: 0 !important;
     }
 }

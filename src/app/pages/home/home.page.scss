@@ -27,6 +27,7 @@ ion-toolbar {
       color: #D6A763;
     }
   }
+  border-bottom: 1px solid #dedede;
 }
 
 ion-footer {
@@ -35,8 +36,10 @@ ion-footer {
   padding: 0 15px 15px 15px;
   ion-grid {
     background-color: white;
-    border-radius: 4px;
+    border-radius: 6px;
+    padding: 0;
     ion-row {
+      padding: 0 5px;
       ion-col:nth-child(1) {
         padding-right: 0;
       }
@@ -50,9 +53,6 @@ ion-footer {
     margin-top: 15px;
     width: 60%;
   }
-  input {
-    outline: none;
-  }
 }
 
 ion-footer::before {
@@ -62,7 +62,6 @@ ion-footer::before {
 #centerPosition {
   text-align: end;
   padding: 10px 0;
-  margin-bottom: 20px;
   div {
     display: inline-flex;
     background-color: white;
@@ -84,5 +83,26 @@ ion-footer::before {
     background-color: transparent;
     width: 100%;
     padding-left: 5px;
+    outline: none;
+    font-size: 12px;
+  }
+  .endereco {
+    ion-col {
+      display: flex;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+#usersList {
+  padding: 0;
+  ion-col {
+    padding: 0;
+  }
+  ion-list {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 6px;
   }
 }
