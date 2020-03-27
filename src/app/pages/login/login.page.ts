@@ -61,7 +61,7 @@ export class LoginPage implements OnInit {
     }, async (errors) => {
       console.log(errors);
       await this.cloaseLoading();
-      if (errors.name === 'TimeoutError') {
+      if (errors.name === 'TimeoutError' || errors.name === 'HttpErrorResponse') {
         this.connectionError();
       }
     });
