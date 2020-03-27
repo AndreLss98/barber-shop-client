@@ -1,7 +1,11 @@
+import { timeout } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-
-import { AlertController, ModalController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AlertController, ModalController } from '@ionic/angular';
+
+import { BASE_URL_GRAPHQL } from '../../../../environments/environment';
+import { HTTP_OPTIONS, TIMEOUT_SIZE } from 'src/app/constants/http-constants';
 
 @Component({
   selector: 'app-recuperar-senha',
@@ -13,9 +17,10 @@ export class RecuperarSenhaPage implements OnInit {
   public formGroup: any;
 
   constructor(
+    private http: HttpClient,
     private formBuilder: FormBuilder,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
   ) {
     this.formGroup = this.formBuilder.group({
       email: [null, [Validators.email, Validators.required]]
@@ -26,8 +31,23 @@ export class RecuperarSenhaPage implements OnInit {
 
   }
 
+  public sendEmail() {
+    const body =
+    `{
+      getSenhaCliente(email: "${this.formGroup.value.email}")
+    }`;
+
+    this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE)).subscribe((response: any) => {
+      if (response.errors) {
+        console.log('Error: ', response.errors)
+      } else {
+        this.openAlert();
+      }
+    }, (error) => console.log(error));
+  }
+
   public async openAlert() {
-    const alert = await this.alertCtrl.create({
+    this.alertCtrl.create({
       header: "Atenção",
       message: "E-mail enviado com sucesso para recuperar a senha.",
       backdropDismiss: false,
@@ -36,13 +56,14 @@ export class RecuperarSenhaPage implements OnInit {
         {
           text: "Ok",
           handler: () => {
+            this.formGroup.patchValue({
+              email: ''
+            });
             this.modalCtrl.dismiss();
           }
         }
       ]
-    });
-
-    alert.present();
+    }).then((alert) => alert.present());
   }
 
 }
