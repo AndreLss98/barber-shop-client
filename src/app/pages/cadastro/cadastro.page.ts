@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { CadastroService } from 'src/app/services/cadastro/cadastro.service';
+import { ModalController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { UserService } from 'src/app/services/user.service';
+import { CadastroService } from 'src/app/services/cadastro/cadastro.service';
+
+import { ConectionStatusPage } from '../modals/conection-status/conection-status.page';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,6 +21,7 @@ export class CadastroPage implements OnInit {
     private router: Router,
     private userService: UserService,
     private formBuilder: FormBuilder,
+    private modalCtrl: ModalController,
     private cadastroService: CadastroService,
   ) {
     this.cadastroForm = this.formBuilder.group({
@@ -53,8 +57,13 @@ export class CadastroPage implements OnInit {
         this.router.navigateByUrl('cadastro-sucesso');
       }
     }, (error) => {
-      console.log(error)
+      console.log(error);
+      this.connectionError();
     });
+  }
+
+  private connectionError(): void {
+    this.modalCtrl.create({ component: ConectionStatusPage }).then((modal) => modal.present());
   }
 
 }
