@@ -25,7 +25,7 @@ export class CadastroPage implements OnInit {
     private cadastroService: CadastroService,
   ) {
     this.cadastroForm = this.formBuilder.group({
-      nome: ["", [Validators.minLength(3), Validators.pattern('^[a-zA-Z]{3,}( [a-zA-Z]{2,})+$'), Validators.required]],
+      nome: ["", [Validators.minLength(3), Validators.pattern(/^[a-zA-Zà-úÀ-Ú]{3,}(\s[a-zA-Zà-úÀ-Ú]{2,})+/), Validators.required]],
       email: ["", [Validators.email, Validators.required]],
       senha: ["", [Validators.minLength(6), Validators.required]],
       telefone: ["", [Validators.required]]
