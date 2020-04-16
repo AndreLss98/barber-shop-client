@@ -11,15 +11,17 @@ ion-header {
         ion-back-button {
             --icon-font-size: 24px;
         }
+        ion-title {
+            font-size: 14px;
+        }
+        ion-button {
+            margin: 0px;
+        }
     }
 }
 
 ion-content {
     --ion-background-color: #313131;
-    ion-title {
-        color: white;
-        margin-bottom: 55px;
-    }
     ion-grid ion-row ion-col {
         color: #d8a964;
     }

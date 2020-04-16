@@ -94,15 +94,16 @@ export class CadastroCartaoPage implements OnInit {
       console.log(this.formGroup.value);
       this.cardService.registerCard(this.userService.user, this.cartao).subscribe((cartao: any) => {
         if (cartao.errors) {
-          console.log(cartao.errors);
+          const error = JSON.parse(cartao.errors[0].message);
+          this.showAlert(error.message);
         } else {
           this.cardService.updateLocalCards(cartao.data.registerCard);
-          this.cartaoCadastrado();
+          this.showAlert("Cartão cadastrado com sucesso!");
         }
       }, (error) => console.log('Erro ao cadastrar cartao: ', error));
     } else {
       this.cardService.updateLocalCards(this.cartao);
-      this.cartaoCadastrado();
+      this.showAlert("Cartão cadastrado com sucesso!");
     }
   }
 
@@ -110,9 +111,10 @@ export class CadastroCartaoPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  private cartaoCadastrado(): void {
+  private showAlert(message: string): void {
     this.alertCtrl.create({
-      message: 'Cartão cadastrado com sucesso',
+      message,
+      mode: 'ios',
       backdropDismiss: false,
       buttons: [
         {
@@ -121,8 +123,7 @@ export class CadastroCartaoPage implements OnInit {
 
           }
         }
-      ],
-      mode: 'ios'
+      ]
     }).then((alert) => {
       alert.present();
       alert.onDidDismiss().then(() => this.closeModal());
