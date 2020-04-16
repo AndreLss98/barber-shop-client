@@ -98,6 +98,8 @@ export class CadastroCartaoPage implements OnInit {
           this.showAlert(error.message);
         } else {
           this.cardService.updateLocalCards(cartao.data.registerCard);
+          this.userService.user.cartoes = cartao.data.registerCard;
+          localStorage.setItem('user', JSON.stringify(this.userService.user));
           this.showAlert("Cartão cadastrado com sucesso!");
         }
       }, (error) => console.log('Erro ao cadastrar cartao: ', error));

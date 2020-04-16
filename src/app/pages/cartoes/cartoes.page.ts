@@ -82,13 +82,17 @@ export class CartoesPage implements OnInit {
 
   private removeByIndex(pos: number) {
     this.cartoes.splice(pos, 1);
+    this.cardService.localCards = this.cartoes;
+    this.userService.user.cartoes = this.cartoes;
+    localStorage.setItem('user', JSON.stringify(this.userService.user));
     this.slides.update();
       this.showInfoAlert("Cartão excluido com sucesso!");
   }
 
   public async showAlert(message: string) {
     await this.alertCtrl.create({
-      message: message,
+      message,
+      mode: 'ios',
       buttons: [
         {
           text: 'Não',
@@ -115,7 +119,8 @@ export class CartoesPage implements OnInit {
   public async showInfoAlert(message: string) {
     let alertElement: HTMLIonAlertElement
     this.alertCtrl.create({
-      message: message,
+      message,
+      mode: 'ios',
       buttons: [
         {
           text: 'Ok',
