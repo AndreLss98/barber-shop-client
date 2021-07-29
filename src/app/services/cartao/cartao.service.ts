@@ -81,6 +81,8 @@ export class CartaoService {
         idcartao numero nome datavalidade cvv
       }
     }`;
+
+    console.log(body);
     return this.http.post(BASE_URL_GRAPHQL, body, HTTP_OPTIONS).pipe(timeout(TIMEOUT_SIZE));
   }
 
